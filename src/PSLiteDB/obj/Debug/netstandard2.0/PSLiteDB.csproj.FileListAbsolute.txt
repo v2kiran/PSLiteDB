@@ -1,0 +1,9 @@
+C:\Github\PSLiteDB\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.deps.json
+C:\Github\PSLiteDB\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.dll
+C:\Github\PSLiteDB\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.csproj.CoreCompileInputs.cache
+C:\Github\PSLiteDB\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.AssemblyInfoInputs.cache
+C:\Github\PSLiteDB\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.AssemblyInfo.cs
+C:\Github\PSLiteDB\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.pdb
+C:\Github\PSLiteDB\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.dll
+C:\Github\PSLiteDB\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.pdb
+C:\Github\PSLiteDB\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.csprojResolveAssemblyReference.cache
