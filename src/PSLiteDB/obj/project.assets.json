@@ -3185,7 +3185,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kiran Narayana\\.nuget\\packages\\": {},
+    "C:\\Users\\Kiran\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -3194,17 +3194,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Github\\Public\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+      "projectUniqueName": "C:\\Github\\Public\\dev\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
       "projectName": "PSLiteDB",
-      "projectPath": "C:\\Github\\Public\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
-      "packagesPath": "C:\\Users\\Kiran Narayana\\.nuget\\packages\\",
-      "outputPath": "C:\\Github\\Public\\PSLiteDB\\src\\PSLiteDB\\obj\\",
+      "projectPath": "C:\\Github\\Public\\dev\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+      "packagesPath": "C:\\Users\\Kiran\\.nuget\\packages\\",
+      "outputPath": "C:\\Github\\Public\\dev\\PSLiteDB\\src\\PSLiteDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kiran Narayana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Kiran\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3212,7 +3212,9 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Users\\Kiran\\.nuget\\packages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://powershell.myget.org/F/powershell-core/api/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
@@ -3230,21 +3232,21 @@
         "dependencies": {
           "LiteDB": {
             "target": "Package",
-            "version": "4.1.1"
-          },
-          "PowerShellStandard.Library": {
-            "target": "Package",
-            "version": "3.0.0-preview-01"
+            "version": "[4.1.1, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.1",
+            "version": "[2.0.1, )",
             "autoReferenced": true
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "10.0.3"
+            "version": "[10.0.3, )"
+          },
+          "PowerShellStandard.Library": {
+            "target": "Package",
+            "version": "[3.0.0-preview-01, )"
           }
         },
         "imports": [
