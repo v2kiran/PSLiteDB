@@ -1,6 +1,7 @@
 ﻿using LiteDB;
 using System;
 using System.Management.Automation;
+using System.Collections.Generic;
 
 namespace PSLiteDB
 {
@@ -41,19 +42,23 @@ namespace PSLiteDB
             }
 
             var collections = Connection.GetCollectionNames();
-            if (!string.IsNullOrEmpty(collections.ToString()))
+            if (Connection.CollectionExists(Collection))
             {
-                PSObject psObject = new PSObject();
-                foreach (string col in collections)
-                {
-                    psObject.Properties.Add(new PSNoteProperty("Collection", col));
-                    WriteObject(psObject);
-
-                }
+                WriteWarning($"Collection\t['{Collection}'] already exists");
             }
             else
             {
-                WriteWarning($"Could not find any collections in {Connection}");
+                var col = Connection.GetCollection(Collection);
+
+                //a collection is created during index creation or the first insert so
+                //we created a test document, insert it into the collection and then delete the test document
+                Dictionary<string, BsonValue> dict = new Dictionary<string, BsonValue>();
+                dict.Add("_id", 1);
+                dict.Add("test", "test");
+                BsonDocument bson = new BsonDocument(dict);
+                col.Insert(new BsonDocument(dict));
+                col.Delete(1);
+
             }
 
 

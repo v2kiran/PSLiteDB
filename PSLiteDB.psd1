@@ -88,19 +88,19 @@
     ModuleList = @('PSLiteDB.dll')
 
     # List of all files packaged with this module
-    #FileList = @('Alphafs.dll','PSAlphaFS.psm1','PSAlphaFS.psd1','PSAlphaFS.Types.ps1xml','PSAlphaFS.Format.ps1xml')
+    #FileList = @('PSLiteDB.dll','PSLiteDB.psm1','PSLiteDB.psd1','LiteDB.dll','system.management.automation')
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData = @{
         PSData = @{
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('AlphaFS', 'FileSystem', 'longfile', 'longfiles', 'MAX_PATH')
+            Tags = @('LiteDB', 'Database','noSQL')
 
             # A URL to the license for this module.
-            LicenseUri = 'https://github.com/v2kiran/PSAlphaFS/blob/master/LICENSE'
+            LicenseUri = 'https://github.com/v2kiran/PSLiteDB/blob/master/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/v2kiran/PSAlphaFS'
+            ProjectUri   = 'https://github.com/v2kiran/PSLiteDB'
 
             # A URL to an icon representing this module.
             # IconUri = ''
