@@ -19,6 +19,8 @@ PSLiteDB is a PowerShell wrapper for LiteDB
 `New-LiteDBDatabase -Path C:\temp\LiteDB\test2.db -Verbose`
 
 ### Connect to the database
-Open-LiteDBConnection -Database C:\temp\LiteDB\test2.db
+`Open-LiteDBConnection -Database C:\temp\LiteDB\test2.db`
+
+
 
 
