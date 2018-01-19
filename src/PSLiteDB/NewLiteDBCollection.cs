@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.New, "LiteDBCollection")]
-    //[CmdletBinding(DefaultParameterSetName = "All")]
     public class NewLiteDBCollection : PSCmdlet
     {
         [Parameter(
@@ -41,21 +40,24 @@ namespace PSLiteDB
                 }
             }
 
-            var collections = Connection.GetCollectionNames();
+
             if (Connection.CollectionExists(Collection))
             {
                 WriteWarning($"Collection\t['{Collection}'] already exists");
             }
             else
             {
-                var col = Connection.GetCollection(Collection);
-
                 //a collection is created during index creation or the first insert so
                 //we created a test document, insert it into the collection and then delete the test document
-                Dictionary<string, BsonValue> dict = new Dictionary<string, BsonValue>();
-                dict.Add("_id", 1);
-                dict.Add("test", "test");
+
+                var dict = new Dictionary<string, BsonValue>()
+                {
+                    {"_id", 1 },
+                    {"test", "test" }
+                };
+
                 BsonDocument bson = new BsonDocument(dict);
+                var col = Connection.GetCollection(Collection);
                 col.Insert(new BsonDocument(dict));
                 col.Delete(1);
 

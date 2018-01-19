@@ -4,11 +4,9 @@ using System.Management.Automation;
 
 namespace PSLiteDB
 {
-    [Cmdlet(VerbsCommon.Add, "LiteDBDocument")]
-    [Alias("Addldb")]
-    public class AddLiteDBDocument : PSCmdlet
+    [Cmdlet(VerbsCommon.Remove, "LiteDBIndex")]
+    public class RemoveLiteDBIndex : PSCmdlet
     {
-        [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = false,
@@ -17,25 +15,25 @@ namespace PSLiteDB
             )]
         public string Collection { get; set; }
 
-        [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = true,
+            ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
             Position = 1
             )]
-        public BsonDocument Document { get; set; }
+        public string Field { get; set; }
+
 
         [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
-            ValueFromPipelineByPropertyName = true
+            ValueFromPipelineByPropertyName = true,
+            Position = 2
             )]
         public LiteDatabase Connection { get; set; }
 
-        private LiteCollection<BsonDocument> Table;
 
-        protected override void BeginProcessing()
+        protected override void ProcessRecord()
         {
             if (Connection == null)
             {
@@ -50,22 +48,23 @@ namespace PSLiteDB
                 }
             }
 
-            //if collection does not exist it will be created and then the document will be inserted into the collection
-            
-        }
-        protected override void ProcessRecord()
-        {
-            Table = Connection.GetCollection(Collection);
-            try
-            {
-                Table.Insert(Document);
-            }
-            catch (Exception)
-            {
 
-                throw;
+            if (!Connection.CollectionExists(Collection))
+            {
+                WriteWarning($"Collection\t['{Collection}'] does not exist");
             }
-            
+            else
+            {
+                try
+                {
+                    Connection.GetCollection(Collection).DropIndex(Field);
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using LiteDB;
 using System;
 using System.Management.Automation;
+using System.Collections.Generic;
 
 namespace PSLiteDB
 {
-    [Cmdlet(VerbsCommon.Add, "LiteDBDocument")]
-    [Alias("Addldb")]
-    public class AddLiteDBDocument : PSCmdlet
+    [Cmdlet(VerbsCommon.Rename, "LiteDBCollection")]
+    public class RenameLiteDBCollection : PSCmdlet
     {
-        [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = false,
@@ -17,25 +16,24 @@ namespace PSLiteDB
             )]
         public string Collection { get; set; }
 
-        [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = true,
+            ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
             Position = 1
             )]
-        public BsonDocument Document { get; set; }
+        public string NewCollection { get; set; }
 
         [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
-            ValueFromPipelineByPropertyName = true
+            ValueFromPipelineByPropertyName = true,
+            Position = 2
             )]
         public LiteDatabase Connection { get; set; }
 
-        private LiteCollection<BsonDocument> Table;
 
-        protected override void BeginProcessing()
+        protected override void ProcessRecord()
         {
             if (Connection == null)
             {
@@ -50,22 +48,30 @@ namespace PSLiteDB
                 }
             }
 
-            //if collection does not exist it will be created and then the document will be inserted into the collection
             
-        }
-        protected override void ProcessRecord()
-        {
-            Table = Connection.GetCollection(Collection);
-            try
+            if (!Connection.CollectionExists(Collection))
             {
-                Table.Insert(Document);
+                WriteWarning($"Collection\t['{Collection}'] does not exist");
             }
-            catch (Exception)
+            else
             {
+                try
+                {
+                    Connection.RenameCollection(Collection, NewCollection);
+                }
+                catch (Exception)
+                {
 
-                throw;
+                    WriteWarning($"NewCollection\t['{NewCollection}'] already exists");
+                    //throw;
+                }
+                
+
             }
             
+
+
+
         }
     }
 }

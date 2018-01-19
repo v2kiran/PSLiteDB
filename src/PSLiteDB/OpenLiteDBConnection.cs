@@ -7,6 +7,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Open, "LiteDBConnection", DefaultParameterSetName = "Simple")]
+    [Alias("connectldb")]
     public class OpenLiteDBConnection : PSCmdlet
     {
         [Alias("Fullname", "Path", "Datasource")]
@@ -16,7 +17,7 @@ namespace PSLiteDB
             ParameterSetName = "Simple",
             Mandatory = false
             )]
-        public string Database { get; set; } = @"C:\temp\litedb\person.db";
+        public string Database { get; set; } = @"C:\temp\litedb\poc.db";
 
         [Parameter(
             Position = 1,
