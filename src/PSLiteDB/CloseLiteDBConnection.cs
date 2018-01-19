@@ -5,7 +5,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Close, "LiteDBConnection")]
-    //[CmdletBinding(DefaultParameterSetName = "All")]
+    [Alias("closeldb")]
     public class CloseLiteDBConnection : PSCmdlet
     {
 

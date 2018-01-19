@@ -76,5 +76,67 @@ $PersonCollection_1.FindById('str')
 #insert doc into 2nd collection
 $PersonCollection_1.Insert($bsondoc)
 
+ipmo "C:\Github\Public\dev\PSLiteDB" -Force
+Get-Module pslitedb | select -ExpandProperty ExportedVariables
+$dbPath = "C:\temp\LiteDB\Person.db"
+New-LiteDBDatabase -Path $dbPath -Verbose 
 
+### Connect to the database
+Open-LiteDBConnection -Database $dbPath
+
+New-LiteDBCollection -Collection PersonCollection_1
+
+$PersonOBJ = [PSCustomObject]@{
+    FirstName = "John"
+    LastName  = "Doe"
+    Age       = 22
+    Occupation = "Deploper"
+} 
+
+#Person PSObject needs to be converted to BSON before it can be inserted into the 
+#LiteDB Collection
+$PersonBSON = $PersonOBJ | ConvertTo-LiteDbBson 
+
+Add-LiteDBDocument -Collection PersonCollection_1 -Document $PersonBSON 
+
+Find-LiteDBDocument -Collection PersonCollection_1 -as PSObject
+
+@(
+    [PSCustomObject]@{
+        FirstName  = "Richard"
+        LastName   = "Alpert"
+        Age        = 90
+        Occupation = "Gangster"
+    } ,
+    [PSCustomObject]@{
+        FirstName  = "Elvis"
+        LastName   = "Presley"
+        Age        = 45
+        Occupation = "Singer"
+    } 
+) | ConvertTo-LiteDbBson | Add-LiteDBDocument PersonCollection_1
+
+
+Find-LiteDBDocument PersonCollection_1 | 
+    Where-Object Occupation -eq 'Deploper' |
+        Remove-LiteDBDocument 
+
+
+ipmo "C:\Github\Public\dev\PSLiteDB" -Force
+$dbPath = "C:\temp\LiteDB\Person.db"
+Open-LiteDBConnection -Database $dbPath
+
+$source = 'C:\Github\Public\dev\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.dll'
+$dest = 'C:\Github\Public\dev\PSLiteDB\lib\PSLiteDB.dll'
+Copy-Item $source $dest -Force
+
+Find-LiteDBDocument PersonCollection_1
+$FirstDoc = Find-LiteDBDocument PersonCollection_1 -Query ($QueryLDB::EQ("Occupation", "Deploper")) -as BSON 
+$FirstDoc["Occupation"] = "Developer"
+
+$FirstDoc | % { "hey $_"}
+
+Update-LiteDBDocument -Collection PersonCollection_1 -Document $FirstDoc
+
+$FirstDoc | ConvertTo-LiteDbBson | Update-LiteDBDocument -Collection PersonCollection_1
 

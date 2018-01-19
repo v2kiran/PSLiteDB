@@ -30,7 +30,7 @@
     Description = 'Powershell LiteDB Module'
 
     # Minimum version of the Windows PowerShell engine required by this module
-    PowerShellVersion = '5.0'
+    PowerShellVersion = '3.0'
 
     # DSC resources to export from this module
     #DscResourcesToExport = '*'
@@ -51,10 +51,10 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    # RequiredModules = @()
+     #RequiredModules = @('lib\PSLiteDB.dll')
 
     # Assemblies that must be loaded prior to importing this module
-    #RequiredAssemblies = @('lib\LiteDB.dll')
+    RequiredAssemblies = @('lib\LiteDB.dll')
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
     #ScriptsToProcess = @('helpers\PSAlphaFSHelpers.ps1')
@@ -66,7 +66,7 @@
     #FormatsToProcess = @('TypeData\PSLiteDB.Format.ps1xml')
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    # NestedModules = @()
+     NestedModules = @('PSLiteDB.psm1')
 
 
     # Functions to export from this module
@@ -78,7 +78,7 @@
 
 
     # Variables to export from this module
-    #VariablesToExport = '*'
+    VariablesToExport      = '*'
 
 
     # Aliases to export from this module

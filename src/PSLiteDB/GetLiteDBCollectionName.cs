@@ -5,7 +5,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Get, "LiteDBCollectionName")]
-    //[CmdletBinding(DefaultParameterSetName = "All")]
+    [Alias("ldbc")]
     public class GetLiteDBCollectionName : PSCmdlet
     {
 
@@ -40,6 +40,7 @@ namespace PSLiteDB
                 foreach (string col in collections)
                 {
                     psObject.Properties.Add(new PSNoteProperty("Collection", col));
+                    psObject.Properties.Add(new PSNoteProperty("Docs", Connection.GetCollection(col).Count()));
                     WriteObject(psObject);
                         
                 }

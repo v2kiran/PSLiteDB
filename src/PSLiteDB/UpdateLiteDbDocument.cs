@@ -4,9 +4,8 @@ using System.Management.Automation;
 
 namespace PSLiteDB
 {
-    [Cmdlet(VerbsCommon.Add, "LiteDBDocument")]
-    [Alias("Addldb")]
-    public class AddLiteDBDocument : PSCmdlet
+    [Cmdlet(VerbsData.Update, "LiteDBDocument",DefaultParameterSetName = "Document")]
+    public class UpdateLiteDBDocument : PSCmdlet
     {
         [ValidateNotNullOrEmpty()]
         [Parameter(
@@ -17,12 +16,34 @@ namespace PSLiteDB
             )]
         public string Collection { get; set; }
 
+
+        [ValidateNotNullOrEmpty()]
+        [Alias("_id")]
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = false,
+            ValueFromPipelineByPropertyName = true,
+            Position = 1,
+            ParameterSetName = "ID"
+            )]
+        public BsonValue ID { get; set; }
+
+        [ValidateNotNullOrEmpty()]
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = false,
+            ValueFromPipelineByPropertyName = true,
+            Position = 1,
+            ParameterSetName = "Array"
+            )]
+        public BsonDocument[] BsonDocumentArray { get; set; }
+
         [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
-            Position = 1
+            Position = 2
             )]
         public BsonDocument Document { get; set; }
 
@@ -58,14 +79,26 @@ namespace PSLiteDB
             Table = Connection.GetCollection(Collection);
             try
             {
-                Table.Insert(Document);
+                if (ParameterSetName == "ID")
+                {
+                    Table.Update(ID, Document);
+                }
+                else if (ParameterSetName == "Array")
+                {
+                    Table.Update(BsonDocumentArray);
+                }
+                else
+                {
+                    Table.Update(Document);
+                }
+                
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
+
         }
     }
 }
