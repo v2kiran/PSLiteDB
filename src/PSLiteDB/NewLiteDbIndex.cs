@@ -49,7 +49,7 @@ namespace PSLiteDB
 
         private bool uniquestring = false;
 
-        protected override void ProcessRecord()
+        protected override void BeginProcessing()
         {
             if (Connection == null)
             {
@@ -63,7 +63,9 @@ namespace PSLiteDB
                     throw (new Exception("You must use 'Open-LiteDBConnection' to initiate a connection to a database"));
                 }
             }
-
+        }
+        protected override void ProcessRecord()
+        {
             if (Unique)
             {
                 uniquestring = true;

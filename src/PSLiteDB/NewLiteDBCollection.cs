@@ -24,8 +24,7 @@ namespace PSLiteDB
             )]
         public LiteDatabase Connection { get; set; }
 
-
-        protected override void ProcessRecord()
+        protected override void BeginProcessing()
         {
             if (Connection == null)
             {
@@ -39,7 +38,10 @@ namespace PSLiteDB
                     throw (new Exception("You must use 'Open-LiteDBConnection' to initiate a connection to a database"));
                 }
             }
+        }
 
+        protected override void ProcessRecord()
+        {
 
             if (Connection.CollectionExists(Collection))
             {

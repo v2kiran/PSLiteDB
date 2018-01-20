@@ -38,12 +38,21 @@ namespace PSLiteDB
             )]
         public BsonDocument[] BsonDocumentArray { get; set; }
 
+
         [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
-            Position = 2
+            Position = 2,
+            ParameterSetName = "ID"
+            )]
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            Position = 2,
+            ParameterSetName = "Document"
             )]
         public BsonDocument Document { get; set; }
 
@@ -76,28 +85,36 @@ namespace PSLiteDB
         }
         protected override void ProcessRecord()
         {
-            Table = Connection.GetCollection(Collection);
-            try
+            if (!Connection.CollectionExists(Collection))
             {
-                if (ParameterSetName == "ID")
-                {
-                    Table.Update(ID, Document);
-                }
-                else if (ParameterSetName == "Array")
-                {
-                    Table.Update(BsonDocumentArray);
-                }
-                else
-                {
-                    Table.Update(Document);
-                }
-                
+                WriteWarning($"Collection\t['{Collection}'] does not exist");
             }
-            catch (Exception)
+            else
             {
+                Table = Connection.GetCollection(Collection);
+                try
+                {
+                    if (ParameterSetName == "ID")
+                    {
+                        Table.Update(ID, Document);
+                    }
+                    else if (ParameterSetName == "Array")
+                    {
+                        Table.Update(BsonDocumentArray);
+                    }
+                    else
+                    {
+                        Table.Update(Document);
+                    }
 
-                throw;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
+
 
         }
     }

@@ -1,11 +1,10 @@
 ﻿using LiteDB;
 using System;
 using System.Management.Automation;
-using System.Collections.Generic;
 
 namespace PSLiteDB
 {
-    [Cmdlet(VerbsCommon.Remove, "LiteDBCollection",ConfirmImpact = ConfirmImpact.High)]
+    [Cmdlet(VerbsCommon.Remove, "LiteDBCollection",ConfirmImpact = ConfirmImpact.High,SupportsShouldProcess = true)]
     public class RemoveLiteDBCollection : PSCmdlet
     {
         [Parameter(
@@ -14,7 +13,7 @@ namespace PSLiteDB
             ValueFromPipelineByPropertyName = true,
             Position = 0
             )]
-        public string Collection { get; set; }
+        public string[] Collection { get; set; }
 
 
         [Parameter(
@@ -26,7 +25,7 @@ namespace PSLiteDB
         public LiteDatabase Connection { get; set; }
 
 
-        protected override void ProcessRecord()
+        protected override void BeginProcessing()
         {
             if (Connection == null)
             {
@@ -41,29 +40,36 @@ namespace PSLiteDB
                 }
             }
 
+        }
 
-            if (!Connection.CollectionExists(Collection))
+        protected override void ProcessRecord()
+        {
+            foreach (var c in Collection)
             {
-                WriteWarning($"Collection\t['{Collection}'] does not exist");
-            }
-            else
-            {
-
-                if (ShouldProcess(Collection,"Delete Collection with all data & indexes"))
+                if (!Connection.CollectionExists(c))
                 {
-                    try
-                    {
-                        Connection.DropCollection(Collection);
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
-                        
+                    WriteWarning($"Collection\t['{c}'] does not exist");
                 }
-                   
+                else
+                {
+
+                    if (ShouldProcess(c, "Delete Collection with all data & indexes"))
+                    {
+                        try
+                        {
+                            Connection.DropCollection(c);
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+
+                    }
+
+                }
             }
+
         }
     }
 }

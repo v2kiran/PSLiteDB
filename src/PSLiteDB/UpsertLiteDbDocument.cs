@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PSLiteDB
 {
-    [Cmdlet(VerbsData.Merge, "LiteDBDocument",DefaultParameterSetName ="ID")]
+    [Cmdlet(VerbsData.Merge, "LiteDBDocument",DefaultParameterSetName ="Document")]
     public class MergeLiteDBDocument : PSCmdlet
     {
         [ValidateNotNullOrEmpty()]
@@ -34,20 +34,28 @@ namespace PSLiteDB
             Mandatory = true,
             ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
-            Position = 2,
-            ParameterSetName = "ID"
+            Position = 1,
+            ParameterSetName = "Array"
             )]
-        public BsonDocument Document { get; set; }
+        public BsonDocument[] BsonDocumentArray { get; set; }
+
 
         [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = false,
+            ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
             Position = 2,
-            ParameterSetName = "Bulk"
+            ParameterSetName = "ID"
             )]
-        public BsonDocument[] BsonDocumentArray { get; set; }
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            Position = 2,
+            ParameterSetName = "Document"
+            )]
+        public BsonDocument Document { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -78,24 +86,29 @@ namespace PSLiteDB
         }
         protected override void ProcessRecord()
         {
-            Table = Connection.GetCollection(Collection);
-            if (ParameterSetName == "ID")
-            {
-                try
-                {
-                    Table.Upsert(ID, Document);
-                }
-                catch (Exception)
-                {
 
-                    throw;
-                }
+            if (!Connection.CollectionExists(Collection))
+            {
+                WriteWarning($"Collection\t['{Collection}'] does not exist");
             }
             else
             {
+                Table = Connection.GetCollection(Collection);
                 try
                 {
-                    Table.Upsert(BsonDocumentArray);
+                    if (ParameterSetName == "ID")
+                    {
+                        Table.Upsert(ID, Document);
+                    }
+                    else if (ParameterSetName == "Array")
+                    {
+                        Table.Upsert(BsonDocumentArray);
+                    }
+                    else
+                    {
+                        Table.Upsert(Document);
+                    }
+
                 }
                 catch (Exception)
                 {
@@ -103,6 +116,7 @@ namespace PSLiteDB
                     throw;
                 }
             }
+
 
 
         }
