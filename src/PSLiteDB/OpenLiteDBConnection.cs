@@ -7,7 +7,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Open, "LiteDBConnection", DefaultParameterSetName = "Simple")]
-    [Alias("connectldb")]
+    [Alias("Oldb")]
     public class OpenLiteDBConnection : PSCmdlet
     {
         [Alias("Fullname", "Path", "Datasource")]

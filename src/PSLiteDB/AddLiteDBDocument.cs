@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Add, "LiteDBDocument", DefaultParameterSetName = "Document")]
-    [Alias("Addldb")]
+    [Alias("Aldb")]
     public class AddLiteDBDocument : PSCmdlet
     {
         [ValidateNotNullOrEmpty()]

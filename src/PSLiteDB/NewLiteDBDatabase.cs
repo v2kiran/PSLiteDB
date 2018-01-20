@@ -7,6 +7,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.New, "LiteDBDatabase")]
+    [Alias("NewLdb")]
     public class NewLiteDBDatabase : PSCmdlet
     {
         [Alias("FullName")]

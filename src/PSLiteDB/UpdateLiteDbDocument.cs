@@ -5,6 +5,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsData.Update, "LiteDBDocument",DefaultParameterSetName = "Document")]
+    [Alias("uldb")]
     public class UpdateLiteDBDocument : PSCmdlet
     {
         [ValidateNotNullOrEmpty()]

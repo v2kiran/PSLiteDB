@@ -5,6 +5,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Get, "LiteDBIndex")]
+    [Alias("ildb")]
     public class GetLiteDBIndex : PSCmdlet
     {
         [Parameter(

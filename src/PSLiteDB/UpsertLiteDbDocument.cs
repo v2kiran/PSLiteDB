@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsData.Merge, "LiteDBDocument",DefaultParameterSetName ="Document")]
+    [Alias("Upsertldb")]
     public class MergeLiteDBDocument : PSCmdlet
     {
         [ValidateNotNullOrEmpty()]
