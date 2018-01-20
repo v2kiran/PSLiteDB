@@ -5,7 +5,7 @@ using System.Management.Automation;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Get, "LiteDBCollectionName")]
-    [Alias("ldbc")]
+    [Alias("gcldb")]
     public class GetLiteDBCollectionName : PSCmdlet
     {
 

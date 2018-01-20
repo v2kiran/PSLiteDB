@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace PSLiteDB
 {
     [Cmdlet(VerbsCommon.Find, "LiteDBDocument", DefaultParameterSetName = "All")]
+    [Alias("fldb")]
     public class FindLiteDBDocument : PSCmdlet
     {
         [Parameter(
@@ -16,9 +17,10 @@ namespace PSLiteDB
             )]
         public string Collection { get; set; }
 
+        [Alias("_id")]
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = true,
+            ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
             ParameterSetName = "ID"
             )]
@@ -49,7 +51,7 @@ namespace PSLiteDB
 
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = false,
+            ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
             ParameterSetName = "Query"
             )]
