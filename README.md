@@ -40,9 +40,7 @@ PSLiteDB is a PowerShell wrapper for LiteDB
 Add-LiteDBDocument -Collection Person -Document $PersonBSON 
 
 ### Check that the ocument was added
-### By default documents are output in BSON format but we can change that by 
-### specifying the `-As` parameter with value `PSObject`
-Find-LiteDBDocument -Collection PersonCollection_1  -As PSObject
+Find-LiteDBDocument -Collection PersonCollection_1
 
 ### Lets add a couple more documents
 `@(
@@ -66,7 +64,7 @@ Find-LiteDBDocument -Collection PersonCollection_1  -As PSObject
 Find-LiteDBDocument PersonCollection_1 -as PSObject | Where Occupation -eq 'Gangster'
 
 ### Remove a record from the collection
-`Find-LiteDBDocument PersonCollection_1 -as PSObject | 
+`Find-LiteDBDocument PersonCollection_1 | 
     Where-Object Occupation -eq 'Gangster' |
         Remove-LiteDBDocument `
 
@@ -96,3 +94,34 @@ Update-LiteDBDocument -Collection PersonCollection_1 -Document $FirstDoc
 
 ### the above succeeds because the `_id` autocrement property is unique for each document
 ### so lets create an index and make sure we dont have duplicates
+### before we create the index we need to first remove all duplicates from the collection
+Remove-LiteDBDocument -Collection PersonCollection_1 -Query ($QueryLDB::EQ("FirstName", "Elvis"))
+
+
+### lets create an index on the `FirstName` property, enforce the Unique constraint
+### and also make the index lowercase
+New-LiteDBIndex -Collection PersonCollection_1 -Field "FirstName" -Expression "LOWER($.FirstName)" -Unique
+
+### lets re-add the documents
+@(
+    [PSCustomObject]@{
+        FirstName  = "Richard"
+        LastName   = "Alpert"
+        Age        = 90
+        Occupation = "Gangster"
+    } ,
+    [PSCustomObject]@{
+        FirstName  = "Elvis"
+        LastName   = "Presley"
+        Age        = 45
+        Occupation = "Singer"
+    } 
+) | ConvertTo-LiteDbBson | Add-LiteDBDocument PersonCollection_1
+
+
+### if we try to run the same command again we will get error
+### "cannot insert duplicate key in unique index 'FirstName'.
+
+
+### since we made the index lowercase we can now search using lowercase values
+`Find-LiteDBDocument PersonCollection_1 -Query ($QueryLDB::EQ("FirstName", "elvis"))`

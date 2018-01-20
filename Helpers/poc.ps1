@@ -122,13 +122,7 @@ Find-LiteDBDocument PersonCollection_1 |
         Remove-LiteDBDocument 
 
 
-ipmo "C:\Github\Public\dev\PSLiteDB" -Force
-$dbPath = "C:\temp\LiteDB\Person.db"
-Open-LiteDBConnection -Database $dbPath
 
-$source = 'C:\Github\Public\dev\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.dll'
-$dest = 'C:\Github\Public\dev\PSLiteDB\lib\PSLiteDB.dll'
-Copy-Item $source $dest -Force
 
 Find-LiteDBDocument PersonCollection_1
 $FirstDoc = Find-LiteDBDocument PersonCollection_1 -Query ($QueryLDB::EQ("Occupation", "Deploper")) -as BSON 
@@ -140,3 +134,95 @@ Update-LiteDBDocument -Collection PersonCollection_1 -Document $FirstDoc
 
 $FirstDoc | ConvertTo-LiteDbBson | Update-LiteDBDocument -Collection PersonCollection_1
 
+Get-LiteDBIndex -Collection PersonCollection_1
+
+New-LiteDBIndex -Collection PersonCollection_1 -Field "FirstName" -Unique
+
+Find-LiteDBDocument PersonCollection_1 -Query ($QueryLDB::EQ("FirstName", "Elvis")) -as BSON |
+select -First 1 | Remove-LiteDBDocument
+
+Get-LiteDBIndex PersonCollection_1
+Remove-LiteDBIndex PersonCollection_1 -Field FirstName
+
+New-LiteDBIndex -Collection PersonCollection_1 -Field "FirstName" -Expression "LOWER($.FirstName)" -Unique
+
+Find-LiteDBDocument PersonCollection_1 -Query ($QueryLDB::EQ("FirstName", "elvis"))
+
+
+$bsonarray = @(
+    [PSCustomObject]@{
+        FirstName  = "Richard"
+        LastName   = "Alpert"
+        Age        = 90
+        Occupation = "Gangster"
+    } ,
+    [PSCustomObject]@{
+        FirstName  = "Elvis"
+        LastName   = "Presley"
+        Age        = 45
+        Occupation = "Singer"
+    } 
+) | ConvertTo-LiteDbBson
+
+Add-LiteDBDocument -Collection p2 -BsonDocumentArray $bsonarray -BulkInsert
+
+# time - 12 min
+$bsonarray = [System.Collections.ArrayList]::new()
+foreach ($i in 1..30000) 
+{
+    $bsonarray.Add(  
+        ([PSCustomObject]@{
+                FirstName  = "user-$i"
+                LastName   = "lastname-$i"
+                Age        = $i
+                Occupation = "Singer$i"
+            } | ConvertTo-LiteDbBson))
+}
+
+Add-LiteDBDocument -Collection p2 -BsonDocumentArray $bsonarray -BulkInsert
+
+
+# time - 42 sec
+$bsonarray = [System.Collections.ArrayList]::new()
+foreach ($i in 1..30000) 
+{
+    $bsonarray.Add(  
+        (
+            [LiteDB.JsonSerializer]::Deserialize(
+                (
+                    [PSCustomObject]@{
+                        FirstName  = "user-$i"
+                        LastName   = "lastname-$i"
+                        Age        = $i
+                        Occupation = "Singer$i"
+                    } | ConvertTo-Json
+                )
+            )
+        )
+    )
+}
+
+Add-LiteDBDocument -Collection p2 -BsonDocumentArray $bsonarray -BulkInsert
+
+
+$d = gsv b* | ConvertTo-LiteDBBSON3 
+$d.GetType()
+$d | gm
+
+$d1 = gsv b* | ConvertTo-LiteDBBSON3 -as Document
+$d1.GetType()
+$d1 | gm
+
+Remove-LiteDBCollection -Collection p2 
+
+1..30000 | % {
+    [PSCustomObject]@{
+        FirstName  = "user-{0}" -f $_
+        LastName   = "lastname-{0}" -f $_
+        Age        = $_
+        Occupation = "Singer{0}" -f $_
+    }
+} | ConvertTo-LiteDBBSON3 |Add-LiteDBDocument -Collection p2 
+
+
+gsv |  ConvertTo-LiteDBBSON3 |Add-LiteDBDocument -Collection p3

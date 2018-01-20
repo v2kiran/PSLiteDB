@@ -33,7 +33,7 @@ namespace PSLiteDB
         public LiteDatabase Connection { get; set; }
 
 
-        protected override void ProcessRecord()
+        protected override void BeginProcessing()
         {
             if (Connection == null)
             {
@@ -48,7 +48,10 @@ namespace PSLiteDB
                 }
             }
 
-            
+        }
+        protected override void ProcessRecord()
+        {
+      
             if (!Connection.CollectionExists(Collection))
             {
                 WriteWarning($"Collection\t['{Collection}'] does not exist");

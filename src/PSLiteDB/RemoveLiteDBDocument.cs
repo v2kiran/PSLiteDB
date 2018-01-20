@@ -60,31 +60,37 @@ namespace PSLiteDB
 
                     throw (new Exception("You must use 'Open-LiteDBConnection' to initiate a connection to a database"));
                 }
-            }
-
-            //if collection does not exist it will be created and then the document will be inserted into the collection
-            
+            }       
         }
         protected override void ProcessRecord()
         {
-            Table = Connection.GetCollection(Collection);
-            try
+            if (!Connection.CollectionExists(Collection))
             {
-                if (ParameterSetName == "ID")
-                {
-                    Table.Delete(ID);
-                }
-                else
-                {
-                    Table.Delete(Query);
-                }
-
+                WriteWarning($"Collection\t['{Collection}'] does not exist");
             }
-            catch (Exception)
+            else
             {
+                Table = Connection.GetCollection(Collection);
+                try
+                {
+                    if (ParameterSetName == "ID")
+                    {
+                        Table.Delete(ID);
+                    }
+                    else
+                    {
+                        Table.Delete(Query);
+                    }
 
-                throw;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
+
+
 
         }
     }
