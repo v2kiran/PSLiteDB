@@ -2,6 +2,7 @@
 using System;
 using System.Management.Automation;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PSLiteDB
 {
@@ -121,7 +122,7 @@ namespace PSLiteDB
                 }
                 else if (ParameterSetName == "Query")
                 {
-                    var results = Table.Find(Query, Skip, Limit);
+                    var results = Table.Find(Query, Skip, Limit).ToList<BsonDocument>();
                     if (results != null)
                     {
                         if (As.ToLower() == "psobject")
@@ -129,12 +130,12 @@ namespace PSLiteDB
                             foreach (var r in results)
                             {
 
-                                var bsondoc = BsonMapper.Global.ToDocument(r);
+                                //var bsondoc = BsonMapper.Global.ToDocument(r);
 
                                 PSObject Obj = new PSObject();
                                 Obj.Properties.Add(new PSNoteProperty("Collection", Collection));
 
-                                foreach (KeyValuePair<string, BsonValue> kvp in bsondoc)
+                                foreach (KeyValuePair<string, BsonValue> kvp in r)
                                 {
                                     Obj.Properties.Add(new PSNoteProperty(kvp.Key, kvp.Value));
                                 }
@@ -156,7 +157,7 @@ namespace PSLiteDB
                 }
                 else
                 {
-                    var results = Table.Find(Query.All(), Skip, Limit);
+                    var results = Table.Find(Query.All(Query.Descending), Skip, Limit).ToList<BsonDocument>();
                     if (results != null)
                     {
                         if (As.ToLower() == "psobject")
@@ -164,12 +165,12 @@ namespace PSLiteDB
                             foreach (var r in results)
                             {
 
-                                var bsondoc = BsonMapper.Global.ToDocument(r);
+                                //var bsondoc = BsonMapper.Global.ToDocument(r);
 
                                 PSObject Obj = new PSObject();
                                 Obj.Properties.Add(new PSNoteProperty("Collection", Collection));
 
-                                foreach (KeyValuePair<string, BsonValue> kvp in bsondoc)
+                                foreach (KeyValuePair<string, BsonValue> kvp in r)
                                 {
                                     Obj.Properties.Add(new PSNoteProperty(kvp.Key, kvp.Value));
                                 }
@@ -179,12 +180,14 @@ namespace PSLiteDB
                         else
                         {
 
-
+                            
                             foreach (var r in results)
                             {
                                 //WriteObject(BsonMapper.Global.ToDocument(r));
                                 WriteObject(Connection.Mapper.ToDocument(r));
                             }
+                            
+                            //WriteObject(results.Select(x=>x.AsDocument));
      
                         }
                     }
