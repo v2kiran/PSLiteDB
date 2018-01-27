@@ -31,7 +31,7 @@ namespace PSLiteDB
             ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true
             )]
-        public BsonArray ValueArray { get; set; }
+        public BsonValue[] ValueArray { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -84,16 +84,16 @@ namespace PSLiteDB
                         WriteObject(Query.EQ(Field, Value));
                         break;
                     case "LT":
-                        WriteObject(Query.LT(Field, Value));
+                        WriteObject(Query.LT(Field, Int32.Parse(Value)));
                         break;
                     case "LTE":
-                        WriteObject(Query.LTE(Field, Value));
+                        WriteObject(Query.LTE(Field, Int32.Parse(Value)));
                         break;
                     case "GT":
-                        WriteObject(Query.GT(Field, Value));
+                        WriteObject(Query.GT(Field, Int32.Parse(Value)));
                         break;
                     case "GTE":
-                        WriteObject(Query.GTE(Field, Value));
+                        WriteObject(Query.GTE(Field, Int32.Parse(Value)));
                         break;
                     case "In":
                         WriteObject(Query.In(Field, ValueArray));

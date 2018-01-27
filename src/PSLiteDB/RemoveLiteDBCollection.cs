@@ -58,6 +58,7 @@ namespace PSLiteDB
                         try
                         {
                             Connection.DropCollection(c);
+                            Connection.Shrink();
                         }
                         catch (Exception)
                         {

@@ -3,7 +3,7 @@
     "PSLiteDB": {
       "commandName": "Executable",
       "executablePath": "C:\\PS6_GA\\pwsh.exe",
-      "commandLineArgs": "-NoExit -NoProfile -Command  \"Import-Module 'C:\\Github\\Public\\dev\\PSLiteDB\\src\\PSLiteDB\\bin\\Debug\\netstandard2.0\\PSLiteDB.dll' ;connectldb\"",
+      "commandLineArgs": "-NoExit -NoProfile -Command  \"Import-Module 'C:\\Github\\Public\\dev\\PSLiteDB\\src\\PSLiteDB\\bin\\Debug\\netstandard2.0\\PSLiteDB.dll' ;Open-LiteDBConnection\"",
       "workingDirectory": "c:\\temp\\litedb"
     }
   }

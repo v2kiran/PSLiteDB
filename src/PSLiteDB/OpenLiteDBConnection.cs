@@ -95,7 +95,39 @@ namespace PSLiteDB
             ParameterSetName = "Simple",
             Mandatory = false
             )]
-        public Byte Log { get; set; } = Logger.NONE;
+        public byte Log { get; set; } = Logger.NONE;
+
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
+        public SwitchParameter SerializeNullValues
+        {
+            get { return _serializeNullValues; }
+            set { _serializeNullValues = value; }
+        }
+        private bool _serializeNullValues;
+
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
+        public SwitchParameter DontTrimWhitespace
+        {
+            get { return _disableTrimWhitespace; }
+            set { _disableTrimWhitespace = value; }
+        }
+        private bool _disableTrimWhitespace;
+
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
+        public SwitchParameter DontConvertEmptyStringToNull
+        {
+            get { return _emptyStringToNull; }
+            set { _emptyStringToNull = value; }
+        }
+        private bool _emptyStringToNull;
+
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
+        public SwitchParameter IncludeFields
+        {
+            get { return _includeFields; }
+            set { _includeFields = value; }
+        }
+        private bool _includeFields;
 
 
         private string resolvedPath;
@@ -189,7 +221,25 @@ namespace PSLiteDB
             }
 
 
+            if (SerializeNullValues)
+            {
+                BsonMapper.Global.SerializeNullValues = true;
+            }
 
+            if (DontTrimWhitespace)
+            {
+                BsonMapper.Global.TrimWhitespace = false;
+            }
+
+            if (DontConvertEmptyStringToNull)
+            {
+                BsonMapper.Global.EmptyStringToNull = false;
+            }
+
+            if (IncludeFields)
+            {
+                BsonMapper.Global.IncludeFields = true;
+            }
 
             using (PowerShell PowerShellInstance = PowerShell.Create())
             {
@@ -208,6 +258,8 @@ namespace PSLiteDB
             {
                 SessionState.PSVariable.Set("LiteDBPSConnection", _connection);
             }
+
+
 
             //write the connection to the pipeline
             WriteObject(_connection);
