@@ -98,12 +98,12 @@ namespace PSLiteDB
         public byte Log { get; set; } = Logger.NONE;
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
-        public SwitchParameter SerializeNullValues
+        public SwitchParameter DontSerializeNullValues
         {
-            get { return _serializeNullValues; }
-            set { _serializeNullValues = value; }
+            get { return _dontSerializeNullValues; }
+            set { _dontSerializeNullValues = value; }
         }
-        private bool _serializeNullValues;
+        private bool _dontSerializeNullValues;
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
         public SwitchParameter DontTrimWhitespace
@@ -220,10 +220,11 @@ namespace PSLiteDB
                 }
             }
 
+            BsonMapper.Global.SerializeNullValues = true;
 
-            if (SerializeNullValues)
+            if (DontSerializeNullValues)
             {
-                BsonMapper.Global.SerializeNullValues = true;
+                BsonMapper.Global.SerializeNullValues = false;
             }
 
             if (DontTrimWhitespace)
