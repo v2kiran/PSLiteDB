@@ -1,178 +1,135 @@
 # PSLiteDB
 
-
-
+## OverView
 [LiteDB](http://www.litedb.org/) is a noSQL singlefile datastore just like SQLite.
-
 PSLiteDB is a PowerShell wrapper for LiteDB
 
-## How to use this Module
+Note: In LiteDB
+- CollectionNames are case-insensitive
+- FieldNames or property Names are case-sensitive
+- FieldValues or PropertyValues are case-sensitive unless queried with an Index that has been explicity created with lowercase values.
 
-Clone the repo in c:\temp
+## Clone Module
+
 ```powershell
+#Clone the repo in c:\temp
 cd c:\temp
 git clone https://github.com/v2kiran/PSLiteDB.git
 ```
 
-Import the module
+## Import Module
 ```powershell
 Import-Module c:\temp\PSLiteDB -verbose
 ```
 
-Create a new LiteDB database
+
+## Create Database
 ```powershell
-$dbPath = "C:\temp\LiteDB\Person.db"
+$dbPath = "C:\temp\LiteDB\Service.db"
 New-LiteDBDatabase -Path $dbPath -Verbose
 ```
 
-Connect to the database
+## Connect Database
 ```powershell
 Open-LiteDBConnection -Database $dbPath
 ```
 
-Create a Collection. Collections are like Tables in SQL
+## Create a Collection.
 ```powershell
-New-LiteDBCollection -Collection PersonCollection_1
+New-LiteDBCollection -Collection SvcCollection
+
+# verify that the collection was created
+Get-LiteDBCollectionName
 ```
 
-Create a `Person` Custom Object
+## Create an Index.
 ```powershell
-$PersonOBJ = [PSCustomObject]@{
-    FirstName = "John"
-    LastName  = "Doe"
-    Age       = 22
-    Occupation = "Deploper"
-}
+# Creates an index in the collection `SvcCollection` with all `DisplayName` property values in `lowercase`
+New-LiteDBIndex -Collection SvcCollection -Field DisplayName -Expression "LOWER($.DisplayName)"
+
+# verify that the index was created
+Get-LiteDBIndex -Collection SvcCollection
 ```
 
-Person PSObject needs to be converted to BSON before it can be inserted into the LiteDB Collection
+## Insert Records
+Get all the services whose name starts with bfollowed by any sequence of characters.
+Force the `Name` property to become the `_id` property in the LiteDB collection
+Serialize the selected records and finally insert them into the `SvcCollection`
 ```powershell
-$PersonBSON = $PersonOBJ | ConvertTo-LiteDbBson
+Get-Service b* | 
+  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType | 
+      ConvertTo-LiteDbBSON | 
+         Add-LiteDBDocument -Collection SvcCollection
 ```
 
-Add the BSON document to the PersonCollection_1
+## Find Records
+Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the service `Name`
 ```powershell
-Add-LiteDBDocument -Collection Person -Document $PersonBSON
+Find-LiteDBDocument -Collection SvcCollection -ID BITS
+
+Output:
+
+Collection  : SvcCollection
+_id         : "BITS"
+DisplayName : "Background Intelligent Transfer Service"
+Status      : 4
+StartType   : 2
 ```
 
-Check that the document was added
+## Update records
+lets stop the BITS service and then update the collection with the new `status`
 ```powershell
-Find-LiteDBDocument -Collection PersonCollection_1
+Get-Service BITS | 
+  Select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType | 
+     ConvertTo-LiteDbBSON | 
+        Update-LiteDBDocument -Collection SvcCollection
+
+# retrieve the bits service record in the litedb collection to see the updated status
+Find-LiteDBDocument -Collection SvcCollection -ID BITS
+
+Output:
+
+Collection  : SvcCollection
+_id         : "BITS"
+DisplayName : "Background Intelligent Transfer Service"
+Status      : 1
+StartType   : 2
 ```
 
-Lets add a couple more documents
+## Delete Records
 ```powershell
-@(
-    [PSCustomObject]@{
-        FirstName  = "Richard"
-        LastName   = "Alpert"
-        Age        = 90
-        Occupation = "Gangster"
-    } ,
-    [PSCustomObject]@{
-        FirstName  = "Elvis"
-        LastName   = "Presley"
-        Age        = 45
-        Occupation = "Singer"
-    } 
-) | ConvertTo-LiteDbBson | Add-LiteDBDocument PersonCollection_1
+# Delete record by ID
+Remove-LiteDBDocument -Collection SvcCollection -ID BITS
+
+# If we now try to retrieve the `BITS` record we should see a warning
+Find-LiteDBDocument -Collection SvcCollection -ID BITS
+WARNING: Document with ID ['"BITS"'] does not exist in the collection ['SvcCollection']
 ```
 
-Find records using powershell client-side filtering
+## Upsert Records
+Upsert stands for - Add if not record exists or update if it does exist.
+```powershell
+Get-Service b* | 
+  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType | 
+      ConvertTo-LiteDbBSON | 
+         Upsert-LiteDBDocument -Collection SvcCollection
+```
+
+## Custom Queries
 by default the document values are case-sensitive 
 ```powershell
-Find-LiteDBDocument PersonCollection_1  | Where Occupation -eq 'Gangster'
-```
+# Find all documents that contain the word 'Bluetooth' in the `SvcCollection` property `DisplayName`
+New-LiteDBQuery -Field DisplayName -Value 'Bluetooth' -Operator Contains | Find-LiteDBDocument -Collection SvcCollection
 
-Remove a record from the collection
-```powershell
-Find-LiteDBDocument PersonCollection_1 | 
-    Where-Object Occupation -eq 'Gangster' |
-        Remove-LiteDBDocument
-```
+# Find all records whose `Status` property greaterthan 3 meaning `started`
+New-LiteDBQuery -Field Status -Value 3 -Operator GT | Find-LiteDBDocument -Collection SvcCollection
 
+# Find all records whose `Status` property lessthan 3 meaning `stopped`
+New-LiteDBQuery -Field Status -Value 3 -Operator LT | Find-LiteDBDocument -Collection SvcCollection
 
-In the first document i.e Person "John Doe" has a typo in the property `Occupation`.
-lets correct that.
+# Combining queries with AND ($QueryLDB is an alias for the litedb query class)
+Find-LiteDBDocument -Collection SvcCollection -Query ($QueryLDB::And($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::GT("Status",3)))
 
-Find the document using LiteDB filtering and Output as BSONDocument
-```powershell
-$FirstDoc = Find-LiteDBDocument PersonCollection_1 -as BSON -Query ($QueryLDB::EQ("Occupation", "Deploper"))
-```
-
-Set the occupation property to the correct value
-```powershell
-$FirstDoc["Occupation"] = "Developer"
-```
-
-Update the collection
-```powershell
-Update-LiteDBDocument -Collection PersonCollection_1 -Document $FirstDoc
-```
-
-verify that the collection is updated
-```powershell
-Find-LiteDBDocument PersonCollection_1
-```
-
-lets see if we can add a duplicate record in the collection
-```powershell
-[PSCustomObject]@{
-    FirstName  = "Elvis"
-    LastName   = "Presley"
-    Age        = 45
-    Occupation = "Singer"
-} | ConvertTo-LiteDbBson | Add-LiteDBDocument PersonCollection_1
-```
-
-the above succeeds because the `_id` autocrement property is unique for each document
-so lets create an index and make sure we dont have duplicates
-before we create the index we need to first remove all duplicates from the collection
-```powershell
-Remove-LiteDBDocument -Collection PersonCollection_1 -Query ($QueryLDB::EQ("FirstName", "Elvis"))
-```
-
-
-lets create an index on the `FirstName` property, enforce the Unique constraint
-and also make the indexed values lowercase. 
-This will enable us to search the collection using lowercase values
-```powershell
-New-LiteDBIndex -Collection PersonCollection_1 -Field "FirstName" -Expression "LOWER($.FirstName)" -Unique
-```
-
-lets re-add the documents we removed earlier
-```powershell
-@(
-    [PSCustomObject]@{
-        FirstName  = "Richard"
-        LastName   = "Alpert"
-        Age        = 90
-        Occupation = "Gangster"
-    } ,
-    [PSCustomObject]@{
-        FirstName  = "Elvis"
-        LastName   = "Presley"
-        Age        = 45
-        Occupation = "Singer"
-    } 
-) | ConvertTo-LiteDbBson | Add-LiteDBDocument PersonCollection_1
-```
-
-
-if we try to insert a document with a firstname property that already exists in the collection again we should get an error:
-```powershell
-[PSCustomObject]@{
-    FirstName  = "Elvis"
-    LastName   = "Presley"
-    Age        = 45
-    Occupation = "Singer"
-} | ConvertTo-LiteDbBson | Add-LiteDBDocument PersonCollection_1
-
-"cannot insert duplicate key in unique index 'FirstName'".
-```
-
-
-since we made the index lowercase we can now search using lowercase values
-```powershell
-Find-LiteDBDocument PersonCollection_1 -Query ($QueryLDB::EQ("FirstName", "elvis"))
+# Combining queries with OR
+Find-LiteDBDocument -Collection SvcCollection -Query ($QueryLDB::Or($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::Contains("DisplayName","Encryption")))
 ```

@@ -1,5 +1,6 @@
 ﻿using LiteDB;
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace PSLiteDB
@@ -31,16 +32,9 @@ namespace PSLiteDB
             ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true
             )]
-        public BsonValue[] ValueArray { get; set; }
-
-        [Parameter(
-            Mandatory = false,
-            ValueFromPipeline = false,
-            ValueFromPipelineByPropertyName = true
-            )]
         public Func<BsonValue,bool> Predicate { get; set; }
 
-        [ValidateSet("EQ", "LT", "LTE", "GT", "GTE", "In", "Not", "StartsWith", "Contains", "Where", "And", "Or")]
+        [ValidateSet("EQ", "LT", "LTE", "GT", "GTE", "Not", "StartsWith", "Contains", "Where", "And", "Or")]
         [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
@@ -94,9 +88,6 @@ namespace PSLiteDB
                         break;
                     case "GTE":
                         WriteObject(Query.GTE(Field, Convert.ToInt32(Value)));
-                        break;
-                    case "In":
-                        WriteObject(Query.In(Field, ValueArray));
                         break;
                     case "Not":
                         WriteObject(Query.Not(Field, Value));
