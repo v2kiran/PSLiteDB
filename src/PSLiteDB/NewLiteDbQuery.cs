@@ -84,16 +84,16 @@ namespace PSLiteDB
                         WriteObject(Query.EQ(Field, Value));
                         break;
                     case "LT":
-                        WriteObject(Query.LT(Field, Int32.Parse(Value)));
+                        WriteObject(Query.LT(Field, Convert.ToInt32(Value)));
                         break;
                     case "LTE":
-                        WriteObject(Query.LTE(Field, Int32.Parse(Value)));
+                        WriteObject(Query.LTE(Field, Convert.ToInt32(Value)));
                         break;
                     case "GT":
-                        WriteObject(Query.GT(Field, Int32.Parse(Value)));
+                        WriteObject(Query.GT(Field, Convert.ToInt32(Value)));
                         break;
                     case "GTE":
-                        WriteObject(Query.GTE(Field, Int32.Parse(Value)));
+                        WriteObject(Query.GTE(Field, Convert.ToInt32(Value)));
                         break;
                     case "In":
                         WriteObject(Query.In(Field, ValueArray));

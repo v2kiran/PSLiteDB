@@ -55,7 +55,7 @@ Add the BSON document to the PersonCollection_1
 Add-LiteDBDocument -Collection Person -Document $PersonBSON
 ```
 
-Check that the ocument was added
+Check that the document was added
 ```powershell
 Find-LiteDBDocument -Collection PersonCollection_1
 ```
@@ -81,7 +81,7 @@ Lets add a couple more documents
 Find records using powershell client-side filtering
 by default the document values are case-sensitive 
 ```powershell
-Find-LiteDBDocument PersonCollection_1 -as PSObject | Where Occupation -eq 'Gangster'
+Find-LiteDBDocument PersonCollection_1  | Where Occupation -eq 'Gangster'
 ```
 
 Remove a record from the collection
@@ -92,8 +92,8 @@ Find-LiteDBDocument PersonCollection_1 |
 ```
 
 
-in the first document i.e Person "John Doe" has a typo in the Occupation 
-string so lets correct that.
+In the first document i.e Person "John Doe" has a typo in the property `Occupation`.
+lets correct that.
 
 Find the document using LiteDB filtering and Output as BSONDocument
 ```powershell
@@ -102,7 +102,7 @@ $FirstDoc = Find-LiteDBDocument PersonCollection_1 -as BSON -Query ($QueryLDB::E
 
 Set the occupation property to the correct value
 ```powershell
-$FirstDoc.Occupation = "Developer"
+$FirstDoc["Occupation"] = "Developer"
 ```
 
 Update the collection
@@ -134,12 +134,13 @@ Remove-LiteDBDocument -Collection PersonCollection_1 -Query ($QueryLDB::EQ("Firs
 
 
 lets create an index on the `FirstName` property, enforce the Unique constraint
-and also make the index lowercase
+and also make the indexed values lowercase. 
+This will enable us to search the collection using lowercase values
 ```powershell
 New-LiteDBIndex -Collection PersonCollection_1 -Field "FirstName" -Expression "LOWER($.FirstName)" -Unique
 ```
 
-lets re-add the documents
+lets re-add the documents we removed earlier
 ```powershell
 @(
     [PSCustomObject]@{
@@ -158,9 +159,16 @@ lets re-add the documents
 ```
 
 
-if we try to run the same command again we will get error
+if we try to insert a document with a firstname property that already exists in the collection again we should get an error:
 ```powershell
-"cannot insert duplicate key in unique index 'FirstName'.
+[PSCustomObject]@{
+    FirstName  = "Elvis"
+    LastName   = "Presley"
+    Age        = 45
+    Occupation = "Singer"
+} | ConvertTo-LiteDbBson | Add-LiteDBDocument PersonCollection_1
+
+"cannot insert duplicate key in unique index 'FirstName'".
 ```
 
 
