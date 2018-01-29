@@ -63,8 +63,9 @@ Get-Service b* |
 ```
 
 ## Find Records
-Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the service `Name`
+Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
 ```powershell
+#Note that the value of parameter ID: 'BITS' is case-sensitive
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
 
 Output:
@@ -74,6 +75,17 @@ _id         : "BITS"
 DisplayName : "Background Intelligent Transfer Service"
 Status      : 4
 StartType   : 2
+
+# just to illustrate that lowercase bits wont show up in the results
+Find-LiteDBDocument -Collection P6 -ID bits
+WARNING: Document with ID ['"bits"'] does not exist in the collection ['SvcCollection']
+
+<#
+List all documents in a collection, limiting the total docs displayed to 5 and skipping the first 2. 
+'Limit' and 'skip' are optional parameters
+By default if you omit the limit parameter only the first 1000 docs are displayed
+#>
+Find-LiteDBDocument -Collection SvcCollection -Limit 5 -Skip 2
 ```
 
 ## Update records
@@ -112,11 +124,11 @@ Upsert stands for - Add if not record exists or update if it does exist.
 Get-Service b* | 
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType | 
       ConvertTo-LiteDbBSON | 
-         Upsert-LiteDBDocument -Collection SvcCollection
+         Upsertldb -Collection SvcCollection
 ```
 
 ## Custom Queries
-by default the document values are case-sensitive 
+By default the parameter values are case-sensitive 
 ```powershell
 # Find all documents that contain the word 'Bluetooth' in the `SvcCollection` property `DisplayName`
 New-LiteDBQuery -Field DisplayName -Value 'Bluetooth' -Operator Contains | Find-LiteDBDocument -Collection SvcCollection
