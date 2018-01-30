@@ -35,17 +35,12 @@ New-LiteDBDatabase -Path $dbPath -Verbose
 ***
 
 ## Connect Database
-The connection to the first db is stored in a session variable called $LiteDBPSConnection.
-This connection variable is re-used in various cmdlets from this module making it efficient and easy by having to type less
-if you want to work with multiple database then you will need to store each connection in a different variable and pass
-that to each cmdlet's 'Connection' parameter.
+The connection to the first db is stored in a session variable called `$LiteDBPSConnection`.
+This connection variable is re-used in various cmdlets from this module making it efficient by having to type less.
+if you want to work with multiple databases then you will need to store each connection from `Open-LiteDBConnection` in a different variable and pass
+that to each cmdlet's `Connection` parameter.
+Check the [Wiki](https://github.com/v2kiran/PSLiteDB/wiki/Working-with-Multiple-Databases) for an example on how to work with multiple databases simultaneously.
 ```powershell
-<#
-The connection to the first db is stored in a session variable called $LiteDBPSConnection.
-This connection variable is re-used in various cmdlets from this module making it efficient and easy by having to type less
-if you want to work with multiple database then you will need to store each connection in a different variable and pass
-that to each cmdlet's 'Connection' parameter.
-#>
 Open-LiteDBConnection -Database $dbPath
 ```
 
@@ -185,3 +180,10 @@ Find-LiteDBDocument -Collection SvcCollection -Query $OR_Query
 ```powershell
 Close-LiteDBConnection
 ```
+
+## WIKI
+- [Create A LiteDB database that is passwordprotected](https://github.com/v2kiran/PSLiteDB/wiki/Database-with-Password)
+- [LiteDB Connection Options](https://github.com/v2kiran/PSLiteDB/wiki/Open-LiteDBConnection)
+- [Demo: PersonCollection](https://github.com/v2kiran/PSLiteDB/wiki/PersonCollection:-Demo-1)
+- [Speed-Test](https://github.com/v2kiran/PSLiteDB/wiki/Speed-test)
+- [Work on Multiple Databases in parallel](https://github.com/v2kiran/PSLiteDB/wiki/Working-with-Multiple-Databases)
