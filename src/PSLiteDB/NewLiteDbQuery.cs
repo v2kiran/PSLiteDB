@@ -34,14 +34,14 @@ namespace PSLiteDB
             )]
         public Func<BsonValue,bool> Predicate { get; set; }
 
-        [ValidateSet("EQ", "LT", "LTE", "GT", "GTE", "Not", "StartsWith", "Contains", "Where", "And", "Or")]
+        [ValidateSet("EQ", "LT", "LTE", "GT", "GTE", "Not", "StartsWith", "Contains", "Where")]
         [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
             Position = 2
             )]
-        public string Operator { get; set; } = "StartsWith";
+        public string Operator { get; set; } = "Contains";
 
         [Parameter(
             Mandatory = false,

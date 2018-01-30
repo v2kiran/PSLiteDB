@@ -61,6 +61,7 @@ namespace PSLiteDB
                         psObject.Properties.Add(new PSNoteProperty("Expression", i.Expression));
                         psObject.Properties.Add(new PSNoteProperty("Unique", i.Unique));
                         psObject.Properties.Add(new PSNoteProperty("MaxLevel", i.MaxLevel));
+                        psObject.Properties.Add(new PSNoteProperty("Connection", Connection));
                         psObject.Properties.Add(new PSNoteProperty("Collection", Collection));
                         WriteObject(psObject);
                     }
