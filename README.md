@@ -3,6 +3,7 @@
 ## OverView
 [LiteDB](http://www.litedb.org/) is a noSQL singlefile datastore just like SQLite.
 PSLiteDB is a PowerShell wrapper for LiteDB
+PSLiteDB has been compiled against the .NET Standard 2 which means you can use this module with both Windows PowerShell and [PowerShell Core](https://blogs.msdn.microsoft.com/powershell/2018/01/10/powershell-core-6-0-generally-available-ga-and-supported/).
 
 Note: In LiteDB
 - CollectionNames are case-insensitive
@@ -18,6 +19,17 @@ git clone https://github.com/v2kiran/PSLiteDB.git
 ```
 
 ***
+
+## New to PowerShell?
+If you never used Powershell before you may get this error when you try to use the module:
+"execution of scripts is disabled on this system"
+Check this [link](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system)
+
+Other Resources:
+[Official microsoft Documentation](https://docs.microsoft.com/en-us/powershell/index?view=powershell-5.1)
+
+***
+
 
 ## Import Module
 ```powershell
