@@ -22,7 +22,7 @@ git clone https://github.com/v2kiran/PSLiteDB.git
 
 ## New to PowerShell?
 If you never used Powershell before you may get this error when you try to use the module:
-"execution of scripts is disabled on this system"
+**"execution of scripts is disabled on this system"**
 Check this [link](https://stackoverflow.com/questions/4037939/powershell-says-execution-of-scripts-is-disabled-on-this-system)
 
 Other Resources:
