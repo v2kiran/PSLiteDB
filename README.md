@@ -35,7 +35,17 @@ New-LiteDBDatabase -Path $dbPath -Verbose
 ***
 
 ## Connect Database
+The connection to the first db is stored in a session variable called $LiteDBPSConnection.
+This connection variable is re-used in various cmdlets from this module making it efficient and easy by having to type less
+if you want to work with multiple database then you will need to store each connection in a different variable and pass
+that to each cmdlet's 'Connection' parameter.
 ```powershell
+<#
+The connection to the first db is stored in a session variable called $LiteDBPSConnection.
+This connection variable is re-used in various cmdlets from this module making it efficient and easy by having to type less
+if you want to work with multiple database then you will need to store each connection in a different variable and pass
+that to each cmdlet's 'Connection' parameter.
+#>
 Open-LiteDBConnection -Database $dbPath
 ```
 
@@ -167,4 +177,11 @@ Find-LiteDBDocument -Collection SvcCollection -Query $And_Query
 # Combining queries with OR
 $OR_Query = $QueryLDB::Or($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::Contains("DisplayName","Encryption"))
 Find-LiteDBDocument -Collection SvcCollection -Query $OR_Query
+```
+
+***
+
+## Close LiteDB Connection
+```powershell
+Close-LiteDBConnection
 ```
