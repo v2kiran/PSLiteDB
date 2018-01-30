@@ -226,3 +226,23 @@ Remove-LiteDBCollection -Collection p2
 
 
 gsv |  ConvertTo-LiteDBBSON3 |Add-LiteDBDocument -Collection p3
+
+
+$dbPath = "C:\temp\LiteDB\speedtest.db"
+New-LiteDBDatabase -Path $dbPath -Verbose
+
+#Connect Database
+Open-LiteDBConnection -Database $dbPath
+
+#Create a Collection.
+New-LiteDBCollection -Collection P1
+
+#Insert 30000 records
+1..30000 | % {
+    [PSCustomObject]@{
+        FirstName  = "user-{0}" -f $_
+        LastName   = "lastname-{0}" -f $_
+        Age        = $_
+        Occupation = "Singer{0}" -f $_
+    }
+} | ConvertTo-LiteDBBSON | Add-LiteDBDocument -Collection P1
