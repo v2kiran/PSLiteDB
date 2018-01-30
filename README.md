@@ -17,6 +17,8 @@ cd c:\temp
 git clone https://github.com/v2kiran/PSLiteDB.git
 ```
 
+***
+
 ## Import Module
 ```powershell
 Import-Module c:\temp\PSLiteDB -verbose
@@ -28,6 +30,8 @@ Import-Module c:\temp\PSLiteDB -verbose
 $dbPath = "C:\temp\LiteDB\Service.db"
 New-LiteDBDatabase -Path $dbPath -Verbose
 ```
+
+***
 
 ## Connect Database
 ```powershell
