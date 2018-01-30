@@ -39,6 +39,7 @@ namespace PSLiteDB
                 PSObject psObject = new PSObject();
                 foreach (string col in collections)
                 {
+                    psObject.Properties.Add(new PSNoteProperty("Connection", Connection));
                     psObject.Properties.Add(new PSNoteProperty("Collection", col));
                     psObject.Properties.Add(new PSNoteProperty("Docs", Connection.GetCollection(col).Count()));
                     WriteObject(psObject);
@@ -50,8 +51,6 @@ namespace PSLiteDB
                 WriteWarning($"Could not find any collections in {Connection}");
             }
 
-
-       
         }
     }
 }

@@ -246,3 +246,60 @@ New-LiteDBCollection -Collection P1
         Occupation = "Singer{0}" -f $_
     }
 } | ConvertTo-LiteDBBSON | Add-LiteDBDocument -Collection P1
+
+
+$dbPath = "C:\temp\LiteDB\OS.db"
+New-LiteDBDatabase -Path $dbPath -Verbose
+
+#Connect Database
+Open-LiteDBConnection -Database $dbPath
+
+#Create a Collection.
+New-LiteDBCollection -Collection OS_Col
+
+Get-CimInstance -ClassName Win32_OperatingSystem | 
+    Select CSName,Caption,TotalVisibleMemorySize,OSArchitecture,OSLanguage |
+        ConvertTo-LiteDbBSON |
+            Add-LiteDBDocument -Collection OS_Col
+
+
+$dbPath = "C:\temp\LiteDB\CPU.db"
+New-LiteDBDatabase -Path $dbPath -Verbose
+
+#Connect Database
+$CPU_DB_Conn = Open-LiteDBConnection -Database $dbPath
+
+#Create a Collection.
+New-LiteDBCollection -Collection CPU_Col -Connection $CPU_DB_Conn
+
+Get-CimInstance -ClassName Win32_Processor |
+    Select SystemName,DeviceID,Name,NumberOfCores,AddressWidth,Manufacturer |
+        ConvertTo-LiteDbBSON |
+            Add-LiteDBDocument -Collection CPU_Col -Connection $CPU_DB_Conn
+
+
+# List collections in Database - 1
+Get-LiteDBCollectionName
+
+# List collections in Database - 2
+Get-LiteDBCollectionName -Connection $CPU_DB_Conn
+
+# List Records in OS_Col in Database - 1
+Find-LiteDBDocument -Collection OS_Col
+
+# List Records in CPU_Col in Database - 2
+Find-LiteDBDocument -Collection CPU_Col -Connection $CPU_DB_Conn
+
+# Create a 2nd collection in Database - 2
+New-LiteDBCollection -Collection OS_DB1_Col -Connection $CPU_DB_Conn
+
+#Insert records from a collection in Database - 1 into a collection in Database - 2
+# Notice that we output the records as BSON so that we dont need to re-serilize the docs
+Find-LiteDBDocument -Collection OS_Col -As BSON | 
+    Add-LiteDBDocument -Collection OS_DB1_Col -Connection $CPU_DB_Conn
+
+# List Records in OS_DB1_Col in Database - 2
+Find-LiteDBDocument -Collection OS_DB1_Col -Connection $CPU_DB_Conn
+
+# List all docs in all collection in Database - 2
+Get-LiteDBCollectionName -Connection $CPU_DB_Conn | Find-LiteDBDocument -Connection $CPU_DB_Conn
