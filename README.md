@@ -140,8 +140,10 @@ New-LiteDBQuery -Field Status -Value 3 -Operator GT | Find-LiteDBDocument -Colle
 New-LiteDBQuery -Field Status -Value 3 -Operator LT | Find-LiteDBDocument -Collection SvcCollection
 
 # Combining queries with AND ($QueryLDB is an alias for the litedb query class)
-Find-LiteDBDocument -Collection SvcCollection -Query ($QueryLDB::And($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::GT("Status",3)))
+$And_Query = $QueryLDB::And($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::GT("Status",3))
+Find-LiteDBDocument -Collection SvcCollection -Query $And_Query
 
 # Combining queries with OR
-Find-LiteDBDocument -Collection SvcCollection -Query ($QueryLDB::Or($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::Contains("DisplayName","Encryption")))
+$OR_Query = $QueryLDB::Or($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::Contains("DisplayName","Encryption"))
+Find-LiteDBDocument -Collection SvcCollection -Query $OR_Query
 ```
