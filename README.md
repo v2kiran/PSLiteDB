@@ -24,6 +24,7 @@ git clone https://github.com/v2kiran/PSLiteDB.git
 Import-Module c:\temp\PSLiteDB -verbose
 ```
 
+***
 
 ## Create Database
 ```powershell
@@ -38,6 +39,8 @@ New-LiteDBDatabase -Path $dbPath -Verbose
 Open-LiteDBConnection -Database $dbPath
 ```
 
+***
+
 ## Create a Collection.
 ```powershell
 New-LiteDBCollection -Collection SvcCollection
@@ -45,6 +48,8 @@ New-LiteDBCollection -Collection SvcCollection
 # verify that the collection was created
 Get-LiteDBCollectionName
 ```
+
+***
 
 ## Create an Index.
 ```powershell
@@ -54,6 +59,8 @@ New-LiteDBIndex -Collection SvcCollection -Field DisplayName -Expression "LOWER(
 # verify that the index was created
 Get-LiteDBIndex -Collection SvcCollection
 ```
+
+***
 
 ## Insert Records
 Get all the services whose name starts with bfollowed by any sequence of characters.
@@ -65,6 +72,8 @@ Get-Service b* |
       ConvertTo-LiteDbBSON | 
          Add-LiteDBDocument -Collection SvcCollection
 ```
+
+***
 
 ## Find Records
 Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
@@ -92,6 +101,8 @@ By default if you omit the limit parameter only the first 1000 docs are displaye
 Find-LiteDBDocument -Collection SvcCollection -Limit 5 -Skip 2
 ```
 
+***
+
 ## Update records
 lets stop the BITS service and then update the collection with the new `status`
 ```powershell
@@ -112,6 +123,8 @@ Status      : 1
 StartType   : 2
 ```
 
+***
+
 ## Delete Records
 ```powershell
 # Delete record by ID
@@ -122,6 +135,8 @@ Find-LiteDBDocument -Collection SvcCollection -ID BITS
 WARNING: Document with ID ['"BITS"'] does not exist in the collection ['SvcCollection']
 ```
 
+***
+
 ## Upsert Records
 Upsert stands for - Add if not record exists or update if it does exist.
 ```powershell
@@ -130,6 +145,8 @@ Get-Service b* |
       ConvertTo-LiteDbBSON | 
          Upsertldb -Collection SvcCollection
 ```
+
+***
 
 ## Custom Queries
 By default the parameter values are case-sensitive 
