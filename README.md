@@ -17,6 +17,12 @@ Note: In LiteDB
 cd c:\temp
 git clone https://github.com/v2kiran/PSLiteDB.git
 ```
+OR
+
+if you have powershell 5.1 you can install PSLiteDB module from the [PowerShell Gallery](https://www.powershellgallery.com/):
+```powershell
+Install-Module -Name PSLiteDB -Scope CurrentUser
+```
 
 ***
 
