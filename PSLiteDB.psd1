@@ -27,7 +27,7 @@
     Copyright = '(c) 2018 Kiran Reddy. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description = 'Powershell LiteDB Module'
+    Description = 'Powershell wrapper fro LiteDB - a nosql single file datastore just like SQLite'
 
     # Minimum version of the Windows PowerShell engine required by this module
     PowerShellVersion = '3.0'
@@ -85,7 +85,7 @@
     AliasesToExport = '*'
 
     # List of all modules packaged with this module.
-    ModuleList = @('PSLiteDB.dll')
+    ModuleList = @('lib/PSLiteDB.dll')
 
     # List of all files packaged with this module
     #FileList = @('PSLiteDB.dll','PSLiteDB.psm1','PSLiteDB.psd1','LiteDB.dll','system.management.automation')
