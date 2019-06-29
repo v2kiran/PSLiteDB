@@ -1,7 +1,7 @@
 $script:QueryLDB = [LiteDB.Query]
 
 
-function ConvertTo-LiteDbBSON2
+function ConvertTo-LiteDbBSON
 {
     [CmdletBinding()]
     param 
