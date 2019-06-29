@@ -9,28 +9,28 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule = 'lib\PSLiteDB.dll'
+    RootModule             = 'lib\PSLiteDB.dll'
 
     # Version number of this module.
-    ModuleVersion = '1.0.0'
+    ModuleVersion          = '1.0.1'
 
     # ID used to uniquely identify this module
-    GUID = '391c63b1-bc3a-4b64-bedf-0f8e8b902719'
+    GUID                   = '391c63b1-bc3a-4b64-bedf-0f8e8b902719'
 
     # Author of this module
-    Author = 'Kiran Reddy'
+    Author                 = 'Kiran Reddy'
 
     # Company or vendor of this module
-    CompanyName = 'Personal'
+    CompanyName            = 'Personal'
 
     # Copyright statement for this module
-    Copyright = '(c) 2018 Kiran Reddy. All rights reserved.'
+    Copyright              = '(c) 2018 Kiran Reddy. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description = 'Powershell wrapper fro LiteDB - a nosql single file datastore just like SQLite'
+    Description            = 'Powershell wrapper fro LiteDB - a nosql single file datastore just like SQLite'
 
     # Minimum version of the Windows PowerShell engine required by this module
-    PowerShellVersion = '3.0'
+    PowerShellVersion      = '3.0'
 
     # DSC resources to export from this module
     #DscResourcesToExport = '*'
@@ -51,10 +51,10 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-     #RequiredModules = @('')
+    #RequiredModules = @('')
 
     # Assemblies that must be loaded prior to importing this module
-    RequiredAssemblies = @('lib\LiteDB.dll')
+    RequiredAssemblies     = @('lib\LiteDB.dll')
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
     #ScriptsToProcess = @('')
@@ -66,15 +66,15 @@
     #FormatsToProcess = @('TypeData\PSLiteDB.Format.ps1xml')
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-     NestedModules = @('PSLiteDB.psm1')
+    NestedModules          = @('PSLiteDB.psm1')
 
 
     # Functions to export from this module
-    FunctionsToExport = '*'
+    FunctionsToExport      = '*'
 
 
     # Cmdlets to export from this module
-    CmdletsToExport = '*'
+    CmdletsToExport        = '*'
 
 
     # Variables to export from this module
@@ -82,19 +82,19 @@
 
 
     # Aliases to export from this module
-    AliasesToExport = '*'
+    AliasesToExport        = '*'
 
     # List of all modules packaged with this module.
-    ModuleList = @('lib/PSLiteDB.dll')
+    ModuleList             = @('lib/PSLiteDB.dll')
 
     # List of all files packaged with this module
     #FileList = @('PSLiteDB.dll','PSLiteDB.psm1','PSLiteDB.psd1','LiteDB.dll','system.management.automation')
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-    PrivateData = @{
+    PrivateData            = @{
         PSData = @{
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('LiteDB', 'Database','noSQL')
+            Tags         = @('LiteDB', 'Database', 'noSQL')
 
             # A URL to the license for this module.
             #LicenseUri = 'https://github.com/v2kiran/PSLiteDB/blob/master/LICENSE'
