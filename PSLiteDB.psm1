@@ -1,7 +1,7 @@
 $script:QueryLDB = [LiteDB.Query]
 
 
-function ConvertTo-LiteDbBSON
+function ConvertTo-LiteDbBSON2
 {
     [CmdletBinding()]
     param 
@@ -34,37 +34,75 @@ function ConvertTo-LiteDbBSON
         {
             if ($As -eq 'Array')
             {
-                $bsonarray.Add(  
-                    (
-                        [LiteDB.JsonSerializer]::Deserialize(
-                            (
-                                ConvertTo-Json  -InputObject $i -Depth $Depth
-                            )
-                        )
-                    )
-                ) 
-            }
-            else
-            {
-                [LiteDB.JsonSerializer]::Deserialize(
+                $obj = [LiteDB.JsonSerializer]::Deserialize(
                     (
                         ConvertTo-Json  -InputObject $i -Depth $Depth
                     )
                 )
-            }
-        }
-        
+
+                
+                $hash = @{ }
+
+                $obj | Where-Object key -match "date|time" |
+                    ForEach-Object {
+                        $kvp = $_
+                        if ($kvp.value -match "Date|(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})")
+                        {
+                            $hash[$kvp.key] = [PSLiteDB.Helpers.MSJsonDateConverter1]::Convert($kvp)
+                        }
+                    }
+
+
+            $hash.GetEnumerator() | ForEach-Object {
+                $obj[$_.key] = $_.Value
+            }      
+
+
+                              
+        $bsonarray.Add(  
+            (
+                $obj
+            )
+        )  
+                
     }
-    
-    end
+    else
     {
-        if ($bsonarray.Count -gt 0)
-        {
-            Write-Output $bsonarray
-        }
+        $obj = [LiteDB.JsonSerializer]::Deserialize(
+            (
+                ConvertTo-Json  -InputObject $i -Depth $Depth
+            )
+        )
+        $hash = @{ }
+
+        $obj | Where-Object key -match "date|time" |
+            ForEach-Object {
+                $kvp = $_
+                if ($kvp.value -match "Date|(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})")
+                {
+                    $hash[$kvp.key] = [PSLiteDB.Helpers.MSJsonDateConverter1]::Convert($kvp)
+                }
+            }
+
+
+    $hash.GetEnumerator() | ForEach-Object {
+        $obj[$_.key] = $_.Value
+    }  
+
+$obj 
+}
+}
+        
+}
+    
+end
+{
+    if ($bsonarray.Count -gt 0)
+    {
+        Write-Output $bsonarray
     }
 }
-
+}
 
 
 Export-ModuleMember -Variable QueryLDB -Function ConvertTo-LiteDBBSON
