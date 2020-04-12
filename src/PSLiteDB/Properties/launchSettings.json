@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "PSLiteDB": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\6\\pwsh.exe",
+      "commandLineArgs": "-NoExit -NoProfile -Command  \"Import-Module 'C:\\temp\\Ps\\psliteorig\\src\\PSLiteDB\\bin\\Debug\\netstandard2.0\\PSLiteDB.dll' ;Open-LiteDBConnection c:\\temp\\litedb\\poc.db\""
+    }
+  }
+}

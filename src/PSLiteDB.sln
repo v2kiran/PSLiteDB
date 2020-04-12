@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSLiteDB", "PSLiteDB\PSLiteDB.csproj", "{EB08F2AC-C8D0-4186-AB2F-28B0483BDBEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB08F2AC-C8D0-4186-AB2F-28B0483BDBEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB08F2AC-C8D0-4186-AB2F-28B0483BDBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB08F2AC-C8D0-4186-AB2F-28B0483BDBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB08F2AC-C8D0-4186-AB2F-28B0483BDBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDBFF03A-284F-49B8-B92F-0CF0DDBD7697}
+	EndGlobalSection
+EndGlobal
