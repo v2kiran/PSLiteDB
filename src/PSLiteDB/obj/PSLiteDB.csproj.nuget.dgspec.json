@@ -1,0 +1,78 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj": {}
+  },
+  "projects": {
+    "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj": {
+      "version": "0.1.0-alpha",
+      "restore": {
+        "projectUniqueName": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+        "projectName": "PSLiteDB",
+        "projectPath": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+        "packagesPath": "C:\\Users\\kiranna\\.nuget\\packages\\",
+        "outputPath": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\kiranna\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "LiteDB": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.1, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "PowerShellStandard.Library": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
