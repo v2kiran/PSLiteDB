@@ -1,10 +1,7 @@
-$script:QueryLDB = [LiteDB.Query]
-
-
 function ConvertTo-LiteDbBSON
 {
     [CmdletBinding()]
-    param 
+    param
     (
         # Input object can be any powershell object
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
@@ -22,19 +19,19 @@ function ConvertTo-LiteDbBSON
         [string]
         $As = "Array"
     )
-    
+
     begin
     {
         $bsonarray = New-Object System.Collections.Generic.List[LiteDB.BsonDocument]
     }
-    
+
     process
     {
-        foreach ($i in $InputObject) 
+        foreach ($i in $InputObject)
         {
             if ($As -eq 'Array')
             {
-                $bsonarray.Add(  
+                $bsonarray.Add(
                     (
                         [LiteDB.JsonSerializer]::Deserialize(
                             (
@@ -42,7 +39,7 @@ function ConvertTo-LiteDbBSON
                             )
                         )
                     )
-                ) 
+                )
             }
             else
             {
@@ -53,9 +50,9 @@ function ConvertTo-LiteDbBSON
                 )
             }
         }
-        
+
     }
-    
+
     end
     {
         if ($bsonarray.Count -gt 0)
@@ -67,4 +64,4 @@ function ConvertTo-LiteDbBSON
 
 
 
-Export-ModuleMember -Variable QueryLDB -Function ConvertTo-LiteDBBSON
+Export-ModuleMember -Variable QueryLDB -Function ConvertTo-LiteDBBSON -alias fldb, oldb
