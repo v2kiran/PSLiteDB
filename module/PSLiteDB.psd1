@@ -12,10 +12,10 @@
     RootModule = 'lib\PSLiteDB.dll'
 
     # Version number of this module.
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '2.0.0'
 
     # ID used to uniquely identify this module
-    GUID = '391c63b1-bc3a-4b64-bedf-0f8e8b902719'
+    GUID = 'a68c0417-43ed-479e-a214-f41cd5191ff3'
 
     # Author of this module
     Author = 'Kiran Reddy'
@@ -117,4 +117,3 @@
     # DefaultCommandPrefix = ''
 
 }
-
