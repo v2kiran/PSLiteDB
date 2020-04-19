@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj": {}
+    "C:\\github\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj": {}
   },
   "projects": {
-    "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj": {
-      "version": "0.1.0-alpha",
+    "C:\\github\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj": {
+      "version": "2.0.0",
       "restore": {
-        "projectUniqueName": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+        "projectUniqueName": "C:\\github\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
         "projectName": "PSLiteDB",
-        "projectPath": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+        "projectPath": "C:\\github\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
         "packagesPath": "C:\\Users\\kiranna\\.nuget\\packages\\",
-        "outputPath": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\obj\\",
+        "outputPath": "C:\\github\\PSLiteDB\\src\\PSLiteDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -43,7 +43,7 @@
           "dependencies": {
             "LiteDB": {
               "target": "Package",
-              "version": "[5.0.5, )"
+              "version": "[5.0.7, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

@@ -3,7 +3,7 @@ using System;
 using System.Management.Automation;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using PSLiteDB.Helpers;
 
 namespace PSLiteDB
 {
@@ -46,35 +46,33 @@ namespace PSLiteDB
         [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
-            ValueFromPipelineByPropertyName = true,
-            Position = 1
+            ValueFromPipelineByPropertyName = true
             )]
         public string As { get; set; } = "PSObject";
 
-
-
         [Parameter(
-    Mandatory = false,
-    ValueFromPipeline = true,
-    ValueFromPipelineByPropertyName = true,
-    ParameterSetName = "Query"
-    )]
+            Mandatory = false,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            ParameterSetName = "Query"
+            )]
         public string Where { get; set; }
 
         [Parameter(
-Mandatory = true,
-ValueFromPipeline = true,
-ValueFromPipelineByPropertyName = true,
-ParameterSetName = "Query"
-)]
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            ParameterSetName = "Query"
+            )]
         public string Select { get; set; }
 
         [Parameter(
-Mandatory = true,
-ValueFromPipeline = true,
-ValueFromPipelineByPropertyName = true,
-ParameterSetName = "Sql"
-)]
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            ParameterSetName = "Sql",
+            Position = 1
+            )]
         public string Sql { get; set; }
 
         [Parameter(
@@ -98,7 +96,6 @@ ParameterSetName = "Sql"
                 }
                 catch (Exception)
                 {
-
                     throw (new Exception("You must use 'Open-LiteDBConnection' to initiate a connection to a database"));
                 }
             }
@@ -117,15 +114,13 @@ ParameterSetName = "Sql"
                     {
                         if (As.ToLower() == "psobject")
                         {
-                            var Obj = Helpers.MSJsonDateConverter.BSONtoPSObjectConverter(results, Collection);
-
+                            var Obj = MSJsonDateConverter.BSONtoPSObjectConverter1(results, Collection);
                             WriteObject(Obj);
                         }
                         else
                         {
                             WriteObject(Connection.Mapper.ToDocument(results));
                         }
-
                     }
                     else
                     {
@@ -154,26 +149,23 @@ ParameterSetName = "Sql"
                     {
                         results = Table.Query().Select(Select).Limit(Limit).Skip(Skip).ToList();
                     }
-
+                   
                     if (results != null)
                     {
                         if (As.ToLower() == "psobject")
                         {
                             foreach (var r in results)
                             {
-                                var Obj = Helpers.MSJsonDateConverter.BSONtoPSObjectConverter(r, Collection);
+                                var Obj = MSJsonDateConverter.BSONtoPSObjectConverter1(r, Collection);
                                 WriteObject(Obj);
                             }
                         }
                         else
                         {
-
                             foreach (var r in results)
                             {
                                 WriteObject(Connection.Mapper.ToDocument(r));
                             }
-
-
                         }
                     }
                 }
@@ -196,10 +188,9 @@ ParameterSetName = "Sql"
                         {
                             if (r != null)
                             {
-                                var Obj = Helpers.MSJsonDateConverter.BSONtoPSObjectConverter(r, Collection);
+                                var Obj = MSJsonDateConverter.BSONtoPSObjectConverter1(r, Collection);
                                 WriteObject(Obj);
                             }
-  
                         }
                     }
                     else
@@ -225,7 +216,7 @@ ParameterSetName = "Sql"
                         {
                             foreach (var r in results)
                             {
-                                var Obj = Helpers.MSJsonDateConverter.BSONtoPSObjectConverter(r, Collection);
+                                var Obj = MSJsonDateConverter.BSONtoPSObjectConverter1(r, Collection);
                                 WriteObject(Obj);
                             }
                         }
@@ -244,9 +235,6 @@ ParameterSetName = "Sql"
                     WriteWarning($"Collection ['{Collection}'] does not exist in the database");
                 }
             }
-
-
-
         }
     }
 }

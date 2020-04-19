@@ -677,16 +677,12 @@
             Returns a special collection for storage files/stream inside datafile. Use _files and _chunks collection names. FileId is implemented as string. Use "GetStorage" for custom options
             </summary>
         </member>
-        <member name="P:LiteDB.ILiteDatabase.UserVersion">
-            <summary>
-            Get/Set database user version - use this version number to control database change model
-            </summary>
-        </member>
-        <member name="M:LiteDB.ILiteDatabase.GetCollection``1(System.String)">
+        <member name="M:LiteDB.ILiteDatabase.GetCollection``1(System.String,LiteDB.BsonAutoId)">
             <summary>
             Get a collection using a entity class as strong typed document. If collection does not exits, create a new one.
             </summary>
             <param name="name">Collection name (case insensitive)</param>
+            <param name="autoId">Define autoId data type (when object contains no id field)</param>
         </member>
         <member name="M:LiteDB.ILiteDatabase.GetCollection``1">
             <summary>
@@ -779,6 +775,37 @@
         <member name="M:LiteDB.ILiteDatabase.Pragma(System.String,LiteDB.BsonValue)">
             <summary>
             Set new value to internal engine variables
+            </summary>
+        </member>
+        <member name="P:LiteDB.ILiteDatabase.UserVersion">
+            <summary>
+            Get/Set database user version - use this version number to control database change model
+            </summary>
+        </member>
+        <member name="P:LiteDB.ILiteDatabase.Timeout">
+            <summary>
+            Get/Set database timeout - this timeout is used to wait for unlock using transactions
+            </summary>
+        </member>
+        <member name="P:LiteDB.ILiteDatabase.UtcDate">
+            <summary>
+            Get/Set if database will deserialize dates in UTC timezone or Local timezone (default: Local)
+            </summary>
+        </member>
+        <member name="P:LiteDB.ILiteDatabase.LimitSize">
+            <summary>
+            Get/Set database limit size (in bytes). New value must be equals or larger than current database size
+            </summary>
+        </member>
+        <member name="P:LiteDB.ILiteDatabase.CheckpointSize">
+            <summary>
+            Get/Set in how many pages (8 Kb each page) log file will auto checkpoint (copy from log file to data file). Use 0 to manual-only checkpoint (and no checkpoint on dispose)
+            Default: 1000 pages
+            </summary>
+        </member>
+        <member name="P:LiteDB.ILiteDatabase.Collation">
+            <summary>
+            Get database collection (this options can be changed only in rebuild proces)
             </summary>
         </member>
         <member name="P:LiteDB.ILiteRepository.Database">
@@ -951,11 +978,17 @@
             Use another MemoryStrem as LOG file.
             </summary>
         </member>
-        <member name="M:LiteDB.LiteDatabase.GetCollection``1(System.String)">
+        <member name="M:LiteDB.LiteDatabase.#ctor(LiteDB.Engine.ILiteEngine,LiteDB.BsonMapper,System.Boolean)">
+            <summary>
+            Start LiteDB database using a pre-exiting engine. When LiteDatabase instance dispose engine instance will be disposed too
+            </summary>
+        </member>
+        <member name="M:LiteDB.LiteDatabase.GetCollection``1(System.String,LiteDB.BsonAutoId)">
             <summary>
             Get a collection using a entity class as strong typed document. If collection does not exits, create a new one.
             </summary>
             <param name="name">Collection name (case insensitive)</param>
+            <param name="autoId">Define autoId data type (when object contains no id field)</param>
         </member>
         <member name="M:LiteDB.LiteDatabase.GetCollection``1">
             <summary>
@@ -1058,6 +1091,32 @@
         <member name="P:LiteDB.LiteDatabase.UserVersion">
             <summary>
             Get/Set database user version - use this version number to control database change model
+            </summary>
+        </member>
+        <member name="P:LiteDB.LiteDatabase.Timeout">
+            <summary>
+            Get/Set database timeout - this timeout is used to wait for unlock using transactions
+            </summary>
+        </member>
+        <member name="P:LiteDB.LiteDatabase.UtcDate">
+            <summary>
+            Get/Set if database will deserialize dates in UTC timezone or Local timezone (default: Local)
+            </summary>
+        </member>
+        <member name="P:LiteDB.LiteDatabase.LimitSize">
+            <summary>
+            Get/Set database limit size (in bytes). New value must be equals or larger than current database size
+            </summary>
+        </member>
+        <member name="P:LiteDB.LiteDatabase.CheckpointSize">
+            <summary>
+            Get/Set in how many pages (8 Kb each page) log file will auto checkpoint (copy from log file to data file). Use 0 to manual-only checkpoint (and no checkpoint on dispose)
+            Default: 1000 pages
+            </summary>
+        </member>
+        <member name="P:LiteDB.LiteDatabase.Collation">
+            <summary>
+            Get database collection (this options can be changed only in rebuild proces)
             </summary>
         </member>
         <member name="T:LiteDB.LiteQueryable`1">
@@ -1492,6 +1551,11 @@
         <member name="P:LiteDB.BsonMapper.IncludeNonPublic">
             <summary>
             Get/Set that mapper must include non public (private, protected and internal) (default: false)
+            </summary>
+        </member>
+        <member name="P:LiteDB.BsonMapper.MaxDepth">
+            <summary>
+            Get/Set maximum depth for nested object (default 20)
             </summary>
         </member>
         <member name="F:LiteDB.BsonMapper.ResolveMember">
@@ -2270,6 +2334,11 @@
             "upgrade": Check if data file is an old version and convert before open (default: false)
             </summary>
         </member>
+        <member name="P:LiteDB.ConnectionString.Collation">
+            <summary>
+            "collation": Set default collaction when database creation (default: "[CurrentCulture]/IgnoreCase")
+            </summary>
+        </member>
         <member name="M:LiteDB.ConnectionString.#ctor">
             <summary>
             Initialize empty connection string
@@ -2789,7 +2858,7 @@
             Parse tokenizer and create new instance of BsonExpression - for now, do not use cache
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpression.ParseAndCompile(LiteDB.Tokenizer,LiteDB.BsonExpressionParserMode,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpression.ParseAndCompile(LiteDB.Tokenizer,LiteDB.BsonExpressionParserMode,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Parse and compile string expression and return BsonExpression
             </summary>
@@ -3214,6 +3283,11 @@
             Get all KEYS names from a document
             </summary>
         </member>
+        <member name="M:LiteDB.BsonExpressionMethods.VALUES(LiteDB.BsonValue)">
+            <summary>
+            Get all values from a document
+            </summary>
+        </member>
         <member name="M:LiteDB.BsonExpressionMethods.OID_CREATIONTIME(LiteDB.BsonValue)">
             <summary>
             Return CreationTime from ObjectId value - returns null if not an ObjectId
@@ -3329,6 +3403,11 @@
             Slit value string based on separator 
             </summary>
         </member>
+        <member name="M:LiteDB.BsonExpressionMethods.SPLIT(LiteDB.BsonValue,LiteDB.BsonValue,LiteDB.BsonValue)">
+            <summary>
+            Slit value string based on regular expression pattern
+            </summary>
+        </member>
         <member name="M:LiteDB.BsonExpressionMethods.FORMAT(LiteDB.BsonValue,LiteDB.BsonValue)">
             <summary>
             Return format value string using format definition (same as String.Format("{0:~}", values)).
@@ -3342,6 +3421,16 @@
         <member name="M:LiteDB.BsonExpressionMethods.JOIN(System.Collections.Generic.IEnumerable{LiteDB.BsonValue},LiteDB.BsonValue)">
             <summary>
             Join all values into a single string with a string separator
+            </summary>
+        </member>
+        <member name="M:LiteDB.BsonExpressionMethods.IS_MATCH(LiteDB.BsonValue,LiteDB.BsonValue)">
+            <summary>
+            Test if value is match with regular expression pattern
+            </summary>
+        </member>
+        <member name="M:LiteDB.BsonExpressionMethods.MATCH(LiteDB.BsonValue,LiteDB.BsonValue,LiteDB.BsonValue)">
+            <summary>
+            Apply regular expression pattern over value to get group data. Return null if not found
             </summary>
         </member>
         <member name="T:LiteDB.VolatileAttribute">
@@ -3459,12 +3548,12 @@
             Operation definition by methods with defined expression type (operators are in precedence order)
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.ParseFullExpression(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.ParseFullExpression(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Start parse string into linq expression. Read path, function or base type bson values (int, double, bool, string)
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.ParseSingleExpression(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.ParseSingleExpression(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Start parse string into linq expression. Read path, function or base type bson values (int, double, bool, string)
             </summary>
@@ -3506,37 +3595,37 @@
             Try parse string with both single/double quote - return null if not string
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParseDocument(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParseDocument(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Try parse json document - return null if not document token
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParseSource(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParseSource(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Try parse source documents (when passed) * - return null if not source token
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParseArray(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParseArray(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Try parse array - return null if not array token
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParseParameter(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParseParameter(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Try parse parameter - return null if not parameter token
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParseInnerExpression(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParseInnerExpression(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Try parse inner expression - return null if not bracket token
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParseMethodCall(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParseMethodCall(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Try parse method call - return null if not method call
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParsePath(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParsePath(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Parse JSON-Path - return null if not method call
             </summary>
@@ -3546,12 +3635,12 @@
             Implement a JSON-Path like navigation on BsonDocument. Support a simple range of paths
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.TryParseFunction(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.TryParseFunction(LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Try parse FUNCTION methods: MAP, FILTER, SORT, ...
             </summary>
         </member>
-        <member name="M:LiteDB.BsonExpressionParser.ParseFunction(System.String,LiteDB.BsonExpressionType,LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,System.Boolean)">
+        <member name="M:LiteDB.BsonExpressionParser.ParseFunction(System.String,LiteDB.BsonExpressionType,LiteDB.Tokenizer,LiteDB.ExpressionContext,LiteDB.BsonDocument,LiteDB.DocumentScope)">
             <summary>
             Parse expression functions, like MAP, FILTER or SORT.
             MAP(items[*] => @.Name)
@@ -3797,7 +3886,7 @@
             Get Stream pool used inside disk service
             </summary>
         </member>
-        <member name="M:LiteDB.Engine.DiskService.Initialize(System.IO.Stream,System.Int64)">
+        <member name="M:LiteDB.Engine.DiskService.Initialize(System.IO.Stream,LiteDB.Collation,System.Int64)">
             <summary>
             Create a new empty database (use synced mode)
             </summary>
@@ -3918,9 +4007,9 @@
             Get how many extends was made in this store
             </summary>
         </member>
-        <member name="F:LiteDB.Engine.MemoryCache._segmentSize">
+        <member name="F:LiteDB.Engine.MemoryCache._segmentSizes">
             <summary>
-            Get memory segment size
+            Get memory segment sizes
             </summary>
         </member>
         <member name="M:LiteDB.Engine.MemoryCache.GetReadablePage(System.Int64,LiteDB.Engine.FileOrigin,System.Action{System.Int64,LiteDB.BufferSlice})">
@@ -3991,6 +4080,11 @@
         <member name="P:LiteDB.Engine.MemoryCache.ExtendSegments">
             <summary>
             Return how many segments already loaded in memory
+            </summary>
+        </member>
+        <member name="P:LiteDB.Engine.MemoryCache.ExtendPages">
+            <summary>
+            Get how many pages this cache extends in memory
             </summary>
         </member>
         <member name="P:LiteDB.Engine.MemoryCache.WritablePages">
@@ -4486,6 +4580,11 @@
             If database is new, initialize with allocated space (in bytes) (default: 0)
             </summary>
         </member>
+        <member name="P:LiteDB.Engine.EngineSettings.Collation">
+            <summary>
+            Create database with custom string collection (used only to create database) (default: Collation.Default)
+            </summary>
+        </member>
         <member name="P:LiteDB.Engine.EngineSettings.ReadOnly">
             <summary>
             Indicate that engine will open files in readonly mode (and will not support any database change)
@@ -4579,7 +4678,7 @@
             Recreate database using empty LOG file to re-write all documents with all indexes
             </summary>
         </member>
-        <member name="M:LiteDB.Engine.LiteEngine.RebuildContent(LiteDB.Engine.IFileReader,LiteDB.UpgradeOption)">
+        <member name="M:LiteDB.Engine.LiteEngine.RebuildContent(LiteDB.Engine.IFileReader)">
             <summary>
             Fill current database with data inside file reader - run inside a transacion
             </summary>
@@ -4658,7 +4757,7 @@
             Implement internal update document
             </summary>
         </member>
-        <member name="M:LiteDB.Engine.LiteEngine.Upgrade(System.String,System.String,LiteDB.UpgradeOption)">
+        <member name="M:LiteDB.Engine.LiteEngine.Upgrade(System.String,System.String)">
             <summary>
             Upgrade old version of LiteDB into new LiteDB file structure. Returns true if database was completed converted
             If database already in current version just return false
@@ -4822,7 +4921,7 @@
             Get/Set where this page are in free list slot [1 byte]
             Used only in DataPage (0-4) and IndexPage (0-1) - when new or not used: 255
             DataPage: 0 (7344 - 8160 free space) - 1 (6120 - 7343) - 2 (4896 - 6119) - 3 (2448 - 4895) - 4 (0 - 2447)
-            IndexPage 0 (600 - 8160 free bytes) - 1 (0 - 599 bytes free)
+            IndexPage 0 (1400 - 8160 free bytes) - 1 (0 - 1399 bytes free)
             </summary>
         </member>
         <member name="P:LiteDB.Engine.BasePage.ItemsCount">
@@ -5449,6 +5548,11 @@
         <member name="M:LiteDB.Engine.QueryOptimization.SplitWherePredicateInTerms">
             <summary>
             Fill terms from where predicate list
+            </summary>
+        </member>
+        <member name="M:LiteDB.Engine.QueryOptimization.OptimizeTerms">
+            <summary>
+            Do some pre-defined optimization on terms to convert expensive filter in indexable filter
             </summary>
         </member>
         <member name="M:LiteDB.Engine.QueryOptimization.DefineQueryFields">
@@ -6304,7 +6408,7 @@
             Calculate how many bytes this node will need on page segment
             </summary>
         </member>
-        <member name="M:LiteDB.Engine.IndexNode.GetKeyLength(LiteDB.BsonValue)">
+        <member name="M:LiteDB.Engine.IndexNode.GetKeyLength(LiteDB.BsonValue,System.Boolean)">
             <summary>
             Get how many bytes will be used to store this value. Must consider:
             [1 byte] - BsonType
@@ -6736,9 +6840,12 @@
             100,000 ~= 1Gb memory
             </summary>
         </member>
-        <member name="F:LiteDB.Constants.MEMORY_SEGMENT_SIZE">
+        <member name="F:LiteDB.Constants.MEMORY_SEGMENT_SIZES">
             <summary>
-            Size, in PAGES, for each buffer array (used in MemoryStore) - Each byte array will be created with this size * PAGE_SIZE
+            Size, in PAGES, for each buffer array (used in MemoryStore)
+            It's an array to increase after each extend - limited in heighest value
+            Each byte array will be created with this size * PAGE_SIZE
+            Use minimal 12 to allocate at least 85Kb per segment (will use LOH)
             </summary>
         </member>
         <member name="F:LiteDB.Constants.VIRTUAL_INDEX_MAX_CACHE">
@@ -6769,6 +6876,21 @@
         <member name="M:LiteDB.Constants.ENSURE(System.Boolean,System.Boolean,System.String)">
             <summary>
             If ifTest are true, ensure condition is true, otherwise stop execution (for Debug proposes only)
+            </summary>
+        </member>
+        <member name="T:LiteDB.ExtendedLengthHelper">
+            <summary>
+            Class to help extend IndexNode key up to 1023 bytes length (for string/byte[]) using 2 first bits in BsonType
+            </summary>
+        </member>
+        <member name="M:LiteDB.ExtendedLengthHelper.ReadLength(System.Byte,System.Byte,LiteDB.BsonType@,System.UInt16@)">
+            <summary>
+            Read BsonType and UShort length from 2 bytes
+            </summary>
+        </member>
+        <member name="M:LiteDB.ExtendedLengthHelper.WriteLength(LiteDB.BsonType,System.UInt16,System.Byte@,System.Byte@)">
+            <summary>
+            Write BsonType and UShort length in 2 bytes
             </summary>
         </member>
         <member name="M:LiteDB.BufferExtensions.IsFullZero(System.Byte[])">

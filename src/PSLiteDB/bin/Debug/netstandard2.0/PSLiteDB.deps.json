@@ -7,9 +7,9 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "PSLiteDB/0.1.0-alpha": {
+      "PSLiteDB/2.0.0": {
         "dependencies": {
-          "LiteDB": "5.0.5",
+          "LiteDB": "5.0.7",
           "NETStandard.Library": "2.0.1",
           "Newtonsoft.Json": "12.0.3",
           "PowerShellStandard.Library": "5.1.0"
@@ -18,11 +18,11 @@
           "PSLiteDB.dll": {}
         }
       },
-      "LiteDB/5.0.5": {
+      "LiteDB/5.0.7": {
         "runtime": {
           "lib/netstandard2.0/LiteDB.dll": {
-            "assemblyVersion": "5.0.5.0",
-            "fileVersion": "5.0.5.0"
+            "assemblyVersion": "5.0.7.0",
+            "fileVersion": "5.0.7.0"
           }
         }
       },
@@ -51,17 +51,17 @@
     }
   },
   "libraries": {
-    "PSLiteDB/0.1.0-alpha": {
+    "PSLiteDB/2.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "LiteDB/5.0.5": {
+    "LiteDB/5.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-R2d0SzfD787wH1dfSDdbGZETFW7osC330oowKDUvDujB2Hh8DgMpDNFJYARvXO7ikperYKkrQ2XBiEooZlAUxQ==",
-      "path": "litedb/5.0.5",
-      "hashPath": "litedb.5.0.5.nupkg.sha512"
+      "sha512": "sha512-pwoPsonlbOLulXmRpAJ+UIfqZ2Q/F54D/LHh0U84TSdl0SQed+wNvoMDie15UYbz85bXUyLgTICJMXqIosWM1g==",
+      "path": "litedb/5.0.7",
+      "hashPath": "litedb.5.0.7.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

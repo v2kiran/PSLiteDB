@@ -36,9 +36,9 @@ namespace PSLiteDB
 
 
         [Parameter(
-     HelpMessage = "Open in Read-Only Mode",
-     ParameterSetName = "Simple"
-     )]
+             HelpMessage = "Open in Read-Only Mode",
+             ParameterSetName = "Simple"
+             )]
         public LiteDB.ConnectionType Mode { get; set; } = LiteDB.ConnectionType.Direct;
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, ParameterSetName = "Simple")]
@@ -57,6 +57,19 @@ namespace PSLiteDB
             )]
         public long InitialSize { get; set; } = 8192;
 
+        [Parameter(
+            ParameterSetName = "Simple",
+            Mandatory = false
+            )]
+        public Collation collation { get; set; } = Collation.Default;
+
+        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
+        public SwitchParameter ReadOnly
+        {
+            get { return _readonly; }
+            set { _readonly = value; }
+        }
+        private bool _readonly;
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
         public SwitchParameter DontSerializeNullValues
@@ -90,7 +103,6 @@ namespace PSLiteDB
         }
         private bool _includeFields;
 
-
         private string resolvedPath;
         private ConnectionString connbuilder;
         private LiteDatabase _connection;
@@ -107,17 +119,21 @@ namespace PSLiteDB
                 connbuilder = new ConnectionString();
                 connbuilder.Connection = Mode;
                 connbuilder.InitialSize = InitialSize;
-                
+                connbuilder.Collation = collation;
 
                 if (Credential != null)
                 {
                     connbuilder.Password = Credential.GetNetworkCredential().Password;
                 }
 
+                if (ReadOnly)
+                {
+                    connbuilder.ReadOnly = true;
+                }
 
                 if (Upgrade)
                 {
-                    connbuilder.Upgrade = LiteDB.UpgradeOption.True;
+                    connbuilder.Upgrade = true;
                 }
 
                 
@@ -130,10 +146,13 @@ namespace PSLiteDB
                     {
                         connbuilder.Filename = resolvedPath;
                         _connectioninfo = connbuilder;
+                  
+
                         try
                         {
                             _connection = new LiteDatabase(connbuilder);
                             _connectioninfo.Password = null;
+                            
                         }
                         catch (Exception)
                         {

@@ -58,6 +58,24 @@ namespace PSLiteDB
         public BsonDocument Document { get; set; }
 
         [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            Position = 0,
+            ParameterSetName = "Query"
+            )]
+        public BsonExpression Set { get; set; }
+
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            Position = 1,
+            ParameterSetName = "Query"
+            )]
+        public BsonExpression Where { get; set; }
+
+        [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true
@@ -102,6 +120,10 @@ namespace PSLiteDB
                     else if (ParameterSetName == "Array")
                     {
                         Table.Update(BsonDocumentArray);
+                    }
+                    else if(ParameterSetName == "Query")
+                    {
+                        Table.UpdateMany(Set, Where);
                     }
                     else
                     {

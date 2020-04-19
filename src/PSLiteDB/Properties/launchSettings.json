@@ -3,7 +3,7 @@
     "PSLiteDB": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
-      "commandLineArgs": "-NoExit -NoProfile -Command  \"Import-Module 'C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\bin\\Debug\\netstandard2.0\\PSLiteDB.dll' ;cd \\;Open-LiteDBConnection C:\\temp\\litedb\\svc.db -upgrade\""
+      "commandLineArgs": "-NoExit -NoProfile -Command  \"Invoke-Build -file C:\\github\\PSLiteDB\\.build.ps1;Import-Module 'C:\\github\\PSLiteDB\\module\\PSLiteDB.psd1' ;cd \\;Open-LiteDBConnection C:\\temp\\litedb\\svc1.db\""
     }
   }
 }

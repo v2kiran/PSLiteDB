@@ -51,25 +51,34 @@ namespace PSLiteDB.Helpers
         {
             PSObject Obj = new PSObject();
             Obj.Properties.Add(new PSNoteProperty("Collection", Collection));
+            Regex rgx = new Regex(@"^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$");
+            Regex rgx2 = new Regex(@"^\/Date\((d|-|.*)\)[\/|\\]$");
+
 
             foreach (KeyValuePair<string, BsonValue> kvp in bsonobj)
             {
                 if (kvp.Value.GetType() == typeof(BsonValue))
                 {
-                    Regex rgx = new Regex(@"^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$");
-                    Regex rgx2 = new Regex(@"^\\/Date\(\d+");
-
                     if (kvp.Value.IsString)
                     {
- 
-                        if (rgx.IsMatch(kvp.Value.AsString) || rgx2.IsMatch(kvp.Value.AsString))
+
+                        //Console.WriteLine($"the value is {kvp.Value.AsString} and result1: {rgx.IsMatch(kvp.Value.AsString)} result2: {rgx2.IsMatch(kvp.Value.AsString)}");
+
+                        if (rgx.IsMatch(kvp.Value.AsString))
                         {
+                            // Console.WriteLine($"rgx1 the key is {kvp.Key}");
                             //standard json iso date conversion
                             Obj.Properties.Add(new PSNoteProperty(kvp.Key, Convert(kvp)));
                         }
+                        else if (rgx2.IsMatch(kvp.Value.AsString))
+                        {
+                            //Console.WriteLine($"rgx2 the key is {kvp.Key}");
+                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, Convert(kvp)));
+
+                        }
                         else
                         {
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
+                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, kvp.Value.AsString));
                         }
                     }
                     else
@@ -83,8 +92,7 @@ namespace PSLiteDB.Helpers
                 }
                 else if (kvp.Value.IsArray)
                 {
-
-                    var bsontype = kvp.Value.AsArray[0].Type;
+                    //var bsontype = kvp.Value.AsArray[0].Type;
                     var li = new List<string>();
                     foreach (var i in kvp.Value.AsArray)
                     {
@@ -103,6 +111,7 @@ namespace PSLiteDB.Helpers
                     {
                         Obj.Properties.Add(new PSNoteProperty(kvp.Key, li));
                     }
+
                 }
                 else
                 {
@@ -112,51 +121,31 @@ namespace PSLiteDB.Helpers
             return Obj;
         }
 
-        public static PSObject BSONtoPSObjectConverter(BsonDocument bsonobj)
+        public static PSObject BSONtoPSObjectConverter1(BsonDocument bsonobj, string Collection)
         {
             PSObject Obj = new PSObject();
-          
+            Obj.Properties.Add(new PSNoteProperty("Collection", Collection));
 
             foreach (KeyValuePair<string, BsonValue> kvp in bsonobj)
             {
                 if (kvp.Value.GetType() == typeof(BsonValue))
                 {
-                    Regex rgx = new Regex(@"^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$");
-                    Regex rgx2 = new Regex(@"^\\/Date\(\d+");
-
-                    if (kvp.Value.IsString)
-                    {
-
-                        if (rgx.IsMatch(kvp.Value.AsString) || rgx2.IsMatch(kvp.Value.AsString))
-                        {
-                            //standard json iso date conversion
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, Convert(kvp)));
-                        }
-                        else
-                        {
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
-                        }
-                    }
-                    else
-                    {
-                        Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
-                    }
+                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
                 }
                 else if (kvp.Value.IsDocument)
                 {
-                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(kvp.Value.AsDocument)));
+                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(kvp.Value.AsDocument, Collection)));
                 }
                 else if (kvp.Value.IsArray)
                 {
-
-                    var bsontype = kvp.Value.AsArray[0].Type;
+                    //var bsontype = kvp.Value.AsArray[0].Type;
                     var li = new List<string>();
                     foreach (var i in kvp.Value.AsArray)
                     {
 
                         if (i.IsDocument)
                         {
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(i.AsDocument)));
+                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(i.AsDocument, Collection)));
                         }
                         else
                         {
@@ -168,6 +157,7 @@ namespace PSLiteDB.Helpers
                     {
                         Obj.Properties.Add(new PSNoteProperty(kvp.Key, li));
                     }
+
                 }
                 else
                 {

@@ -51,3 +51,11 @@ C:\temp\ps\PSLiteDB\src\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.pdb
 C:\temp\ps\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.deps.json
 C:\temp\ps\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.dll
 C:\temp\ps\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.pdb
+C:\github\PSLiteDB\src\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.csprojAssemblyReference.cache
+C:\github\PSLiteDB\src\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.AssemblyInfoInputs.cache
+C:\github\PSLiteDB\src\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.AssemblyInfo.cs
+C:\github\PSLiteDB\src\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.dll
+C:\github\PSLiteDB\src\PSLiteDB\obj\Debug\netstandard2.0\PSLiteDB.pdb
+C:\github\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.deps.json
+C:\github\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.dll
+C:\github\PSLiteDB\src\PSLiteDB\bin\Debug\netstandard2.0\PSLiteDB.pdb

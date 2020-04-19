@@ -1,13 +1,13 @@
 # PSLiteDB
 
-## OverView
+## :rainbow: OverView
 [LiteDB](http://www.litedb.org/) is a noSQL singlefile datastore just like SQLite.
 PSLiteDB is a PowerShell wrapper for LiteDB
 
-Note: In LiteDB
-- CollectionNames are case-insensitive
-- FieldNames or property Names are case-sensitive
-- FieldValues or PropertyValues are case-sensitive unless queried with an Index that has been explicity created with lowercase values.
+>Note: in V5 everything is case in-sensitive
+- Collection names are case-insensitive
+- FieldNames or property names are case-insensitive
+- FieldValues or property values are case-insensitive.
 
 ## Clone Module
 
@@ -21,7 +21,7 @@ git clone https://github.com/v2kiran/PSLiteDB.git
 
 ## Import Module
 ```powershell
-Import-Module c:\temp\PSLiteDB -verbose
+Import-Module c:\temp\PSLiteDB\module\PSLiteDB.psd1 -verbose
 ```
 
 ***
@@ -35,9 +35,9 @@ New-LiteDBDatabase -Path $dbPath -Verbose
 ***
 
 ## Connect Database
-The connection to the first db is stored in a session variable called `$LiteDBPSConnection`.
-This connection variable is re-used in various cmdlets from this module making it efficient by having to type less.
-if you want to work with multiple databases then you will need to store each connection from `Open-LiteDBConnection` in a different variable and pass
+- :arrow_forward: :saxophone: The connection to the first db is stored in a session variable called `$LiteDBPSConnection`.
+- :arrow_forward: :trumpet: This connection variable is re-used in various cmdlets from this module making it efficient by having to type less.
+- :arrow_forward: :guitar: if you want to work with multiple databases then you will need to store each connection from `Open-LiteDBConnection` in a different variable and pass
 that to each cmdlet's `Connection` parameter.
 Check the [Wiki](https://github.com/v2kiran/PSLiteDB/wiki/Working-with-Multiple-Databases) for an example on how to work with multiple databases simultaneously.
 ```powershell
@@ -72,16 +72,29 @@ Get all the services whose name starts with bfollowed by any sequence of charact
 Force the `Name` property to become the `_id` property in the LiteDB collection
 Serialize the selected records and finally insert them into the `SvcCollection`
 ```powershell
-Get-Service b* | 
-  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType | 
-      ConvertTo-LiteDbBSON | 
+Get-Service b* |
+  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
+      ConvertTo-LiteDbBSON |
          Add-LiteDBDocument -Collection SvcCollection
 ```
+
+##### Bulk Insert
+```powershell
+Get-Service b* |
+  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
+      ConvertTo-LiteDbBSON |
+         Add-LiteDBDocument -Collection SvcCollection -Bulk -Batch 5000
+
+```
+
+> :dart: **Note**:  The `ConvertTo-LiteDbBSON` Function returns a Bsondocument array which will be unrolled by the `Add-LitedbDocument` cmdlet by default so if you want to avoid that and add the array as a whole you need to use the `-bulk` switch. Usefull when inserting a huge number of documents in batches.
 
 ***
 
 ## Find Records
 Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
+
+##### :one: Find by `ID`
 ```powershell
 #Note that the value of parameter ID: 'BITS' is case-sensitive
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
@@ -94,26 +107,84 @@ DisplayName : "Background Intelligent Transfer Service"
 Status      : 4
 StartType   : 2
 
-# just to illustrate that lowercase bits wont show up in the results
-Find-LiteDBDocument -Collection P6 -ID bits
-WARNING: Document with ID ['"bits"'] does not exist in the collection ['SvcCollection']
+# just to illustrate that lowercase bits also now works( this didnt work in LiteDB v4)
+Find-LiteDBDocument -Collection SvcCollection -ID bits
+
 
 <#
-List all documents in a collection, limiting the total docs displayed to 5 and skipping the first 2. 
+List all documents in a collection, limiting the total docs displayed to 5 and skipping the first 2.
 'Limit' and 'skip' are optional parameters
 By default if you omit the limit parameter only the first 1000 docs are displayed
 #>
 Find-LiteDBDocument -Collection SvcCollection -Limit 5 -Skip 2
 ```
 
+
+
+
+##### :two:  Find by `SQL Query`
+```powershell
+# get the first 5 documents from the service collection
+Find-LiteDBDocument SvcCollection -Sql "Select $ from SvcCollection limit 5"
+
+# get the first 5 documents with selected properties or fields from the service collection
+Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection limit 5"
+
+# using where to filter the results ( listing the first 5 stopped services)
+Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status = 1 limit 5"
+
+# using where to filter the results - greaterthan
+Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status > 1 limit 5"
+
+# using multiple where filters. ( stopped services along with a wildcard name filter)
+Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status = 1 and Name like 'app%' limit 5"
+
+# Sorting by name descending
+Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status = 1 order by name desc limit 5"
+
+# using Functions
+# get the first 5 documents with selected properties or fields from the service collection
+Find-LiteDBDocument SvcCollection -Sql "Select upper(Name),Status from SvcCollection limit 5"
+
+```
+
+
+##### :three: Find by `Named Queries`
+```powershell
+# Wildcard filter B*. Select 2 properties _id & status to display in the output
+# Select is a mandatory parameter when used with -Where
+Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,Status}"
+
+# Calculated properties: show status as svcstatus
+Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,SvcStatus: Status}"
+
+# limit: output to 2 documents
+Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,SvcStatus: Status}" -Limit 2
+
+# Skip: skip first 2 documents
+Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,SvcStatus: Status}" -Limit 2 -Skip 2
+
+# using Functions
+Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{Name: _id,DN : UPPER(DisplayName)}" -Limit 2
+
+# for a list of other functions refer to : http://www.litedb.org/docs/expressions/
+
+```
+##### :four: :tada: Listing all documents
+By default when used with no other parameters the cmdlet lists all documents in the collection.
+```powershell
+Find-LiteDBDocument SvcCollection
+```
 ***
 
 ## Update records
 lets stop the BITS service and then update the collection with the new `status`
+
+##### :one: Update by `Id`
 ```powershell
-Get-Service BITS | 
-  Select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType | 
-     ConvertTo-LiteDbBSON | 
+Get-Service BITS |
+  Select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
+     ConvertTo-LiteDbBSON |
         Update-LiteDBDocument -Collection SvcCollection
 
 # retrieve the bits service record in the litedb collection to see the updated status
@@ -127,10 +198,22 @@ DisplayName : "Background Intelligent Transfer Service"
 Status      : 1
 StartType   : 2
 ```
+##### :two: Update by `BsonExpression`
+You can also use a sql statement now to update one or more records.
+The where statement is a predicate or condition which will determine the documents to be updated.
+```powershell
+# set the status property of the service named bfe to 4
+Update-LiteDBDocument SvcCollection -Set "{status:4}"  -Where "_id = 'bfe'"
 
+# Retrieve all documents whose displayname begins with blue and Transform the name property to uppercase
+Update-LiteDBDocument SvcCollection -set "{Name:UPPER(Name)}" -Where "DisplayName like 'blue%'"
+```
 ***
 
 ## Delete Records
+
+##### :one: Delete by `Id`
+
 ```powershell
 # Delete record by ID
 Remove-LiteDBDocument -Collection SvcCollection -ID BITS
@@ -139,42 +222,30 @@ Remove-LiteDBDocument -Collection SvcCollection -ID BITS
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
 WARNING: Document with ID ['"BITS"'] does not exist in the collection ['SvcCollection']
 ```
+##### :two: Delete by `BsonExpression`
+```powershell
+# delete all records from the test2 collection where the property osname is null
+Remove-LiteDBDocument test2 -Query "osname = null"
+```
 
 ***
 
 ## Upsert Records
 Upsert stands for - Add if not record exists or update if it does exist.
 ```powershell
-Get-Service b* | 
-  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType | 
-      ConvertTo-LiteDbBSON | 
+Get-Service b* |
+  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
+      ConvertTo-LiteDbBSON |
          Upsertldb -Collection SvcCollection
 ```
 
 ***
 
-## Custom Queries
-By default the parameter values are case-sensitive 
-```powershell
-# Find all documents that contain the word 'Bluetooth' in the `SvcCollection` property `DisplayName`
-New-LiteDBQuery -Field DisplayName -Value 'Bluetooth' -Operator Contains | Find-LiteDBDocument -Collection SvcCollection
-
-# Find all records whose `Status` property greaterthan 3 meaning `started`
-New-LiteDBQuery -Field Status -Value 3 -Operator GT | Find-LiteDBDocument -Collection SvcCollection
-
-# Find all records whose `Status` property lessthan 3 meaning `stopped`
-New-LiteDBQuery -Field Status -Value 3 -Operator LT | Find-LiteDBDocument -Collection SvcCollection
-
-# Combining queries with AND ($QueryLDB is an alias for the litedb query class)
-$And_Query = $QueryLDB::And($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::GT("Status",3))
-Find-LiteDBDocument -Collection SvcCollection -Query $And_Query
-
-# Combining queries with OR
-$OR_Query = $QueryLDB::Or($QueryLDB::StartsWith("DisplayName","Blue"),$QueryLDB::Contains("DisplayName","Encryption"))
-Find-LiteDBDocument -Collection SvcCollection -Query $OR_Query
-```
+## Query Filters
+Using Query filters is not recomended anymore, it may be deprecated in future.
 
 ***
+
 
 ## Close LiteDB Connection
 ```powershell
@@ -182,8 +253,7 @@ Close-LiteDBConnection
 ```
 
 ## WIKI
-- [Create A LiteDB database that is passwordprotected](https://github.com/v2kiran/PSLiteDB/wiki/Database-with-Password)
+- [Create a password protected LiteDB database](https://github.com/v2kiran/PSLiteDB/wiki/Database-with-Password)
 - [LiteDB Connection Options](https://github.com/v2kiran/PSLiteDB/wiki/Open-LiteDBConnection)
-- [Demo: PersonCollection](https://github.com/v2kiran/PSLiteDB/wiki/PersonCollection:-Demo-1)
 - [Speed-Test](https://github.com/v2kiran/PSLiteDB/wiki/Speed-test)
 - [Work on Multiple Databases in parallel](https://github.com/v2kiran/PSLiteDB/wiki/Working-with-Multiple-Databases)

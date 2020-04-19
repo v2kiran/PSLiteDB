@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace PSLiteDB
 {
-    [Cmdlet(VerbsCommon.Add, "LiteDBDocument", DefaultParameterSetName = "Document")]
-    [Alias("Aldb")]
-    public class AddLiteDBDocument : PSCmdlet
+    [Cmdlet(VerbsData.Merge, "LiteDBDocument", DefaultParameterSetName = "Document")]
+    [Alias("Upsertldb")]
+    public class MergeLiteDBDocument : PSCmdlet
     {
         [ValidateNotNullOrEmpty()]
         [Parameter(
@@ -33,28 +33,12 @@ namespace PSLiteDB
         [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = true,
+            ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
             Position = 1,
             ParameterSetName = "Array"
             )]
         public BsonDocument[] BsonDocumentArray { get; set; }
-
-        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false, ParameterSetName = "Array")]
-        public SwitchParameter BulkInsert
-        {
-            get { return _bulk; }
-            set { _bulk = value; }
-        }
-        private bool _bulk;
-
-        [Parameter(
-            Mandatory = false,
-            ValueFromPipeline = false,
-            ValueFromPipelineByPropertyName = true,
-            ParameterSetName = "Array"
-            )]
-        public int BatchSize { get; set; } = 5000;
 
 
         [ValidateNotNullOrEmpty()]
@@ -81,7 +65,7 @@ namespace PSLiteDB
             )]
         public LiteDatabase Connection { get; set; }
 
-        //private LiteCollection<BsonDocument> Table;
+        private ILiteCollection<BsonDocument> Table;
 
         protected override void BeginProcessing()
         {
@@ -103,34 +87,27 @@ namespace PSLiteDB
         }
         protected override void ProcessRecord()
         {
+
             if (!Connection.CollectionExists(Collection))
             {
                 WriteWarning($"Collection\t['{Collection}'] does not exist");
             }
             else
             {
-                var Table = Connection.GetCollection(Collection);
+                Table = Connection.GetCollection(Collection);
                 try
                 {
                     if (ParameterSetName == "ID")
                     {
-                        Table.Insert(ID, Document);
+                        Table.Upsert(ID, Document);
                     }
                     else if (ParameterSetName == "Array")
                     {
-                        if (BulkInsert)
-                        {
-                            Table.InsertBulk(BsonDocumentArray, BatchSize);
-                        }
-                        else
-                        {
-                            Table.Insert(BsonDocumentArray);
-                        }
-
+                        Table.Upsert(BsonDocumentArray);
                     }
                     else
                     {
-                        Table.Insert(Document);
+                        Table.Upsert(Document);
                     }
 
                 }
@@ -140,8 +117,6 @@ namespace PSLiteDB
                     throw;
                 }
             }
-
-
         }
     }
 }

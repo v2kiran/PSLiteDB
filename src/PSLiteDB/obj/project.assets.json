@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "LiteDB/5.0.5": {
+      "LiteDB/5.0.7": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/LiteDB.dll": {}
@@ -56,10 +56,10 @@
     }
   },
   "libraries": {
-    "LiteDB/5.0.5": {
-      "sha512": "R2d0SzfD787wH1dfSDdbGZETFW7osC330oowKDUvDujB2Hh8DgMpDNFJYARvXO7ikperYKkrQ2XBiEooZlAUxQ==",
+    "LiteDB/5.0.7": {
+      "sha512": "pwoPsonlbOLulXmRpAJ+UIfqZ2Q/F54D/LHh0U84TSdl0SQed+wNvoMDie15UYbz85bXUyLgTICJMXqIosWM1g==",
       "type": "package",
-      "path": "litedb/5.0.5",
+      "path": "litedb/5.0.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -72,7 +72,7 @@
         "lib/netstandard1.3/LiteDB.xml",
         "lib/netstandard2.0/LiteDB.dll",
         "lib/netstandard2.0/LiteDB.xml",
-        "litedb.5.0.5.nupkg.sha512",
+        "litedb.5.0.7.nupkg.sha512",
         "litedb.nuspec"
       ]
     },
@@ -263,7 +263,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "LiteDB >= 5.0.5",
+      "LiteDB >= 5.0.7",
       "NETStandard.Library >= 2.0.1",
       "Newtonsoft.Json >= 12.0.3",
       "PowerShellStandard.Library >= 5.1.0"
@@ -274,13 +274,13 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "0.1.0-alpha",
+    "version": "2.0.0",
     "restore": {
-      "projectUniqueName": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+      "projectUniqueName": "C:\\github\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
       "projectName": "PSLiteDB",
-      "projectPath": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
+      "projectPath": "C:\\github\\PSLiteDB\\src\\PSLiteDB\\PSLiteDB.csproj",
       "packagesPath": "C:\\Users\\kiranna\\.nuget\\packages\\",
-      "outputPath": "C:\\temp\\ps\\PSLiteDB\\src\\PSLiteDB\\obj\\",
+      "outputPath": "C:\\github\\PSLiteDB\\src\\PSLiteDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -312,7 +312,7 @@
         "dependencies": {
           "LiteDB": {
             "target": "Package",
-            "version": "[5.0.5, )"
+            "version": "[5.0.7, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",
