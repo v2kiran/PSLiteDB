@@ -1,6 +1,35 @@
-# PSLiteDB
+# :rainbow: PSLiteDB
+<!-- TOC -->
 
-## :rainbow: OverView
+- [:rainbow: PSLiteDB](#rainbow-pslitedb)
+  - [:boom: OverView](#boom-overview)
+  - [:cyclone: Clone Module](#cyclone-clone-module)
+  - [:droplet: Import Module](#droplet-import-module)
+  - [:palm_tree: Create Database](#palmtree-create-database)
+  - [:saxophone: Connect Database](#saxophone-connect-database)
+  - [:trumpet: Create a Collection.](#trumpet-create-a-collection)
+  - [:guitar: Create an Index.](#guitar-create-an-index)
+  - [Insert Records](#insert-records)
+        - [:one: :arrow_forward: Insert by `ID`](#one-arrowforward-insert-by-id)
+        - [:two: :arrow_forward: Bulk Insert](#two-arrowforward-bulk-insert)
+  - [Find Records](#find-records)
+        - [:one: :arrow_forward: Find by `ID`](#one-arrowforward-find-by-id)
+        - [:two:  Find by `SQL Query`](#two-find-by-sql-query)
+        - [:three: Find by `Named Queries`](#three-find-by-named-queries)
+        - [:four: :tada: Listing all documents](#four-tada-listing-all-documents)
+  - [Update records](#update-records)
+        - [:one: Update by `Id`](#one-update-by-id)
+        - [:two: Update by `BsonExpression`](#two-update-by-bsonexpression)
+  - [Delete Records](#delete-records)
+        - [:one: Delete by `Id`](#one-delete-by-id)
+        - [:two: Delete by `BsonExpression`](#two-delete-by-bsonexpression)
+  - [Upsert Records](#upsert-records)
+  - [Query Filters](#query-filters)
+  - [Close LiteDB Connection](#close-litedb-connection)
+  - [WIKI](#wiki)
+
+<!-- /TOC -->
+## :boom: OverView
 [LiteDB](http://www.litedb.org/) is a noSQL singlefile datastore just like SQLite.
 PSLiteDB is a PowerShell wrapper for LiteDB
 
@@ -9,7 +38,7 @@ PSLiteDB is a PowerShell wrapper for LiteDB
 - FieldNames or property names are case-insensitive
 - FieldValues or property values are case-insensitive.
 
-## Clone Module
+## :cyclone: Clone Module
 
 ```powershell
 #Clone the repo in c:\temp
@@ -19,14 +48,14 @@ git clone https://github.com/v2kiran/PSLiteDB.git
 
 ***
 
-## Import Module
+## :droplet: Import Module
 ```powershell
 Import-Module c:\temp\PSLiteDB\module\PSLiteDB.psd1 -verbose
 ```
 
 ***
 
-## Create Database
+## :palm_tree: Create Database
 ```powershell
 $dbPath = "C:\temp\LiteDB\Service.db"
 New-LiteDBDatabase -Path $dbPath -Verbose
@@ -34,10 +63,10 @@ New-LiteDBDatabase -Path $dbPath -Verbose
 
 ***
 
-## Connect Database
-- :arrow_forward: :saxophone: The connection to the first db is stored in a session variable called `$LiteDBPSConnection`.
-- :arrow_forward: :trumpet: This connection variable is re-used in various cmdlets from this module making it efficient by having to type less.
-- :arrow_forward: :guitar: if you want to work with multiple databases then you will need to store each connection from `Open-LiteDBConnection` in a different variable and pass
+## :saxophone: Connect Database
+- :arrow_forward:  The connection to the first db is stored in a session variable called `$LiteDBPSConnection`.
+- :arrow_forward:  This connection variable is re-used in various cmdlets from this module making it efficient by having to type less.
+- :arrow_forward:  if you want to work with multiple databases then you will need to store each connection from `Open-LiteDBConnection` in a different variable and pass
 that to each cmdlet's `Connection` parameter.
 Check the [Wiki](https://github.com/v2kiran/PSLiteDB/wiki/Working-with-Multiple-Databases) for an example on how to work with multiple databases simultaneously.
 ```powershell
@@ -46,7 +75,7 @@ Open-LiteDBConnection -Database $dbPath
 
 ***
 
-## Create a Collection.
+## :trumpet: Create a Collection.
 ```powershell
 New-LiteDBCollection -Collection SvcCollection
 
@@ -56,7 +85,7 @@ Get-LiteDBCollectionName
 
 ***
 
-## Create an Index.
+## :guitar: Create an Index.
 ```powershell
 # Creates an index in the collection `SvcCollection` with all `DisplayName` property values in `lowercase`
 New-LiteDBIndex -Collection SvcCollection -Field DisplayName -Expression "LOWER($.DisplayName)"
@@ -71,6 +100,8 @@ Get-LiteDBIndex -Collection SvcCollection
 Get all the services whose name starts with bfollowed by any sequence of characters.
 Force the `Name` property to become the `_id` property in the LiteDB collection
 Serialize the selected records and finally insert them into the `SvcCollection`
+
+##### :one: :arrow_forward: Insert by `ID`
 ```powershell
 Get-Service b* |
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -78,7 +109,7 @@ Get-Service b* |
          Add-LiteDBDocument -Collection SvcCollection
 ```
 
-##### Bulk Insert
+##### :two: :arrow_forward: Bulk Insert
 ```powershell
 Get-Service b* |
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -94,7 +125,7 @@ Get-Service b* |
 ## Find Records
 Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
 
-##### :one: Find by `ID`
+##### :one: :arrow_forward: Find by `ID`
 ```powershell
 #Note that the value of parameter ID: 'BITS' is case-sensitive
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
