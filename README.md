@@ -20,9 +20,11 @@
   - [:beetle: Update records](#beetle-update-records)
         - [:one::arrow_forward: Update by `Id`](#onearrowforward-update-by-id)
         - [:two::arrow_forward: Update by `BsonExpression`](#twoarrowforward-update-by-bsonexpression)
+        - [:three::arrow_forward: Update by `SQL Query`](#threearrowforward-update-by-sql-query)
   - [:no_entry: Delete Records](#noentry-delete-records)
         - [:one::arrow_forward: Delete by `Id`](#onearrowforward-delete-by-id)
         - [:two::arrow_forward: Delete by `BsonExpression`](#twoarrowforward-delete-by-bsonexpression)
+        - [:three::arrow_forward: Delete by `SQL Query`](#threearrowforward-delete-by-sql-query)
   - [:sunrise: Upsert Records](#sunrise-upsert-records)
   - [Query Filters](#query-filters)
   - [:taxi: Close LiteDB Connection](#taxi-close-litedb-connection)
@@ -239,6 +241,13 @@ Update-LiteDBDocument SvcCollection -Set "{status:4}"  -Where "_id = 'bfe'"
 # Retrieve all documents whose displayname begins with blue and Transform the name property to uppercase
 Update-LiteDBDocument SvcCollection -set "{Name:UPPER(Name)}" -Where "DisplayName like 'blue%'"
 ```
+
+
+##### :three::arrow_forward: Update by `SQL Query`
+```powershell
+#update multiple fields with a wildcard where query
+Update-LiteDBDocument 'service' -sql "UPDATE service SET name=UPPER($.name),status = 4 where displayname like 'peer%'"
+```
 ***
 
 ## :no_entry: Delete Records
@@ -257,6 +266,13 @@ WARNING: Document with ID ['"BITS"'] does not exist in the collection ['SvcColle
 ```powershell
 # delete all records from the test2 collection where the property osname is null
 Remove-LiteDBDocument test2 -Query "osname = null"
+```
+
+##### :three::arrow_forward: Delete by `SQL Query`
+```powershell
+#Deleteall records from the service collectionwhose displayname matches'xbox live'
+Remove-LiteDBDocument 'service' -Sql "delete service where displayname like 'xbox live%'"
+
 ```
 
 ***

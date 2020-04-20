@@ -38,6 +38,16 @@ namespace PSLiteDB
             )]
         public BsonExpression Query { get; set; }
 
+        [ValidateNotNullOrEmpty()]
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            Position = 1,
+            ParameterSetName = "sql"
+            )]
+        public string Sql { get; set; }
+
         [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
@@ -77,9 +87,13 @@ namespace PSLiteDB
                     {
                         Table.Delete(ID);
                     }
-                    else
+                    else if(ParameterSetName == "Query")
                     {
                         Table.DeleteMany(Query);
+                    }
+                    else if(ParameterSetName == "sql")
+                    {
+                        Connection.Execute(Sql);
                     }
 
                 }

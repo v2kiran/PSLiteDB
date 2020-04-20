@@ -4,7 +4,7 @@ using System.Management.Automation;
 
 namespace PSLiteDB
 {
-    [Cmdlet(VerbsData.Update, "LiteDBDocument", DefaultParameterSetName = "Document")]
+    [Cmdlet(VerbsData.Update, "LiteDBDocument", DefaultParameterSetName = "sql")]
     [Alias("uldb")]
     public class UpdateLiteDBDocument : PSCmdlet
     {
@@ -45,14 +45,12 @@ namespace PSLiteDB
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
-            Position = 2,
             ParameterSetName = "ID"
             )]
         [Parameter(
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
-            Position = 2,
             ParameterSetName = "Document"
             )]
         public BsonDocument Document { get; set; }
@@ -79,10 +77,10 @@ namespace PSLiteDB
             Mandatory = true,
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
-            Position = 1,
-            ParameterSetName = "sql"
+            ParameterSetName = "Sql",
+            Position = 1
             )]
-        public BsonExpression SQL { get; set; }
+        public string Sql { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -136,7 +134,7 @@ namespace PSLiteDB
                     }
                     else if (ParameterSetName == "Sql")
                     {
-                        Connection.Execute(SQL);
+                        Connection.Execute(Sql);
                     }
                     else
                     {
