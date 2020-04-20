@@ -9,23 +9,23 @@
   - [:saxophone: Connect Database](#saxophone-connect-database)
   - [:trumpet: Create a Collection.](#trumpet-create-a-collection)
   - [:guitar: Create an Index.](#guitar-create-an-index)
-  - [Insert Records](#insert-records)
+  - [:tada: Insert Records](#tada-insert-records)
         - [:one: :arrow_forward: Insert by `ID`](#one-arrowforward-insert-by-id)
         - [:two: :arrow_forward: Bulk Insert](#two-arrowforward-bulk-insert)
-  - [Find Records](#find-records)
+  - [:snowflake: Find Records](#snowflake-find-records)
         - [:one: :arrow_forward: Find by `ID`](#one-arrowforward-find-by-id)
-        - [:two:  Find by `SQL Query`](#two-find-by-sql-query)
-        - [:three: Find by `Named Queries`](#three-find-by-named-queries)
-        - [:four: :tada: Listing all documents](#four-tada-listing-all-documents)
-  - [Update records](#update-records)
-        - [:one: Update by `Id`](#one-update-by-id)
-        - [:two: Update by `BsonExpression`](#two-update-by-bsonexpression)
-  - [Delete Records](#delete-records)
-        - [:one: Delete by `Id`](#one-delete-by-id)
-        - [:two: Delete by `BsonExpression`](#two-delete-by-bsonexpression)
-  - [Upsert Records](#upsert-records)
+        - [:two::arrow_forward:  Find by `SQL Query`](#twoarrowforward-find-by-sql-query)
+        - [:three: :arrow_forward: Find by `Named Queries`](#three-arrowforward-find-by-named-queries)
+        - [:four: :arrow_forward: Listing all documents](#four-arrowforward-listing-all-documents)
+  - [:beetle: Update records](#beetle-update-records)
+        - [:one::arrow_forward: Update by `Id`](#onearrowforward-update-by-id)
+        - [:two::arrow_forward: Update by `BsonExpression`](#twoarrowforward-update-by-bsonexpression)
+  - [:no_entry: Delete Records](#noentry-delete-records)
+        - [:one::arrow_forward: Delete by `Id`](#onearrowforward-delete-by-id)
+        - [:two::arrow_forward: Delete by `BsonExpression`](#twoarrowforward-delete-by-bsonexpression)
+  - [:sunrise: Upsert Records](#sunrise-upsert-records)
   - [Query Filters](#query-filters)
-  - [Close LiteDB Connection](#close-litedb-connection)
+  - [:taxi: Close LiteDB Connection](#taxi-close-litedb-connection)
   - [WIKI](#wiki)
 
 <!-- /TOC -->
@@ -96,7 +96,7 @@ Get-LiteDBIndex -Collection SvcCollection
 
 ***
 
-## Insert Records
+## :tada: Insert Records
 Get all the services whose name starts with bfollowed by any sequence of characters.
 Force the `Name` property to become the `_id` property in the LiteDB collection
 Serialize the selected records and finally insert them into the `SvcCollection`
@@ -122,7 +122,7 @@ Get-Service b* |
 
 ***
 
-## Find Records
+## :snowflake: Find Records
 Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
 
 ##### :one: :arrow_forward: Find by `ID`
@@ -153,7 +153,7 @@ Find-LiteDBDocument -Collection SvcCollection -Limit 5 -Skip 2
 
 
 
-##### :two:  Find by `SQL Query`
+##### :two::arrow_forward:  Find by `SQL Query`
 ```powershell
 # get the first 5 documents from the service collection
 Find-LiteDBDocument SvcCollection -Sql "Select $ from SvcCollection limit 5"
@@ -180,7 +180,7 @@ Find-LiteDBDocument SvcCollection -Sql "Select upper(Name),Status from SvcCollec
 ```
 
 
-##### :three: Find by `Named Queries`
+##### :three: :arrow_forward: Find by `Named Queries`
 ```powershell
 # Wildcard filter B*. Select 2 properties _id & status to display in the output
 # Select is a mandatory parameter when used with -Where
@@ -201,17 +201,17 @@ Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{Name:
 # for a list of other functions refer to : http://www.litedb.org/docs/expressions/
 
 ```
-##### :four: :tada: Listing all documents
+##### :four: :arrow_forward: Listing all documents
 By default when used with no other parameters the cmdlet lists all documents in the collection.
 ```powershell
 Find-LiteDBDocument SvcCollection
 ```
 ***
 
-## Update records
+## :beetle: Update records
 lets stop the BITS service and then update the collection with the new `status`
 
-##### :one: Update by `Id`
+##### :one::arrow_forward: Update by `Id`
 ```powershell
 Get-Service BITS |
   Select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -229,7 +229,7 @@ DisplayName : "Background Intelligent Transfer Service"
 Status      : 1
 StartType   : 2
 ```
-##### :two: Update by `BsonExpression`
+##### :two::arrow_forward: Update by `BsonExpression`
 You can also use a sql statement now to update one or more records.
 The where statement is a predicate or condition which will determine the documents to be updated.
 ```powershell
@@ -241,9 +241,9 @@ Update-LiteDBDocument SvcCollection -set "{Name:UPPER(Name)}" -Where "DisplayNam
 ```
 ***
 
-## Delete Records
+## :no_entry: Delete Records
 
-##### :one: Delete by `Id`
+##### :one::arrow_forward: Delete by `Id`
 
 ```powershell
 # Delete record by ID
@@ -253,7 +253,7 @@ Remove-LiteDBDocument -Collection SvcCollection -ID BITS
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
 WARNING: Document with ID ['"BITS"'] does not exist in the collection ['SvcCollection']
 ```
-##### :two: Delete by `BsonExpression`
+##### :two::arrow_forward: Delete by `BsonExpression`
 ```powershell
 # delete all records from the test2 collection where the property osname is null
 Remove-LiteDBDocument test2 -Query "osname = null"
@@ -261,7 +261,7 @@ Remove-LiteDBDocument test2 -Query "osname = null"
 
 ***
 
-## Upsert Records
+## :sunrise: Upsert Records
 Upsert stands for - Add if not record exists or update if it does exist.
 ```powershell
 Get-Service b* |
@@ -278,7 +278,7 @@ Using Query filters is not recomended anymore, it may be deprecated in future.
 ***
 
 
-## Close LiteDB Connection
+## :taxi: Close LiteDB Connection
 ```powershell
 Close-LiteDBConnection
 ```
