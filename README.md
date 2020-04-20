@@ -1,7 +1,7 @@
-# :rainbow: PSLiteDB
+# :rocket: PSLiteDB
 <!-- TOC -->
 
-- [:rainbow: PSLiteDB](#rainbow-pslitedb)
+- [:rocket: PSLiteDB](#rocket-pslitedb)
   - [:boom: OverView](#boom-overview)
   - [:cyclone: Clone Module](#cyclone-clone-module)
   - [:droplet: Import Module](#droplet-import-module)
@@ -10,19 +10,19 @@
   - [:trumpet: Create a Collection.](#trumpet-create-a-collection)
   - [:guitar: Create an Index.](#guitar-create-an-index)
   - [:tada: Insert Records](#tada-insert-records)
-       - [:one: :arrow_forward: Insert by `ID`](#one-arrowforward-insert-by-id)
-       - [:two: :arrow_forward: Bulk Insert](#two-arrowforward-bulk-insert)
+        - [:one::arrow_forward: Insert by `ID`](#onearrowforward-insert-by-id)
+        - [:two::arrow_forward: Bulk Insert](#twoarrowforward-bulk-insert)
   - [:snowflake: Find Records](#snowflake-find-records)
-       - [:one: :arrow_forward: Find by `ID`](#one-arrowforward-find-by-id)
-       - [:two::arrow_forward:  Find by `SQL Query`](#twoarrowforward-find-by-sql-query)
-       - [:three: :arrow_forward: Find by `Named Queries`](#three-arrowforward-find-by-named-queries)
-       - [:four: :arrow_forward: Listing all documents](#four-arrowforward-listing-all-documents)
+        - [:one::arrow_forward: Find by `ID`](#onearrowforward-find-by-id)
+        - [:two::arrow_forward:  Find by `SQL Query`](#twoarrowforward-find-by-sql-query)
+        - [:three::arrow_forward: Find by `Named Queries`](#threearrowforward-find-by-named-queries)
+        - [:four::arrow_forward: Listing all documents](#fourarrowforward-listing-all-documents)
   - [:beetle: Update records](#beetle-update-records)
-       - [:one::arrow_forward: Update by `Id`](#onearrowforward-update-by-id)
-       - [:two::arrow_forward: Update by `BsonExpression`](#twoarrowforward-update-by-bsonexpression)
+        - [:one::arrow_forward: Update by `Id`](#onearrowforward-update-by-id)
+        - [:two::arrow_forward: Update by `BsonExpression`](#twoarrowforward-update-by-bsonexpression)
   - [:no_entry: Delete Records](#noentry-delete-records)
-       - [:one::arrow_forward: Delete by `Id`](#onearrowforward-delete-by-id)
-       - [:two::arrow_forward: Delete by `BsonExpression`](#twoarrowforward-delete-by-bsonexpression)
+        - [:one::arrow_forward: Delete by `Id`](#onearrowforward-delete-by-id)
+        - [:two::arrow_forward: Delete by `BsonExpression`](#twoarrowforward-delete-by-bsonexpression)
   - [:sunrise: Upsert Records](#sunrise-upsert-records)
   - [Query Filters](#query-filters)
   - [:taxi: Close LiteDB Connection](#taxi-close-litedb-connection)
@@ -101,7 +101,7 @@ Get all the services whose name starts with bfollowed by any sequence of charact
 Force the `Name` property to become the `_id` property in the LiteDB collection
 Serialize the selected records and finally insert them into the `SvcCollection`
 
-##### :one: :arrow_forward: Insert by `ID`
+##### :one::arrow_forward: Insert by `ID`
 ```powershell
 Get-Service b* |
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -109,7 +109,7 @@ Get-Service b* |
          Add-LiteDBDocument -Collection SvcCollection
 ```
 
-##### :two: :arrow_forward: Bulk Insert
+##### :two::arrow_forward: Bulk Insert
 ```powershell
 Get-Service b* |
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -125,7 +125,7 @@ Get-Service b* |
 ## :snowflake: Find Records
 Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
 
-##### :one: :arrow_forward: Find by `ID`
+##### :one::arrow_forward: Find by `ID`
 ```powershell
 #Note that the value of parameter ID: 'BITS' is case-sensitive
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
@@ -180,7 +180,7 @@ Find-LiteDBDocument SvcCollection -Sql "Select upper(Name),Status from SvcCollec
 ```
 
 
-##### :three: :arrow_forward: Find by `Named Queries`
+##### :three::arrow_forward: Find by `Named Queries`
 ```powershell
 # Wildcard filter B*. Select 2 properties _id & status to display in the output
 # Select is a mandatory parameter when used with -Where
@@ -201,7 +201,7 @@ Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{Name:
 # for a list of other functions refer to : http://www.litedb.org/docs/expressions/
 
 ```
-##### :four: :arrow_forward: Listing all documents
+##### :four::arrow_forward: Listing all documents
 By default when used with no other parameters the cmdlet lists all documents in the collection.
 ```powershell
 Find-LiteDBDocument SvcCollection

@@ -76,6 +76,15 @@ namespace PSLiteDB
         public BsonExpression Where { get; set; }
 
         [Parameter(
+            Mandatory = true,
+            ValueFromPipeline = true,
+            ValueFromPipelineByPropertyName = true,
+            Position = 1,
+            ParameterSetName = "sql"
+            )]
+        public BsonExpression SQL { get; set; }
+
+        [Parameter(
             Mandatory = false,
             ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true
@@ -124,6 +133,10 @@ namespace PSLiteDB
                     else if(ParameterSetName == "Query")
                     {
                         Table.UpdateMany(Set, Where);
+                    }
+                    else if (ParameterSetName == "Sql")
+                    {
+                        Connection.Execute(SQL);
                     }
                     else
                     {
