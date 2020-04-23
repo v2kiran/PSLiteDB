@@ -4,35 +4,38 @@
   - [:boom: OverView](#boom-overview)
   - [:cyclone: Clone Module](#cyclone-clone-module)
   - [:droplet: Import Module](#droplet-import-module)
-  - [:palm_tree: Create Database](#palm_tree-create-database)
+  - [:palm_tree: Create Database](#palmtree-create-database)
   - [:saxophone: Connect Database](#saxophone-connect-database)
-  - [:trumpet: Create a Collection.](#trumpet-create-a-collection)
-  - [:guitar: Create an Index.](#guitar-create-an-index)
+  - [:trumpet: Create a Collection](#trumpet-create-a-collection)
+  - [:guitar: Create an Index](#guitar-create-an-index)
   - [:tada: Insert Records](#tada-insert-records)
-        - [:one::arrow_forward: Insert by `ID`](#onearrow_forward-insert-by-id)
-        - [:two::arrow_forward: Bulk Insert](#twoarrow_forward-bulk-insert)
+        - [:one::arrow_forward: Insert by `ID`](#onearrowforward-insert-by-id)
+        - [:two::arrow_forward: Bulk Insert](#twoarrowforward-bulk-insert)
   - [:snowflake: Find Records](#snowflake-find-records)
-        - [:one::arrow_forward: Find by `ID`](#onearrow_forward-find-by-id)
-        - [:two::arrow_forward:  Find by `SQL Query`](#twoarrow_forward-find-by-sql-query)
-        - [:three::arrow_forward: Find by `Named Queries`](#threearrow_forward-find-by-named-queries)
-        - [:four::arrow_forward: Listing all documents](#fourarrow_forward-listing-all-documents)
+        - [:one::arrow_forward: Find by `ID`](#onearrowforward-find-by-id)
+        - [:two::arrow_forward:  Find by `SQL Query`](#twoarrowforward-find-by-sql-query)
+        - [:three::arrow_forward: Find by `Named Queries`](#threearrowforward-find-by-named-queries)
+        - [:four::arrow_forward: Find `All Documents`](#fourarrowforward-find-all-documents)
   - [:beetle: Update records](#beetle-update-records)
-        - [:one::arrow_forward: Update by `Id`](#onearrow_forward-update-by-id)
-        - [:two::arrow_forward: Update by `BsonExpression`](#twoarrow_forward-update-by-bsonexpression)
-        - [:three::arrow_forward: Update by `SQL Query`](#threearrow_forward-update-by-sql-query)
-  - [:no_entry: Delete Records](#no_entry-delete-records)
-        - [:one::arrow_forward: Delete by `Id`](#onearrow_forward-delete-by-id)
-        - [:two::arrow_forward: Delete by `BsonExpression`](#twoarrow_forward-delete-by-bsonexpression)
-        - [:three::arrow_forward: Delete by `SQL Query`](#threearrow_forward-delete-by-sql-query)
+        - [:one::arrow_forward: Update by `Id`](#onearrowforward-update-by-id)
+        - [:two::arrow_forward: Update by `BsonExpression`](#twoarrowforward-update-by-bsonexpression)
+        - [:three::arrow_forward: Update by `SQL Query`](#threearrowforward-update-by-sql-query)
+  - [:no_entry: Delete Records](#noentry-delete-records)
+        - [:one::arrow_forward: Delete by `Id`](#onearrowforward-delete-by-id)
+        - [:two::arrow_forward: Delete by `BsonExpression`](#twoarrowforward-delete-by-bsonexpression)
+        - [:three::arrow_forward: Delete by `SQL Query`](#threearrowforward-delete-by-sql-query)
   - [:sunrise: Upsert Records](#sunrise-upsert-records)
   - [Query Filters](#query-filters)
   - [:taxi: Close LiteDB Connection](#taxi-close-litedb-connection)
   - [WIKI](#wiki)
+
 ## :boom: OverView
+
 [LiteDB](http://www.litedb.org/) is a noSQL singlefile datastore just like SQLite.
 PSLiteDB is a PowerShell wrapper for LiteDB
 
 >Note: in V5 everything is case in-sensitive
+
 - Collection names are case-insensitive
 - FieldNames or property names are case-insensitive
 - FieldValues or property values are case-insensitive.
@@ -48,6 +51,7 @@ git clone https://github.com/v2kiran/PSLiteDB.git
 ***
 
 ## :droplet: Import Module
+
 ```powershell
 Import-Module c:\temp\PSLiteDB\module\PSLiteDB.psd1 -verbose
 ```
@@ -55,6 +59,7 @@ Import-Module c:\temp\PSLiteDB\module\PSLiteDB.psd1 -verbose
 ***
 
 ## :palm_tree: Create Database
+
 ```powershell
 $dbPath = "C:\temp\LiteDB\Service.db"
 New-LiteDBDatabase -Path $dbPath -Verbose
@@ -63,18 +68,21 @@ New-LiteDBDatabase -Path $dbPath -Verbose
 ***
 
 ## :saxophone: Connect Database
-- :arrow_forward:  The connection to the first db is stored in a session variable called `$LiteDBPSConnection`.
-- :arrow_forward:  This connection variable is re-used in various cmdlets from this module making it efficient by having to type less.
-- :arrow_forward:  if you want to work with multiple databases then you will need to store each connection from `Open-LiteDBConnection` in a different variable and pass
+
+- The connection to the first db is stored in a session variable called `$LiteDBPSConnection`.
+- This connection variable is re-used in various cmdlets from this module making it efficient by having to type less.
+- if you want to work with multiple databases then you will need to store each connection from `Open-LiteDBConnection` in a different variable and pass
 that to each cmdlet's `Connection` parameter.
 Check the [Wiki](https://github.com/v2kiran/PSLiteDB/wiki/Working-with-Multiple-Databases) for an example on how to work with multiple databases simultaneously.
+
 ```powershell
 Open-LiteDBConnection -Database $dbPath
 ```
 
 ***
 
-## :trumpet: Create a Collection.
+## :trumpet: Create a Collection
+
 ```powershell
 New-LiteDBCollection -Collection SvcCollection
 
@@ -84,7 +92,8 @@ Get-LiteDBCollectionName
 
 ***
 
-## :guitar: Create an Index.
+## :guitar: Create an Index
+
 ```powershell
 # Creates an index in the collection `SvcCollection` with all `DisplayName` property values in `lowercase`
 New-LiteDBIndex -Collection SvcCollection -Field DisplayName -Expression "LOWER($.DisplayName)"
@@ -96,11 +105,13 @@ Get-LiteDBIndex -Collection SvcCollection
 ***
 
 ## :tada: Insert Records
+
 Get all the services whose name starts with bfollowed by any sequence of characters.
 Force the `Name` property to become the `_id` property in the LiteDB collection
 Serialize the selected records and finally insert them into the `SvcCollection`
 
 ##### :one::arrow_forward: Insert by `ID`
+
 ```powershell
 Get-Service b* |
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -109,6 +120,7 @@ Get-Service b* |
 ```
 
 ##### :two::arrow_forward: Bulk Insert
+
 ```powershell
 Get-Service b* |
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -122,9 +134,11 @@ Get-Service b* |
 ***
 
 ## :snowflake: Find Records
+
 Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
 
 ##### :one::arrow_forward: Find by `ID`
+
 ```powershell
 #Note that the value of parameter ID: 'BITS' is case-sensitive
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
@@ -153,6 +167,7 @@ Find-LiteDBDocument -Collection SvcCollection -Limit 5 -Skip 2
 
 
 ##### :two::arrow_forward:  Find by `SQL Query`
+
 ```powershell
 # get the first 5 documents from the service collection
 Find-LiteDBDocument SvcCollection -Sql "Select $ from SvcCollection limit 5"
@@ -180,6 +195,7 @@ Find-LiteDBDocument SvcCollection -Sql "Select upper(Name),Status from SvcCollec
 
 
 ##### :three::arrow_forward: Find by `Named Queries`
+
 ```powershell
 # Wildcard filter B*. Select 2 properties _id & status to display in the output
 # Select is a mandatory parameter when used with -Where
@@ -200,17 +216,22 @@ Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{Name:
 # for a list of other functions refer to : http://www.litedb.org/docs/expressions/
 
 ```
-##### :four::arrow_forward: Listing all documents
+##### :four::arrow_forward: Find `All Documents`
+
 By default when used with no other parameters the cmdlet lists all documents in the collection.
+
 ```powershell
 Find-LiteDBDocument SvcCollection
 ```
+
 ***
 
 ## :beetle: Update records
+
 lets stop the BITS service and then update the collection with the new `status`
 
 ##### :one::arrow_forward: Update by `Id`
+
 ```powershell
 Get-Service BITS |
   Select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -228,9 +249,11 @@ DisplayName : "Background Intelligent Transfer Service"
 Status      : 1
 StartType   : 2
 ```
+
 ##### :two::arrow_forward: Update by `BsonExpression`
-You can also use a sql statement now to update one or more records.
+
 The where statement is a predicate or condition which will determine the documents to be updated.
+
 ```powershell
 # set the status property of the service named bfe to 4
 Update-LiteDBDocument SvcCollection -Set "{status:4}"  -Where "_id = 'bfe'"
@@ -241,15 +264,18 @@ Update-LiteDBDocument SvcCollection -set "{Name:UPPER(Name)}" -Where "DisplayNam
 
 
 ##### :three::arrow_forward: Update by `SQL Query`
+
 ```powershell
 #update multiple fields with a wildcard where query
 Update-LiteDBDocument 'service' -sql "UPDATE service SET name=UPPER($.name),status = 4 where displayname like 'peer%'"
 ```
+
 ***
 
 ## :no_entry: Delete Records
 
 ##### :one::arrow_forward: Delete by `Id`
+
 
 ```powershell
 # Delete record by ID
@@ -259,13 +285,16 @@ Remove-LiteDBDocument -Collection SvcCollection -ID BITS
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
 WARNING: Document with ID ['"BITS"'] does not exist in the collection ['SvcCollection']
 ```
+
 ##### :two::arrow_forward: Delete by `BsonExpression`
+
 ```powershell
 # delete all records from the test2 collection where the property osname is null
 Remove-LiteDBDocument test2 -Query "osname = null"
 ```
 
 ##### :three::arrow_forward: Delete by `SQL Query`
+
 ```powershell
 #Deleteall records from the service collectionwhose displayname matches'xbox live'
 Remove-LiteDBDocument 'service' -Sql "delete service where displayname like 'xbox live%'"
@@ -275,7 +304,9 @@ Remove-LiteDBDocument 'service' -Sql "delete service where displayname like 'xbo
 ***
 
 ## :sunrise: Upsert Records
+
 Upsert stands for - Add if not record exists or update if it does exist.
+
 ```powershell
 Get-Service b* |
   select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
@@ -286,17 +317,20 @@ Get-Service b* |
 ***
 
 ## Query Filters
+
 Using Query filters is not recomended anymore, it may be deprecated in future.
 
 ***
 
 
 ## :taxi: Close LiteDB Connection
+
 ```powershell
 Close-LiteDBConnection
 ```
 
 ## WIKI
+
 - [Create a password protected LiteDB database](https://github.com/v2kiran/PSLiteDB/wiki/Database-with-Password)
 - [LiteDB Connection Options](https://github.com/v2kiran/PSLiteDB/wiki/Open-LiteDBConnection)
 - [Speed-Test](https://github.com/v2kiran/PSLiteDB/wiki/Speed-test)
