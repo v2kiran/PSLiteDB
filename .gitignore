@@ -14,3 +14,5 @@ x64/
 *.suo
 *.user
 *.sln.docstates
+
+src/PSLiteDB/obj/Debug/*
