@@ -1,34 +1,5 @@
 # :rocket: PSLiteDB
 
-- [:rocket: PSLiteDB](#rocket-pslitedb)
-  - [:boom: OverView](#boom-overview)
-  - [:cyclone: Clone Module](#cyclone-clone-module)
-  - [:droplet: Import Module](#droplet-import-module)
-  - [:palm_tree: Create Database](#palmtree-create-database)
-  - [:saxophone: Connect Database](#saxophone-connect-database)
-  - [:trumpet: Create a Collection](#trumpet-create-a-collection)
-  - [:guitar: Create an Index](#guitar-create-an-index)
-  - [:tada: Insert Records](#tada-insert-records)
-        - [:one::arrow_forward: Insert by `ID`](#onearrowforward-insert-by-id)
-        - [:two::arrow_forward: Bulk Insert](#twoarrowforward-bulk-insert)
-  - [:snowflake: Find Records](#snowflake-find-records)
-        - [:one::arrow_forward: Find by `ID`](#onearrowforward-find-by-id)
-        - [:two::arrow_forward:  Find by `SQL Query`](#twoarrowforward-find-by-sql-query)
-        - [:three::arrow_forward: Find by `Named Queries`](#threearrowforward-find-by-named-queries)
-        - [:four::arrow_forward: Find `All Documents`](#fourarrowforward-find-all-documents)
-  - [:beetle: Update records](#beetle-update-records)
-        - [:one::arrow_forward: Update by `Id`](#onearrowforward-update-by-id)
-        - [:two::arrow_forward: Update by `BsonExpression`](#twoarrowforward-update-by-bsonexpression)
-        - [:three::arrow_forward: Update by `SQL Query`](#threearrowforward-update-by-sql-query)
-  - [:no_entry: Delete Records](#noentry-delete-records)
-        - [:one::arrow_forward: Delete by `Id`](#onearrowforward-delete-by-id)
-        - [:two::arrow_forward: Delete by `BsonExpression`](#twoarrowforward-delete-by-bsonexpression)
-        - [:three::arrow_forward: Delete by `SQL Query`](#threearrowforward-delete-by-sql-query)
-  - [:sunrise: Upsert Records](#sunrise-upsert-records)
-  - [Query Filters](#query-filters)
-  - [:taxi: Close LiteDB Connection](#taxi-close-litedb-connection)
-  - [WIKI](#wiki)
-
 ## :boom: OverView
 
 [LiteDB](http://www.litedb.org/) is a noSQL singlefile datastore just like SQLite.
