@@ -3,7 +3,7 @@ trigger:
 - master
 
 jobs:
-- job: PSLiteDB-Pipeline
+- job: PSLiteDB_Pipeline
   displayName: 'Test, compile and publish PSLiteDB'
 
 pool:
