@@ -149,16 +149,68 @@ try
         $result = Find-LiteDBDocument SvcCollection -Where "_id = 'Bits'" -Select "{_id,concat:concat(_id,displayname)}"
         $result | Should -Not -BeNullOrEmpty
         $result.count | Should -Be 1
-        $result.DisplayName | Should -contain 'Background Intelligent Transfer Service'
         $result.Concat.count | Should -Be 2
         $result.Concat | Should -Contain 'Background Intelligent Transfer Service'
         $result.Concat | Should -Contain 'Bits'
       }
+    }#context named queries
 
+  }# find-litedbdocument
+
+  # Describe Update-LiteDBDocument
+  Describe "Update-LiteDBDocument" -Tag Update -Fixture {
+    Context "Update By BSON Expression" -Fixture {
+      It "Changes a property value" {
+        $result = Find-LiteDBDocument SvcCollection -id bfe
+        $result.status | Should -be "running"
+        Update-LiteDBDocument SvcCollection -Set "{status:'stopped'}"  -Where "_id = 'bfe'"
+        $result = Find-LiteDBDocument SvcCollection -id bfe
+        $result.status | Should -be "stopped"
+      }
     }
-
+    Context "Update By SQL" -Fixture {
+      It "Changes multiple property values" {
+        $result = Find-LiteDBDocument SvcCollection -id bfe
+        $result.status | Should -be "stopped"
+        $result.starttype | Should -Be 'Automatic'
+        Update-LiteDBDocument 'SvcCollection' -sql "UPDATE SvcCollection SET Status='Running',StartType = 'Manual' where _id = 'bfe'"
+        $result = Find-LiteDBDocument SvcCollection -id bfe
+        $result.status | Should -be "Running"
+        $result.starttype | Should -Be 'Manual'
+      }
+    }
   }
-
+  Remove-LiteDBDocument -Collection SvcCollection -ID BITS
+  # Describe Remove-LiteDBDocument
+  Describe "Remove-LiteDBDocument" -Tag Delete, Remove -Fixture {
+    Context "Remove By ID" -Fixture {
+      It "Removes a document by ID" {
+        $result = Find-LiteDBDocument SvcCollection -id BthAvctpSvc
+        $result.DisplayName | Should -be "AVCTP service"
+        Remove-LiteDBDocument -Collection SvcCollection -ID BthAvctpSvc
+        $result = Find-LiteDBDocument SvcCollection -id BthAvctpSvc
+        $result | Should -be $null
+      }
+    }
+    Context "Remove By BSON Expression" -Fixture {
+      It "Changes a property value" {
+        $result = Find-LiteDBDocument SvcCollection -id bfe
+        $result._id | Should -be "bfe"
+        Remove-LiteDBDocument SvcCollection -Query "DisplayName = 'Base Filtering Engine'"
+        $result = Find-LiteDBDocument SvcCollection -id bfe
+        $result | Should -be $null
+      }
+    }
+    Context "Remove By SQL" -Fixture {
+      It "Removes multiple documents" {
+        $result = Find-LiteDBDocument SvcCollection "select _id,Displayname from svccollection where displayname like 'bluetooth%'"
+        $result.count | Should -be 4
+        Remove-LiteDBDocument 'SvcCollection' -Sql "delete SvcCollection where displayname like 'bluetooth%'"
+        $result = Find-LiteDBDocument SvcCollection "select _id,Displayname from svccollection where displayname like 'bluetooth%'"
+        $result | Should -be $null
+      }
+    }
+  }
 
 }#try
 finally

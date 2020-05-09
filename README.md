@@ -100,7 +100,7 @@ Get-Service b* |
 
 ```
 
-> :dart: **Note**:  The `ConvertTo-LiteDbBSON` Function returns a Bsondocument array which will be unrolled by the `Add-LitedbDocument` cmdlet by default so if you want to avoid that and add the array as a whole you need to use the `-bulk` switch. Usefull when inserting a huge number of documents in batches.
+> :point_right: **Note**:  The `ConvertTo-LiteDbBSON` Function returns a Bsondocument array which will be unrolled by the `Add-LitedbDocument` cmdlet by default so if you want to avoid that and add the array as a whole you need to use the `-bulk` switch. Usefull when inserting a huge number of documents in batches.
 
 ***
 
@@ -111,7 +111,7 @@ Because we used the `Name` property of the `servicecontroller` object as our `_i
 ##### :one::arrow_forward: Find by `ID`
 
 ```powershell
-#Note that the value of parameter ID: 'BITS' is case-sensitive
+#Note that the value of parameter ID: 'BITS' is case-Insensitive
 Find-LiteDBDocument -Collection SvcCollection -ID BITS
 
 Output:
