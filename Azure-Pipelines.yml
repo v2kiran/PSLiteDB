@@ -1,5 +1,5 @@
 trigger:
-- v5
+- master
 
 jobs:
 - job: PSLiteDB-Pipeline
