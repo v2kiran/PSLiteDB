@@ -1,0 +1,3471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-LiteDBDocument</command:name>
+      <command:verb>Add</command:verb>
+      <command:noun>LiteDBDocument</command:noun>
+      <maml:description>
+        <maml:para>Add\Insert one or more BSON documents into a litedb database.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Add\Insert one or more BSON documents into a litedb database.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+          <maml:name>BsonDocumentArray</maml:name>
+          <maml:Description>
+            <maml:para>Specify an array of BSON documents to insert. Useful in bulk insert scenarios.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument[]</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>BatchSize</maml:name>
+          <maml:Description>
+            <maml:para>The number of documents to insert in one single batch</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>BulkInsert</maml:name>
+          <maml:Description>
+            <maml:para>use with bsonarray for bulk inserting documents.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+          <maml:name>Document</maml:name>
+          <maml:Description>
+            <maml:para>The BSON document to add to the litedb database.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+          <maml:name>ID</maml:name>
+          <maml:Description>
+            <maml:para>specify the id of the bson document to be added.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonValue</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+          <maml:name>Document</maml:name>
+          <maml:Description>
+            <maml:para>The BSON document to add to the litedb database.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>BatchSize</maml:name>
+        <maml:Description>
+          <maml:para>The number of documents to insert in one single batch</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+        <maml:name>BsonDocumentArray</maml:name>
+        <maml:Description>
+          <maml:para>Specify an array of BSON documents to insert. Useful in bulk insert scenarios.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonDocument[]</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonDocument[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>BulkInsert</maml:name>
+        <maml:Description>
+          <maml:para>use with bsonarray for bulk inserting documents.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+        <maml:name>Document</maml:name>
+        <maml:Description>
+          <maml:para>The BSON document to add to the litedb database.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonDocument</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+        <maml:name>ID</maml:name>
+        <maml:Description>
+          <maml:para>specify the id of the bson document to be added.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonValue</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonValue</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonDocument[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonDocument</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $mymovie = [PSCustomObject]@{
+    Title = 'Turner &amp; Hooch'
+    _id = 3
+    Budget = [int64]13000001
+    Gross = [int64]71079915
+    MPAA = 'PG'
+    Rating = 7.2
+    RatingCount = 91415
+    ReleaseDate = [Datetime]'7/28/1989'
+    RunTime = 101
+    }
+
+    $mymovie |  ConvertTo-LiteDbBSON | Add-LiteDBDocument -Collection movies</dev:code>
+        <dev:remarks>
+          <maml:para>add a powershell customobject containing movie data into a collection named 'movies'. Note: this assumes that the litedb database already contains a collection named 'movies'. Before we can add a document to the litedb the powershell object needs to be converted into a format(BSONDocument) that Litedb can understand.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Close-LiteDBConnection</command:name>
+      <command:verb>Close</command:verb>
+      <command:noun>LiteDBConnection</command:noun>
+      <maml:description>
+        <maml:para>Close\Dispose an open litedb connection.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Close\Dispose an open litedb connection.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Close-LiteDBConnection</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedbconnection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedbconnection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Close-LiteDBConnection</dev:code>
+        <dev:remarks>
+          <maml:para>This will close the default litedb connection stored in the hidden variable - $LiteDBPSConnection</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Close-LiteDBConnection -Connection $myconnection</dev:code>
+        <dev:remarks>
+          <maml:para>This will close the litedb connection stored in the variable - $myconnection</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>ConvertTo-LiteDbBSON</command:name>
+      <command:verb>ConvertTo</command:verb>
+      <command:noun>LiteDbBSON</command:noun>
+      <maml:description>
+        <maml:para>Convert psobjects into LiteDB compatible BSON documents key-value pair.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Convert psobjects into LiteDB compatible BSON documents key-value pair.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>ConvertTo-LiteDbBSON</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>InputObject</maml:name>
+          <maml:Description>
+            <maml:para>psobject to be converted to bson document.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
+          <dev:type>
+            <maml:name>Object[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Depth</maml:name>
+          <maml:Description>
+            <maml:para>the depth of serialization of psobjetcs.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">UInt16</command:parameterValue>
+          <dev:type>
+            <maml:name>UInt16</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+          <maml:name>As</maml:name>
+          <maml:Description>
+            <maml:para>Output as a single document or as an array(useful when you want to do add\insert documents in batches)</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Document</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Array</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+        <maml:name>As</maml:name>
+        <maml:Description>
+          <maml:para>Output as a single document or as an array(useful when you want to do add\insert documents in batches)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Depth</maml:name>
+        <maml:Description>
+          <maml:para>the depth of serialization of psobjetcs.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">UInt16</command:parameterValue>
+        <dev:type>
+          <maml:name>UInt16</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>InputObject</maml:name>
+        <maml:Description>
+          <maml:para>psobject to be converted to bson document.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Object[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Object[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Object[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.UInt16</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; PS C:\&gt; $mymovie = [PSCustomObject]@{
+    Title = 'Turner &amp; Hooch'
+    _id = 3
+    Budget = [int64]13000001
+    Gross = [int64]71079915
+    MPAA = 'PG'
+    Rating = 7.2
+    RatingCount = 91415
+    ReleaseDate = [Datetime]'7/28/1989'
+    RunTime = 101
+    }
+
+    $mymovie |  ConvertTo-LiteDbBSON</dev:code>
+        <dev:remarks>
+          <maml:para>converts the psobject stored in the variable $mymovie into a bsondocument(key,value)pair.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Find-LiteDBDocument</command:name>
+      <command:verb>Find</command:verb>
+      <command:noun>LiteDBDocument</command:noun>
+      <maml:description>
+        <maml:para>Find document(s) within a litedb database.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Find document(s) within a litedb database.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Find-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>As</maml:name>
+          <maml:Description>
+            <maml:para>List objects in either of 2 formats: PSObject or BSON document.</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">PSObject</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">BSON</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="_id">
+          <maml:name>ID</maml:name>
+          <maml:Description>
+            <maml:para>The ID of the document to be found.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonValue</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:Description>
+            <maml:para>The number of documents to be listed.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>Ignores the specified number of objects and then gets the remaining objects. Enter the number of objects to skip.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Find-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>As</maml:name>
+          <maml:Description>
+            <maml:para>List objects in either of 2 formats: PSObject or BSON document.</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">PSObject</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">BSON</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:Description>
+            <maml:para>The number of documents to be listed.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>Select</maml:name>
+          <maml:Description>
+            <maml:para>BSON expression to select properties\fields to show.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>Ignores the specified number of objects and then gets the remaining objects. Enter the number of objects to skip.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>Where</maml:name>
+          <maml:Description>
+            <maml:para>Where filter criteria by BSOn expression.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Find-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+          <maml:name>Sql</maml:name>
+          <maml:Description>
+            <maml:para>Find documents by a SQL statement.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>As</maml:name>
+          <maml:Description>
+            <maml:para>List objects in either of 2 formats: PSObject or BSON document.</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">PSObject</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">BSON</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:Description>
+            <maml:para>The number of documents to be listed.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Skip</maml:name>
+          <maml:Description>
+            <maml:para>Ignores the specified number of objects and then gets the remaining objects. Enter the number of objects to skip.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>As</maml:name>
+        <maml:Description>
+          <maml:para>List objects in either of 2 formats: PSObject or BSON document.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="_id">
+        <maml:name>ID</maml:name>
+        <maml:Description>
+          <maml:para>The ID of the document to be found.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonValue</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Limit</maml:name>
+        <maml:Description>
+          <maml:para>The number of documents to be listed.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+        <maml:name>Select</maml:name>
+        <maml:Description>
+          <maml:para>BSON expression to select properties\fields to show.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Skip</maml:name>
+        <maml:Description>
+          <maml:para>Ignores the specified number of objects and then gets the remaining objects. Enter the number of objects to skip.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+        <maml:name>Sql</maml:name>
+        <maml:Description>
+          <maml:para>Find documents by a SQL statement.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+        <maml:name>Where</maml:name>
+        <maml:Description>
+          <maml:para>Where filter criteria by BSOn expression.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonValue</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument -Collection movies</dev:code>
+        <dev:remarks>
+          <maml:para>List all documents inside the movies collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument -Collection movies -Limit 5</dev:code>
+        <dev:remarks>
+          <maml:para>List the first 5 documents inside the movies collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument -Collection movies -ID 6</dev:code>
+        <dev:remarks>
+          <maml:para>List document with ID 6 inside the movies collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument movies -Sql "Select $ from movies limit 5"</dev:code>
+        <dev:remarks>
+          <maml:para>List the first 5 documents inside the movies collection using a SQL statement.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 5 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument movies -Sql "Select _id,Title,MPAA from movies where MPAA='PG-13'"</dev:code>
+        <dev:remarks>
+          <maml:para>List all documents inside the movies collection whose MPAA property value matches 'PG-13'. Note: We only retrieve a select few properties(_id,Title,MPAA) of the collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 6 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument movies -Sql "Select concat(string(_id),MPAA) as concat,_id,MPAA from movies where MPAA='PG-13'"</dev:code>
+        <dev:remarks>
+          <maml:para>Concatenate 2 fields _id &amp; MPAA and show that as a new calculated field 'concat' Note: this does not actually add the field concat to the collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 7 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument movies -Where "MPAA='PG-13'" -Select "{_id,Title,MPAA}"</dev:code>
+        <dev:remarks>
+          <maml:para>List 3 properties of all documents that match the where criteria.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 6 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-LiteDBDocument movies -Where "MPAA='PG-13'" -Select "{_id,MovieName:Title}"</dev:code>
+        <dev:remarks>
+          <maml:para>Show the field Title as MovieName. Note: this does not actually rename the field Title to moviename.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-LiteDBCollectionName</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>LiteDBCollectionName</command:noun>
+      <maml:description>
+        <maml:para>List all collections in a litedb database.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>List all collections in a litedb database.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-LiteDBCollectionName</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Collection</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-LiteDBCollectionName
+
+Connection          collection   AutoId Docs
+----------          ----------   ------ ----
+LiteDB.LiteDatabase one        ObjectId    3
+LiteDB.LiteDatabase test       ObjectId    0
+LiteDB.LiteDatabase movies     ObjectId    0</dev:code>
+        <dev:remarks>
+          <maml:para>shows 3 collections along with the document count in each collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-LiteDBIndex</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>LiteDBIndex</command:noun>
+      <maml:description>
+        <maml:para>List all indices for a litedb database.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>List all indices for a litedb database.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-LiteDBIndex</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-LiteDBIndex -Collection 'one'
+
+collection : one
+Connection : LiteDB.LiteDatabase
+name       : _id
+expression : $._id
+unique     : True
+maxLevel   : 7</dev:code>
+        <dev:remarks>
+          <maml:para>_id field which is mandatory is indexed by default.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Merge-LiteDBDocument</command:name>
+      <command:verb>Merge</command:verb>
+      <command:noun>LiteDBDocument</command:noun>
+      <maml:description>
+        <maml:para>Update an existing document or if it is missing add to the collection.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Update an existing document or if it is missing add to the collection.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Merge-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>BsonDocumentArray</maml:name>
+          <maml:Description>
+            <maml:para>An array of BSON documents to update.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument[]</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Merge-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+          <maml:name>Document</maml:name>
+          <maml:Description>
+            <maml:para>The bson document to upsert.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Merge-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+          <maml:name>ID</maml:name>
+          <maml:Description>
+            <maml:para>The ID of the BSON document.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonValue</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+          <maml:name>Document</maml:name>
+          <maml:Description>
+            <maml:para>The bson document to upsert.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>BsonDocumentArray</maml:name>
+        <maml:Description>
+          <maml:para>An array of BSON documents to update.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonDocument[]</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonDocument[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+        <maml:name>Document</maml:name>
+        <maml:Description>
+          <maml:para>The bson document to upsert.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonDocument</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+        <maml:name>ID</maml:name>
+        <maml:Description>
+          <maml:para>The ID of the BSON document.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonValue</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonValue</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonDocument[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonDocument</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $movies | ConvertTo-LiteDbBSON | Upsert-LiteDBDocument movies</dev:code>
+        <dev:remarks>
+          <maml:para>Update existing and add missing documents into the movies collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-LiteDBCollection</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>LiteDBCollection</command:noun>
+      <maml:description>
+        <maml:para>Create a new collection\table in a litedb database.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Create a new collection\table in a litedb database.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-LiteDBCollection</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; New-LiteDBCollection -Collection movies</dev:code>
+        <dev:remarks>
+          <maml:para>Creates a new collection named 'movies'.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-LiteDBDatabase</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>LiteDBDatabase</command:noun>
+      <maml:description>
+        <maml:para>Creates a new litedb database on the file system.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Creates a new litedb database on the file system.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-LiteDBDatabase</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="FullName">
+          <maml:name>Path</maml:name>
+          <maml:Description>
+            <maml:para>Path to LiteDB database</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:Description>
+            <maml:para>Credential to secure the database</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Credential</maml:name>
+        <maml:Description>
+          <maml:para>Credential to secure the database</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="FullName">
+        <maml:name>Path</maml:name>
+        <maml:Description>
+          <maml:para>Path to LiteDB database</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; New-LiteDBDatabase -Path c:\temp\movie.db</dev:code>
+        <dev:remarks>
+          <maml:para>creates a new litedb database at c:\temp\movie.db</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; New-LiteDBDatabase -Path c:\temp\movie.db -Credential (Get-Credential)</dev:code>
+        <dev:remarks>
+          <maml:para>creates a new litedb database at c:\temp\movie.db with password protection. In order to open the database you would have to provide the password used when the db was created.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-LiteDBIndex</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>LiteDBIndex</command:noun>
+      <maml:description>
+        <maml:para>Create a new LiteDb index.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Create a new LiteDb index. Even if multiple indexed expressions are used on a query, only one of the indexes is used, with the remaining expressions being filtered using a full scan. Index keys must have at most 1023 bytes Up to 255 indexes per collections, including the _id primary key, but limited to 8096 bytes for index definition. Each index uses: 41 bytes + LEN(name) + LEN(expression)</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-LiteDBIndex</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Field</maml:name>
+          <maml:Description>
+            <maml:para>The field\property name in the collection that is to be indexed.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Expression</maml:name>
+          <maml:Description>
+            <maml:para>The expression based index that is to be created. see http://www.litedb.org/docs/indexes/ &amp; http://www.litedb.org/docs/expressions/</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Unique</maml:name>
+          <maml:Description>
+            <maml:para>Speicy if the indexed field should allow duplicates.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Expression</maml:name>
+        <maml:Description>
+          <maml:para>The expression based index that is to be created. see http://www.litedb.org/docs/indexes/ &amp; http://www.litedb.org/docs/expressions/</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Field</maml:name>
+        <maml:Description>
+          <maml:para>The field\property name in the collection that is to be indexed.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Unique</maml:name>
+        <maml:Description>
+          <maml:para>Speicy if the indexed field should allow duplicates.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; New-LiteDBIndex -Collection movies -Field Genre -Expression "LOWER($.Genre)"</dev:code>
+        <dev:remarks>
+          <maml:para>Creates an index on the 'genre' field with the values in lowercase.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; New-LiteDBIndex -Collection movies -Field Total -Expression "SUM($.Items[*].Price)"</dev:code>
+        <dev:remarks>
+          <maml:para>Creates an index on the 'Total' field which is a calculated field. Items is a field that contains an array of bson documents with one of the properties in the embedded documents being price.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>expressions</maml:linkText>
+        <maml:uri>http://www.litedb.org/docs/expressions/</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>indexes</maml:linkText>
+        <maml:uri>http://www.litedb.org/docs/indexes/</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Open-LiteDBConnection</command:name>
+      <command:verb>Open</command:verb>
+      <command:noun>LiteDBConnection</command:noun>
+      <maml:description>
+        <maml:para>Open a connection to a litedb database on the filesystem or in-memory.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Open a connection to a litedb database on the filesystem or in-memory.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Open-LiteDBConnection</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>ConnectionString</maml:name>
+          <maml:Description>
+            <maml:para>Pass your own connectionstring to LiteDB</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>IncludeFields</maml:name>
+          <maml:Description>
+            <maml:para>Not implemented.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>ReadOnly</maml:name>
+          <maml:Description>
+            <maml:para>Open datafile in read-only mode</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Open-LiteDBConnection</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="Fullname, Path, Datasource">
+          <maml:name>Database</maml:name>
+          <maml:Description>
+            <maml:para>Path to LiteDB database</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:Description>
+            <maml:para>Credential to secure the database</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>IncludeFields</maml:name>
+          <maml:Description>
+            <maml:para>Not implemented.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>InitialSize</maml:name>
+          <maml:Description>
+            <maml:para>Create a LiteDB databse with a specific starting size. By default the starting size is 8 KB.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Mode</maml:name>
+          <maml:Description>
+            <maml:para>LiteDB offers 2 types of connections: Direct and Shared. This affect how engine will open data file.</maml:para>
+            <maml:para>Direct: Engine will open the datafile in exclusive mode and will keep it open until Dispose(). The datafile cannot be opened by another process. This is the recommended mode because it’s faster and cachable. Shared: Engine will be close the datafile after each operation. Locks are made using Mutex. This is more expensive but you can open same file from multiple processes.</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Direct</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Shared</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">ConnectionType</command:parameterValue>
+          <dev:type>
+            <maml:name>ConnectionType</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>ReadOnly</maml:name>
+          <maml:Description>
+            <maml:para>Open datafile in read-only mode</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Upgrade</maml:name>
+          <maml:Description>
+            <maml:para>Check if datafile is of an older version and upgrade it before opening</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>collation</maml:name>
+          <maml:Description>
+            <maml:para>A collation is a special pragma (for more info, see Pragmas) that allows users to specify a culture and string compare options for a datafile.</maml:para>
+            <maml:para>Collation is a read-only pragma and can only be changed with a rebuild.</maml:para>
+            <maml:para>A collation is specified with the format CultureName/CompareOption1[,CompareOptionN]. For more info about compare options, check the .NET documentation.</maml:para>
+            <maml:para>Datafiles are always created with CultureInfo.CurrentCulture as their culture and with IgnoreCase as the compare option. The collation can be change by rebuilding the datafile.</maml:para>
+            <maml:para>Examples: rebuild {"collation": "en-US/None"}; rebuilds the datafile with the en-US culture and regular string comparison</maml:para>
+            <maml:para>rebuild {"collation": "en-GB/IgnoreCase"}; rebuilds the datafile with the en-GB culture and case-insensitive string comparison</maml:para>
+            <maml:para>rebuild {"collation": "pt-BR/IgnoreCase,IgnoreSymbols"}; rebuilds the datafile with the pt-BR culture and case-insensitive string comparison that also ignores symbols (white spaces, punctuation, math symbols etc.)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Collation</command:parameterValue>
+          <dev:type>
+            <maml:name>Collation</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>ConnectionString</maml:name>
+        <maml:Description>
+          <maml:para>Pass your own connectionstring to LiteDB</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Credential</maml:name>
+        <maml:Description>
+          <maml:para>Credential to secure the database</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="Fullname, Path, Datasource">
+        <maml:name>Database</maml:name>
+        <maml:Description>
+          <maml:para>Path to LiteDB database</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>IncludeFields</maml:name>
+        <maml:Description>
+          <maml:para>Not implemented.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>InitialSize</maml:name>
+        <maml:Description>
+          <maml:para>Create a LiteDB databse with a specific starting size. By default the starting size is 8 KB.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Mode</maml:name>
+        <maml:Description>
+          <maml:para>LiteDB offers 2 types of connections: Direct and Shared. This affect how engine will open data file.</maml:para>
+          <maml:para>Direct: Engine will open the datafile in exclusive mode and will keep it open until Dispose(). The datafile cannot be opened by another process. This is the recommended mode because it’s faster and cachable. Shared: Engine will be close the datafile after each operation. Locks are made using Mutex. This is more expensive but you can open same file from multiple processes.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">ConnectionType</command:parameterValue>
+        <dev:type>
+          <maml:name>ConnectionType</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>ReadOnly</maml:name>
+        <maml:Description>
+          <maml:para>Open datafile in read-only mode</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Upgrade</maml:name>
+        <maml:Description>
+          <maml:para>Check if datafile is of an older version and upgrade it before opening</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>collation</maml:name>
+        <maml:Description>
+          <maml:para>A collation is a special pragma (for more info, see Pragmas) that allows users to specify a culture and string compare options for a datafile.</maml:para>
+          <maml:para>Collation is a read-only pragma and can only be changed with a rebuild.</maml:para>
+          <maml:para>A collation is specified with the format CultureName/CompareOption1[,CompareOptionN]. For more info about compare options, check the .NET documentation.</maml:para>
+          <maml:para>Datafiles are always created with CultureInfo.CurrentCulture as their culture and with IgnoreCase as the compare option. The collation can be change by rebuilding the datafile.</maml:para>
+          <maml:para>Examples: rebuild {"collation": "en-US/None"}; rebuilds the datafile with the en-US culture and regular string comparison</maml:para>
+          <maml:para>rebuild {"collation": "en-GB/IgnoreCase"}; rebuilds the datafile with the en-GB culture and case-insensitive string comparison</maml:para>
+          <maml:para>rebuild {"collation": "pt-BR/IgnoreCase,IgnoreSymbols"}; rebuilds the datafile with the pt-BR culture and case-insensitive string comparison that also ignores symbols (white spaces, punctuation, math symbols etc.)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Collation</command:parameterValue>
+        <dev:type>
+          <maml:name>Collation</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Open-LiteDBConnection
+
+Database       :
+ConnectionInfo :
+Mapper         : LiteDB.BsonMapper
+FileStorage    : LiteDB.LiteStorage`1[System.String]
+UserVersion    : 0
+Timeout        : 00:01:00
+UtcDate        : False
+LimitSize      : 9223372036854775807
+CheckpointSize : 1000
+Collation      : en-US/IgnoreCase</dev:code>
+        <dev:remarks>
+          <maml:para>The database property is empty suggesting that the we are working with an in-memory database.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Open-LiteDBConnection -Database c:\temp\movie.db
+
+Database       : C:\temp\movie.db
+ConnectionInfo : LiteDB.ConnectionString
+Mapper         : LiteDB.BsonMapper
+FileStorage    : LiteDB.LiteStorage`1[System.String]
+UserVersion    : 0
+Timeout        : 00:01:00
+UtcDate        : False
+LimitSize      : 9223372036854775807
+CheckpointSize : 1000
+Collation      : en-US/IgnoreCase</dev:code>
+        <dev:remarks>
+          <maml:para>Opens a connection to the litedb located at c:\temp\movie.db</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Open-LiteDBConnection -Database c:\temp\movie.db -Credential (Get-Credential)
+
+Database       : C:\temp\movie.db
+ConnectionInfo : LiteDB.ConnectionString
+Mapper         : LiteDB.BsonMapper
+FileStorage    : LiteDB.LiteStorage`1[System.String]
+UserVersion    : 0
+Timeout        : 00:01:00
+UtcDate        : False
+LimitSize      : 9223372036854775807
+CheckpointSize : 1000
+Collation      : en-US/IgnoreCase</dev:code>
+        <dev:remarks>
+          <maml:para>If you created the database with password protection then the same password will need to be passed every time you want to open the litedb database.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>collation</maml:linkText>
+        <maml:uri>http://www.litedb.org/docs/collation/</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Remove-LiteDBCollection</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>LiteDBCollection</command:noun>
+      <maml:description>
+        <maml:para>Remove or delete a collection.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Remove or delete a collection.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-LiteDBCollection</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection to be removed</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:Description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:Description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection to be removed</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:Description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:Description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-LiteDBCollection -Collection movies</dev:code>
+        <dev:remarks>
+          <maml:para>Caution: Removes the collection named 'movies' along with all data stored inside the collection.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Remove-LiteDBDocument</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>LiteDBDocument</command:noun>
+      <maml:description>
+        <maml:para>Remove\delete a litedb document.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Remove\delete a litedb document.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+          <maml:name>ID</maml:name>
+          <maml:Description>
+            <maml:para>The document ID.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonValue</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Remove-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Query</maml:name>
+          <maml:Description>
+            <maml:para>BSON expression that forms the delete query.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonExpression</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonExpression</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Remove-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Sql</maml:name>
+          <maml:Description>
+            <maml:para>SQL expression that forms the delete query.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+        <maml:name>ID</maml:name>
+        <maml:Description>
+          <maml:para>The document ID.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonValue</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Query</maml:name>
+        <maml:Description>
+          <maml:para>BSON expression that forms the delete query.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonExpression</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonExpression</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Sql</maml:name>
+        <maml:Description>
+          <maml:para>SQL expression that forms the delete query.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonValue</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonExpression</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-LiteDBDocument -Collection movies -ID 3</dev:code>
+        <dev:remarks>
+          <maml:para>Remove a document by ID</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-LiteDBDocument movies -Query "MPAA='PG-13'"</dev:code>
+        <dev:remarks>
+          <maml:para>Remove a document(s) by BSON expression. All documents whose MPAA field matches the value 'PG-13' will be removed.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-LiteDBDocument 'movies' -Sql "delete movies where ReleaseDate &gt; datetime('12/10/1989')"</dev:code>
+        <dev:remarks>
+          <maml:para>Remove a document(s) by SQL statement. Documents greater than a certain datetime are removed with this sql query.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Remove-LiteDBIndex</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>LiteDBIndex</command:noun>
+      <maml:description>
+        <maml:para>Remove\Delete a litedb index.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Remove\Delete a litedb index.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-LiteDBIndex</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Field</maml:name>
+          <maml:Description>
+            <maml:para>The indexed field name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Field</maml:name>
+        <maml:Description>
+          <maml:para>The indexed field name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Remove-LiteDBIndex -Collection movies -Field Genre</dev:code>
+        <dev:remarks>
+          <maml:para>Removes index associated with field Genre.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Rename-LiteDBCollection</command:name>
+      <command:verb>Rename</command:verb>
+      <command:noun>LiteDBCollection</command:noun>
+      <maml:description>
+        <maml:para>Rename a collection.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Rename a collection.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Rename-LiteDBCollection</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The old collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>NewCollection</maml:name>
+          <maml:Description>
+            <maml:para>The new collection name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The old collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>NewCollection</maml:name>
+        <maml:Description>
+          <maml:para>The new collection name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Rename-LiteDBCollection -Collection moviecol -NewCollection moviecol2</dev:code>
+        <dev:remarks>
+          <maml:para>Rename a collection named 'moviecol' to 'moviecol2'</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-LiteDBDocument</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>LiteDBDocument</command:noun>
+      <maml:description>
+        <maml:para>Update a litedb document.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Update a litedb document.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>BsonDocumentArray</maml:name>
+          <maml:Description>
+            <maml:para>Update multiple documents by passing a bson document array.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument[]</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+          <maml:name>ID</maml:name>
+          <maml:Description>
+            <maml:para>The ID of the bson document to be updated.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonValue</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>Document</maml:name>
+          <maml:Description>
+            <maml:para>The bson document to be updated.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>Document</maml:name>
+          <maml:Description>
+            <maml:para>The bson document to be updated.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonDocument</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>Set</maml:name>
+          <maml:Description>
+            <maml:para>The BSON expression for updating a document(s)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonExpression</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonExpression</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+          <maml:name>Where</maml:name>
+          <maml:Description>
+            <maml:para>The BSON expression for updating a document(s)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">BsonExpression</command:parameterValue>
+          <dev:type>
+            <maml:name>BsonExpression</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Update-LiteDBDocument</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Collection</maml:name>
+          <maml:Description>
+            <maml:para>The collection or table name.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>Sql</maml:name>
+          <maml:Description>
+            <maml:para>The SQL expression for updating a document(s)</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+          <maml:name>Connection</maml:name>
+          <maml:Description>
+            <maml:para>The litedb connection object.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+          <dev:type>
+            <maml:name>LiteDatabase</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>BsonDocumentArray</maml:name>
+        <maml:Description>
+          <maml:para>Update multiple documents by passing a bson document array.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonDocument[]</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonDocument[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Collection</maml:name>
+        <maml:Description>
+          <maml:para>The collection or table name.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <maml:name>Connection</maml:name>
+        <maml:Description>
+          <maml:para>The litedb connection object.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">LiteDatabase</command:parameterValue>
+        <dev:type>
+          <maml:name>LiteDatabase</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+        <maml:name>Document</maml:name>
+        <maml:Description>
+          <maml:para>The bson document to be updated.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonDocument</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonDocument</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="_id">
+        <maml:name>ID</maml:name>
+        <maml:Description>
+          <maml:para>The ID of the bson document to be updated.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonValue</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonValue</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>Set</maml:name>
+        <maml:Description>
+          <maml:para>The BSON expression for updating a document(s)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonExpression</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonExpression</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>Sql</maml:name>
+        <maml:Description>
+          <maml:para>The SQL expression for updating a document(s)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+        <maml:name>Where</maml:name>
+        <maml:Description>
+          <maml:para>The BSON expression for updating a document(s)</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">BsonExpression</command:parameterValue>
+        <dev:type>
+          <maml:name>BsonExpression</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonValue</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonDocument[]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonDocument</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.BsonExpression</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>LiteDB.LiteDatabase</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $mymovie = [PSCustomObject]@{
+    Title = 'Turner and Hooch'
+    _id = 3
+    Budget = [int64]13000001
+    Gross = [int64]71079915
+    MPAA = 'PG'
+    Rating = 7.2
+    RatingCount = 91415
+    ReleaseDate = [Datetime]'7/28/1989'
+    RunTime = 101
+    }
+
+    $mymovie |  ConvertTo-LiteDbBSON | Update-LiteDBDocument -Collection movies</dev:code>
+        <dev:remarks>
+          <maml:para>Updates document with id 3(by ID)</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Update-LiteDBDocument movies -Set "{Title:'Turner and Hooch'}"  -Where "_id = 3"</dev:code>
+        <dev:remarks>
+          <maml:para>Updates document with id 3(by BSON expression). The title property value is changed.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Update-LiteDBDocument 'movies' -sql "UPDATE movies SET Title='Turner &amp; Hooch',RunTime = 101 where _id = 3"</dev:code>
+        <dev:remarks>
+          <maml:para>Update multiple fields of a document with ID 3(by SQL)</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+</helpItems>

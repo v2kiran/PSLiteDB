@@ -71,7 +71,8 @@ namespace PSLiteDB
         }
         private bool _readonly;
 
-        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
+
+/*        [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
         public SwitchParameter DontSerializeNullValues
         {
             get { return _dontSerializeNullValues; }
@@ -93,7 +94,7 @@ namespace PSLiteDB
             get { return _emptyStringToNull; }
             set { _emptyStringToNull = value; }
         }
-        private bool _emptyStringToNull;
+        private bool _emptyStringToNull;*/
 
         [Parameter(ValueFromPipelineByPropertyName = true, Mandatory = false)]
         public SwitchParameter IncludeFields
@@ -116,10 +117,12 @@ namespace PSLiteDB
             if (ParameterSetName == "Simple")
             {
 
-                connbuilder = new ConnectionString();
-                connbuilder.Connection = Mode;
-                connbuilder.InitialSize = InitialSize;
-                connbuilder.Collation = collation;
+                connbuilder = new ConnectionString
+                {
+                    Connection = Mode,
+                    InitialSize = InitialSize,
+                    Collation = collation
+                };
 
                 if (Credential != null)
                 {
@@ -136,7 +139,7 @@ namespace PSLiteDB
                     connbuilder.Upgrade = true;
                 }
 
-                
+
 
                 if (Database != null && !string.IsNullOrEmpty(Database) && !string.IsNullOrWhiteSpace(Database))
                 {
@@ -166,7 +169,7 @@ namespace PSLiteDB
                 }
                 else
                 {
-                    _connection = new LiteDatabase(new MemoryStream());
+                    _connection = new LiteDatabase(":memory:");
                     WriteVerbose($"Open-LiteDBConnection: Opened connection to In-Memory database");
                 }
             }
@@ -176,7 +179,7 @@ namespace PSLiteDB
                 try
                 {
                     _connection = new LiteDatabase(ConnectionString);
-                   _connectioninfo = null;
+                    _connectioninfo = null;
                 }
                 catch (Exception)
                 {
@@ -187,7 +190,7 @@ namespace PSLiteDB
 
             BsonMapper.Global.SerializeNullValues = true;
 
-            if (DontSerializeNullValues)
+/*            if (DontSerializeNullValues)
             {
                 BsonMapper.Global.SerializeNullValues = false;
             }
@@ -200,7 +203,7 @@ namespace PSLiteDB
             if (DontConvertEmptyStringToNull)
             {
                 BsonMapper.Global.EmptyStringToNull = false;
-            }
+            }*/
 
             if (IncludeFields)
             {

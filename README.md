@@ -32,7 +32,7 @@ Import-Module c:\temp\PSLiteDB\module\PSLiteDB.psd1 -verbose
 ## :palm_tree: Create Database
 
 ```powershell
-$dbPath = "C:\temp\LiteDB\Service.db"
+$dbPath = "C:\temp\LiteDB\Movie.db"
 New-LiteDBDatabase -Path $dbPath -Verbose
 ```
 
@@ -55,7 +55,7 @@ Open-LiteDBConnection -Database $dbPath
 ## :trumpet: Create a Collection
 
 ```powershell
-New-LiteDBCollection -Collection SvcCollection
+New-LiteDBCollection -Collection movies
 
 # verify that the collection was created
 Get-LiteDBCollectionName
@@ -66,64 +66,93 @@ Get-LiteDBCollectionName
 ## :guitar: Create an Index
 
 ```powershell
-# Creates an index in the collection `SvcCollection` with all `DisplayName` property values in `lowercase`
-New-LiteDBIndex -Collection SvcCollection -Field DisplayName -Expression "LOWER($.DisplayName)"
+# Creates an index in the collection `movies` with all `DisplayName` property values in `lowercase`
+New-LiteDBIndex -Collection movies -Field Genre -Expression "LOWER($.Genre)"
 
 # verify that the index was created
-Get-LiteDBIndex -Collection SvcCollection
+Get-LiteDBIndex -Collection movies
 ```
 
 ***
 
 ## :tada: Insert Records
 
-Get all the services whose name starts with bfollowed by any sequence of characters.
-Force the `Name` property to become the `_id` property in the LiteDB collection
-Serialize the selected records and finally insert them into the `SvcCollection`
+Create a movie database from csv records/file.
+Force the `MovieID` property to become the `_id` property in the LiteDB collection
+Serialize the selected records and finally insert them into the `movies`
 
 ##### :one::arrow_forward: Insert by `ID`
 
 ```powershell
-Get-Service b* |
-  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
-      ConvertTo-LiteDbBSON |
-         Add-LiteDBDocument -Collection SvcCollection
+
+# Sample dataset taken from [data-world](https://data.world/)
+$dataset = @"
+MovieID,Title,MPAA,Budget,Gross,Release Date,Genre,Runtime,Rating,RatingCount
+1,Look Who's Talking,PG-13,7500000,296000000,1989-10-12,Romance,93,5.9,73638
+2,Driving Miss Daisy,PG,7500000,145793296,1989-12-13,Comedy,99,7.4,91075
+3,Turner & Hooch,PG,13000000,71079915,1989-07-28,Crime,100,7.2,91415
+4,Born on the Fourth of July,R,14000000,161001698,1989-12-20,War,145,7.2,91415
+5,Field of Dreams,PG,15000000,84431625,1989-04-21,Drama,107,7.5,101702
+6,Uncle Buck,PG,15000000,79258538,1989-08-16,Family,100,7,77659
+7,When Harry Met Sally...,R,16000000,92800000,1989-07-21,Romance,96,7.6,180871
+8,Dead Poets Society,PG,16400000,235860116,1989-06-02,Drama,129,8.1,382002
+9,Parenthood,PG-13,20000000,126297830,1989-07-31,Comedy,124,7,41866
+10,Lethal Weapon 2,R,25000000,227853986,1989-07-07,Comedy,114,7.2,151737
+"@
+
+# Convert the dataset from CSV to PSObjects
+# Since a csv converts all object properties to string we need to convert those string properties back to their original type
+$movies = $dataset |
+    ConvertFrom-Csv |
+    Select-Object @{Name = "_id"; E = { [int]$_.MovieID } },
+    @{Name = "Budget"; E = { [int64]$_.Budget } },
+    @{Name = "Gross"; E = { [int64]$_.Gross } },
+    @{Name = "ReleaseDate"; E = { [datetime]$_.'Release Date' } },
+    @{Name = "RunTime"; E = { [int]$_.Runtime } },
+    @{Name = "Rating"; E = { [Double]$_.Rating } },
+    @{Name = "RatingCount"; E = { [int64]$_.RatingCount } },
+    Title, MPAA
+
+$movies |
+    ConvertTo-LiteDbBSON |
+    Add-LiteDBDocument -Collection movies
 ```
 
 ##### :two::arrow_forward: Bulk Insert
 
 ```powershell
-Get-Service b* |
-  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
-      ConvertTo-LiteDbBSON |
-         Add-LiteDBDocument -Collection SvcCollection -Bulk -Batch 5000
+$movie_array = $movies | ConvertTo-LiteDbBSON -as array
+
+Add-LiteDBDocument 'movies' -BsonDocumentArray $movie_array -BatchSize 1000 -BulkInsert
 
 ```
 
-> :point_right: **Note**:  The `ConvertTo-LiteDbBSON` Function returns a Bsondocument array which will be unrolled by the `Add-LitedbDocument` cmdlet by default so if you want to avoid that and add the array as a whole you need to use the `-bulk` switch. Usefull when inserting a huge number of documents in batches.
+> :point_right: **Note**:  The `ConvertTo-LiteDbBSON` Function returns a Bsondocument array which will be unrolled by the `Add-LitedbDocument` cmdlet by default so if you want to avoid that and add the entire array. Usefull when inserting a huge number of documents in batches.
 
 ***
 
 ## :snowflake: Find Records
 
-Because we used the `Name` property of the `servicecontroller` object as our `_id` in the LiteDb collection, we can search for records using the `ServiceName`
+Because we used the `MovieID` property of the `dataset` as our `_id` in the LiteDb collection, we can search for records using the `MovieID` value
 
 ##### :one::arrow_forward: Find by `ID`
 
 ```powershell
 #Note that the value of parameter ID: 'BITS' is case-Insensitive
-Find-LiteDBDocument -Collection SvcCollection -ID BITS
+Find-LiteDBDocument -Collection movies -ID 10
 
 Output:
 
-Collection  : SvcCollection
-_id         : "BITS"
-DisplayName : "Background Intelligent Transfer Service"
-Status      : 4
-StartType   : 2
-
-# just to illustrate that lowercase bits also now works( this didnt work in LiteDB v4)
-Find-LiteDBDocument -Collection SvcCollection -ID bits
+Collection  : movies
+_id         : 10
+Title       : Lethal Weapon 2
+ReleaseDate : 7/7/1989 12:00:00 AM
+Budget      : 25000000
+Rating      : 7.2
+RatingCount : 151737
+Gross       : 227853986
+MPAA        : R
+RunTime     : 114
 
 
 <#
@@ -131,7 +160,7 @@ List all documents in a collection, limiting the total docs displayed to 5 and s
 'Limit' and 'skip' are optional parameters
 By default if you omit the limit parameter only the first 1000 docs are displayed
 #>
-Find-LiteDBDocument -Collection SvcCollection -Limit 5 -Skip 2
+Find-LiteDBDocument -Collection movies -Limit 5 -Skip 2
 ```
 
 
@@ -140,27 +169,30 @@ Find-LiteDBDocument -Collection SvcCollection -Limit 5 -Skip 2
 ##### :two::arrow_forward:  Find by `SQL Query`
 
 ```powershell
-# get the first 5 documents from the service collection
-Find-LiteDBDocument SvcCollection -Sql "Select $ from SvcCollection limit 5"
+# get the first 5 documents from the movies collection
+Find-LiteDBDocument movies -Sql "Select $ from movies limit 5"
 
-# get the first 5 documents with selected properties or fields from the service collection
-Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection limit 5"
+# get the first 5 documents with selected properties or fields from the movies collection
+Find-LiteDBDocument movies -Sql "Select _id,Title from movies limit 5"
 
-# using where to filter the results ( listing the first 5 stopped services)
-Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status = 1 limit 5"
+# using where to filter the results - string filter
+Find-LiteDBDocument movies -Sql "Select _id,Title from movies Where MPAA = 'PG-13'"
 
 # using where to filter the results - greaterthan
-Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status > 1 limit 5"
+Find-LiteDBDocument movies -Sql "Select _id,Title from movies Where Rating > 7.5"
 
-# using multiple where filters. ( stopped services along with a wildcard name filter)
-Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status = 1 and Name like 'app%' limit 5"
+# using multiple where filters. ( movies that contain 'talking' in their title)
+Find-LiteDBDocument movies -Sql "Select _id,Title from movies where MPAA = 'PG-13' and Title like '%talking'"
 
 # Sorting by name descending
-Find-LiteDBDocument SvcCollection -Sql "Select Name,Status from SvcCollection Where Status = 1 order by name desc limit 5"
+Find-LiteDBDocument movies -Sql "Select _id,Title from movies where MPAA = 'PG-13' order by Title desc"
+
+# date filter
+Find-LiteDBDocument movies -Sql "select _id,Title,ReleaseDate from test where ReleaseDate > datetime('8/16/1989') order by Releasedate desc"
 
 # using Functions
-# get the first 5 documents with selected properties or fields from the service collection
-Find-LiteDBDocument SvcCollection -Sql "Select upper(Name),Status from SvcCollection limit 5"
+# get the first 5 documents with selected properties or fields from the movies collection
+Find-LiteDBDocument movies -Sql "Select upper(Title),_id,MPAA from movies limit 5"
 
 ```
 
@@ -170,19 +202,19 @@ Find-LiteDBDocument SvcCollection -Sql "Select upper(Name),Status from SvcCollec
 ```powershell
 # Wildcard filter B*. Select 2 properties _id & status to display in the output
 # Select is a mandatory parameter when used with -Where
-Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,Status}"
+Find-LiteDBDocument movies -Where "Title like '%talking'" -Select "{_id,Title,MPAA}"
 
-# Calculated properties: show status as svcstatus
-Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,SvcStatus: Status}"
+# Calculated properties: show Title as MovieName
+Find-LiteDBDocument movies -Where "Title like '%talking'" -Select "{_id,MovieName: Title}"
 
 # limit: output to 2 documents
-Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,SvcStatus: Status}" -Limit 2
+Find-LiteDBDocument movies -Where "Title like '%s%'" -Select "{_id,MovieName: Title}" -Limit 2
 
 # Skip: skip first 2 documents
-Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{_id,SvcStatus: Status}" -Limit 2 -Skip 2
+Find-LiteDBDocument movies -Where "Title like '%s%'" -Select "{_id,MovieName: Title}" -Limit 2 -Skip 2
 
 # using Functions
-Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{Name: _id,DN : UPPER(DisplayName)}" -Limit 2
+Find-LiteDBDocument movies -Where "Title like '%talking'" -Select "{Name: _id,MovieName : UPPER(Title)}" -Limit 2
 
 # for a list of other functions refer to : http://www.litedb.org/docs/expressions/
 
@@ -192,54 +224,71 @@ Find-LiteDBDocument SvcCollection -Where "DisplayName like 'B%'" -Select "{Name:
 By default when used with no other parameters the cmdlet lists all documents in the collection.
 
 ```powershell
-Find-LiteDBDocument SvcCollection
+Find-LiteDBDocument movies
 ```
 
 ***
 
 ## :beetle: Update records
 
-lets stop the BITS service and then update the collection with the new `status`
-
-##### :one::arrow_forward: Update by `Id`
+##### :one::arrow_forward: Update by `SQL Query`
 
 ```powershell
-Get-Service BITS |
-  Select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
-     ConvertTo-LiteDbBSON |
-        Update-LiteDBDocument -Collection SvcCollection
+#update multiple fields with a wildcard where query
+Update-LiteDBDocument 'movies' -sql "UPDATE movies SET Title='Turner and Hooch',Runtime = 101 where _id=3"
+```
 
-# retrieve the bits service record in the litedb collection to see the updated status
-Find-LiteDBDocument -Collection SvcCollection -ID BITS
+lets stop the BITS service and then update the collection with the new `status`
+
+##### :two::arrow_forward: Update by `Id`
+
+```powershell
+$mymovie = [PSCustomObject]@{
+    Title = 'Turner and Hooch'
+    _id = 3
+    Budget = [int64]13000001
+    Gross = [int64]71079915
+    MPAA = 'PG'
+    Rating = 7.2
+    RatingCount = 91415
+    ReleaseDate = [Datetime]'7/28/1989'
+    RunTime = 101
+    }
+
+    $mymovie |  ConvertTo-LiteDbBSON | Update-LiteDBDocument -Collection movies
+
+# retrieve the movie record in the litedb collection to see the updated status
+Find-LiteDBDocument -Collection movies -ID 3
 
 Output:
 
-Collection  : SvcCollection
-_id         : "BITS"
-DisplayName : "Background Intelligent Transfer Service"
-Status      : 1
-StartType   : 2
+
+Collection  : movies
+_id         : 3
+Title       : Turner and Hooch
+ReleaseDate : 7/28/1989 12:00:00 AM
+Budget      : 13000001
+Rating      : 7.2
+RatingCount : 91415
+Gross       : 71079915
+MPAA        : PG
+RunTime     : 101
 ```
 
-##### :two::arrow_forward: Update by `BsonExpression`
+##### :three::arrow_forward: Update by `BsonExpression`
 
 The where statement is a predicate or condition which will determine the documents to be updated.
 
 ```powershell
 # set the status property of the service named bfe to 4
-Update-LiteDBDocument SvcCollection -Set "{status:4}"  -Where "_id = 'bfe'"
+Update-LiteDBDocument movies -Set "{Runtime:101}"  -Where "_id = 3"
 
 # Retrieve all documents whose displayname begins with blue and Transform the name property to uppercase
-Update-LiteDBDocument SvcCollection -set "{Name:UPPER(Name)}" -Where "DisplayName like 'blue%'"
+Update-LiteDBDocument movies -set "{Title:UPPER(Title)}" -Where "Title like '%talking'"
 ```
 
 
-##### :three::arrow_forward: Update by `SQL Query`
 
-```powershell
-#update multiple fields with a wildcard where query
-Update-LiteDBDocument 'service' -sql "UPDATE service SET name=UPPER($.name),status = 4 where displayname like 'peer%'"
-```
 
 ***
 
@@ -250,25 +299,25 @@ Update-LiteDBDocument 'service' -sql "UPDATE service SET name=UPPER($.name),stat
 
 ```powershell
 # Delete record by ID
-Remove-LiteDBDocument -Collection SvcCollection -ID BITS
+Remove-LiteDBDocument -Collection movies -ID 3
 
-# If we now try to retrieve the `BITS` record we should see a warning
-Find-LiteDBDocument -Collection SvcCollection -ID BITS
-WARNING: Document with ID ['"BITS"'] does not exist in the collection ['SvcCollection']
+# If we try to retrieve the record we should see a warning
+ Find-LiteDBDocument -Collection movies -ID 3
+WARNING: Document with ID ['3'] does not exist in the collection ['movies']
 ```
 
 ##### :two::arrow_forward: Delete by `BsonExpression`
 
 ```powershell
-# delete all records from the test2 collection where the property osname is null
-Remove-LiteDBDocument test2 -Query "osname = null"
+# delete all records from the movies collection where the property Budget is null
+Remove-LiteDBDocument movies -Query "Budget = null"
 ```
 
 ##### :three::arrow_forward: Delete by `SQL Query`
 
 ```powershell
 #Deleteall records from the service collectionwhose displayname matches'xbox live'
-Remove-LiteDBDocument 'service' -Sql "delete service where displayname like 'xbox live%'"
+Remove-LiteDBDocument 'movies' -Sql "delete movies where Title like '%talking'"
 
 ```
 
@@ -276,13 +325,23 @@ Remove-LiteDBDocument 'service' -Sql "delete service where displayname like 'xbo
 
 ## :sunrise: Upsert Records
 
-Upsert stands for - Add if not record exists or update if it does exist.
+Upsert stands for - Add if missing else update existing.
 
 ```powershell
-Get-Service b* |
-  select @{Name="_id";E={$_.Name}},DisplayName,Status,StartType |
-      ConvertTo-LiteDbBSON |
-         Upsertldb -Collection SvcCollection
+$movies = $dataset |
+    ConvertFrom-Csv |
+    Select-Object @{Name = "_id"; E = { [int]$_.MovieID } },
+    @{Name = "Budget"; E = { [int64]$_.Budget } },
+    @{Name = "Gross"; E = { [int64]$_.Gross } },
+    @{Name = "ReleaseDate"; E = { [datetime]$_.'Release Date' } },
+    @{Name = "RunTime"; E = { [int]$_.Runtime } },
+    @{Name = "Rating"; E = { [Double]$_.Rating } },
+    @{Name = "RatingCount"; E = { [int64]$_.RatingCount } },
+    Title, MPAA -First 15
+
+$movies |
+    ConvertTo-LiteDbBSON |
+    Upsert-LiteDBDocument -Collection movies
 ```
 
 ***

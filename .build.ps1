@@ -19,3 +19,8 @@ task Copydll {
 }
 
 task . clean, copydll
+
+<#
+New-ExternalHelp .\docs -OutputPath module\en-US\ -Force
+
+#>
