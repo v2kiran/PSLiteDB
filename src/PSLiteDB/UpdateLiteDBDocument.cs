@@ -1,6 +1,7 @@
 ﻿using LiteDB;
 using System;
 using System.Management.Automation;
+using System.Collections.Generic;
 
 namespace PSLiteDB
 {
@@ -65,7 +66,7 @@ namespace PSLiteDB
         public BsonExpression Set { get; set; }
 
         [Parameter(
-            Mandatory = true,
+            Mandatory = true,       
             ValueFromPipeline = true,
             ValueFromPipelineByPropertyName = true,
             Position = 1,
@@ -75,11 +76,12 @@ namespace PSLiteDB
 
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = true,
+            ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
             ParameterSetName = "Sql",
             Position = 1
             )]
+        [ValidateNotNullOrEmpty()]
         public string Sql { get; set; }
 
         [Parameter(
@@ -134,6 +136,7 @@ namespace PSLiteDB
                     }
                     else if (ParameterSetName == "Sql")
                     {
+                        WriteVerbose($"sql: {Sql}");
                         Connection.Execute(Sql);
                     }
                     else

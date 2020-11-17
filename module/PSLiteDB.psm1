@@ -24,7 +24,7 @@ function ConvertTo-LiteDbBSON
         [ValidateSet("Document", "Array")]
         [Parameter(ValueFromPipelineByPropertyName)]
         [string]
-        $As = "Array"
+        $As
     )
 
     begin
@@ -93,19 +93,6 @@ function ConvertTo-LiteDbBSON
             # this hashtable will only hold the datetime key-value pair(s)
             $hash = @{ }
 
-            <#
-                        # Check for keys with the word date or time in them and convert value to datetime if possible
-            $bsonobj.GetEnumerator() |
-                Where-Object key -match "date|time" |
-                ForEach-Object {
-                    $kvp = $_
-                    if ($kvp.value -match "Date|(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})")
-                    {
-                        $hash[$kvp.key] = [MSJsonDateConverter]::Convert($kvp)
-                    }
-                }
-            #>
-
 
             # Convert JSON datetime string value to bson datetime values
             $bsonobj.GetEnumerator() |
@@ -154,7 +141,7 @@ function ConvertTo-LiteDbBSON
             }# as array
             else
             {
-                $bsonobj
+                Write-Output $bsonobj -NoEnumerate
             }
         }
 
@@ -191,6 +178,6 @@ $ScriptBlock = [scriptblock]::Create( {
 
 
 
-[string[]]$funcs = "Find-LiteDBDocument", "Add-LiteDBDocument", "Get-LiteDBIndex", "New-LiteDBIndex", "Remove-LiteDBCollection", "Remove-LiteDBIndex", "Rename-LitedbCollection", "Update-LiteDbDocument", "Upsert-LiteDbDocument", "Remove-LiteDbDocument"
+[string[]]$funcs = "Find-LiteDBDocument", "Add-LiteDBDocument", "Get-LiteDBIndex", "New-LiteDBIndex", "Remove-LiteDBCollection", "Remove-LiteDBIndex", "Rename-LitedbCollection", "Update-LiteDbDocument", "Merge-LiteDbDocument", "Remove-LiteDbDocument"
 Register-ArgumentCompleter -CommandName $funcs -ParameterName Collection -ScriptBlock $ScriptBlock
-Export-ModuleMember -Function ConvertTo-LiteDBBSON -alias fldb, oldb, ctlb, cldb, aldb
+Export-ModuleMember -Function ConvertTo-LiteDBBSON -alias fldb, oldb, ctlb, cldb, uldb, aldb, Upsertldb, 'Upsert-LiteDbDocument'

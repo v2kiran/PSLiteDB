@@ -41,7 +41,7 @@ namespace PSLiteDB
         [ValidateNotNullOrEmpty()]
         [Parameter(
             Mandatory = true,
-            ValueFromPipeline = true,
+            ValueFromPipeline = false,
             ValueFromPipelineByPropertyName = true,
             Position = 1,
             ParameterSetName = "sql"
@@ -67,7 +67,6 @@ namespace PSLiteDB
                 }
                 catch (Exception)
                 {
-
                     throw (new Exception("You must use 'Open-LiteDBConnection' to initiate a connection to a database"));
                 }
             }

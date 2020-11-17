@@ -6,6 +6,7 @@ using LiteDB;
 using System.Management.Automation;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace PSLiteDB.Helpers
 {
@@ -20,7 +21,7 @@ namespace PSLiteDB.Helpers
     {
         public string BsonKey { get; set; }
         public DateTime BsonDate { get; set; }
-
+        private static int i;
 
 
         public static DateTime Convert(KeyValuePair<string, BsonValue> kvp)
@@ -47,108 +48,117 @@ namespace PSLiteDB.Helpers
             return foo.BsonDate;
         }
 
-        public static PSObject BSONtoPSObjectConverter(BsonDocument bsonobj, string Collection)
-        {
-            PSObject Obj = new PSObject();
-            Obj.Properties.Add(new PSNoteProperty("Collection", Collection));
-            Regex rgx = new Regex(@"^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$");
-            Regex rgx2 = new Regex(@"^\/Date\((d|-|.*)\)[\/|\\]$");
-
-
-            foreach (KeyValuePair<string, BsonValue> kvp in bsonobj)
-            {
-                if (kvp.Value.GetType() == typeof(BsonValue))
-                {
-                    if (kvp.Value.IsString)
-                    {
-
-                        //Console.WriteLine($"the value is {kvp.Value.AsString} and result1: {rgx.IsMatch(kvp.Value.AsString)} result2: {rgx2.IsMatch(kvp.Value.AsString)}");
-
-                        if (rgx.IsMatch(kvp.Value.AsString))
-                        {
-                            // Console.WriteLine($"rgx1 the key is {kvp.Key}");
-                            //standard json iso date conversion
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, Convert(kvp)));
-                        }
-                        else if (rgx2.IsMatch(kvp.Value.AsString))
-                        {
-                            //Console.WriteLine($"rgx2 the key is {kvp.Key}");
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, Convert(kvp)));
-
-                        }
-                        else
-                        {
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, kvp.Value.AsString));
-                        }
-                    }
-                    else
-                    {
-                        Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
-                    }
-                }
-                else if (kvp.Value.IsDocument)
-                {
-                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(kvp.Value.AsDocument, Collection)));
-                }
-                else if (kvp.Value.IsArray)
-                {
-                    //var bsontype = kvp.Value.AsArray[0].Type;
-                    var li = new List<string>();
-                    foreach (var i in kvp.Value.AsArray)
-                    {
-
-                        if (i.IsDocument)
-                        {
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(i.AsDocument, Collection)));
-                        }
-                        else
-                        {
-                            li.Add(i.AsString);
-
-                        }
-                    }
-                    if (li.Count > 0)
-                    {
-                        Obj.Properties.Add(new PSNoteProperty(kvp.Key, li));
-                    }
-
-                }
-                else
-                {
-                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
-                }
-            }
-            return Obj;
-        }
 
         public static PSObject BSONtoPSObjectConverter1(BsonDocument bsonobj, string Collection)
         {
             PSObject Obj = new PSObject();
             Obj.Properties.Add(new PSNoteProperty("Collection", Collection));
-
+            i = 1;
             foreach (KeyValuePair<string, BsonValue> kvp in bsonobj)
             {
+                //Console.WriteLine($"current iteration {i}");
                 if (kvp.Value.GetType() == typeof(BsonValue))
                 {
+                    //Console.WriteLine($"detect bsonvalue {kvp.Key} {kvp.Value}");
                     Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
                 }
                 else if (kvp.Value.IsDocument)
-                {
-                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(kvp.Value.AsDocument, Collection)));
+                {                  
+                    var json = LiteDB.JsonSerializer.Serialize(kvp.Value);
+                    using (PowerShell PowerShellInstance = PowerShell.Create())
+                    {
+                        PowerShellInstance.Commands.AddCommand("ConvertFrom-Json").AddParameter("inputobject", json);
+                        var PSOutput = PowerShellInstance.Invoke();
+                        Obj.Properties.Add(new PSNoteProperty(kvp.Key, PSOutput));
+                    }
                 }
                 else if (kvp.Value.IsArray)
                 {
+                    //Console.WriteLine($" detect array {kvp.Key} {kvp.Value}");
                     //var bsontype = kvp.Value.AsArray[0].Type;
                     var li = new List<string>();
+                    var objlist = new List<PSObject>();
                     foreach (var i in kvp.Value.AsArray)
                     {
 
                         if (i.IsDocument)
                         {
-                            Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter(i.AsDocument, Collection)));
+                            //Console.WriteLine($"detect array doc {i.AsDocument} {i.RawValue}");
+                            //objlist.Add(BSONtoPSObjectConverter2(i.AsDocument));
+
+                            var json = LiteDB.JsonSerializer.Serialize(i);
+                            using (PowerShell PowerShellInstance = PowerShell.Create())
+                            {
+                                PowerShellInstance.Commands.AddCommand("ConvertFrom-Json").AddParameter("inputobject", json);
+                                var PSOutput = PowerShellInstance.Invoke();
+                                foreach (var item in PSOutput)
+                                {
+                                    objlist.Add(item);
+                                }
+                                
+                            }
                         }
                         else
                         {
+                            //Console.WriteLine($"detect array string {i.AsString} {i.RawValue}");
+                            li.Add(i.AsString);
+                        }
+                    }
+                    if (li.Count > 0)
+                    {
+                        Obj.Properties.Add(new PSNoteProperty(kvp.Key, li));
+                    }
+                    if (objlist.Count > 0)
+                    {
+                        Obj.Properties.Add(new PSNoteProperty(kvp.Key, objlist));
+                    }
+
+                }
+                else
+                {
+                    //Console.WriteLine(" detect all else");
+                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
+                }
+                i++;
+            }
+            return Obj;
+        }
+
+
+
+        public static PSObject BSONtoPSObjectConverter2(BsonDocument bsonobj)
+        {
+            PSObject Obj = new PSObject();
+            i = 1;
+            foreach (KeyValuePair<string, BsonValue> kvp in bsonobj)
+            {
+                //Console.WriteLine($"current iteration {i}");
+                if (kvp.Value.GetType() == typeof(BsonValue))
+                {
+                    //Console.WriteLine($" detect bsonvalue {kvp.Key} {kvp.Value}");
+                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
+                }
+                else if (kvp.Value.IsDocument)
+                {
+                    Obj.Properties.Add(new PSNoteProperty(kvp.Key, BSONtoPSObjectConverter2(kvp.Value.AsDocument)));
+                }
+                else if (kvp.Value.IsArray)
+                {
+                    //Console.WriteLine($" detect array {kvp.Key} {kvp.Value}");
+                    //var bsontype = kvp.Value.AsArray[0].Type;
+                    var li = new List<string>();
+                    var objlist = new List<PSObject>();
+                    foreach (var i in kvp.Value.AsArray)
+                    {
+
+                        if (i.IsDocument)
+                        {
+                            //Console.WriteLine($" array doc {i.AsDocument} {i.RawValue}");
+                            objlist.Add(BSONtoPSObjectConverter2(i.AsDocument));
+                        }
+                        else
+                        {
+                            //Console.WriteLine($" array string {i.AsString} {i.RawValue}");
                             li.Add(i.AsString);
 
                         }
@@ -157,17 +167,24 @@ namespace PSLiteDB.Helpers
                     {
                         Obj.Properties.Add(new PSNoteProperty(kvp.Key, li));
                     }
+                    if (objlist.Count > 0)
+                    {
+                        Obj.Properties.Add(new PSNoteProperty(kvp.Key, objlist));
+                    }
 
                 }
                 else
                 {
+                    //Console.WriteLine(" detect all else");
                     Obj.Properties.Add(new PSNoteProperty(kvp.Key, ReadObject(kvp.Value)));
                 }
+                i++;
             }
             return Obj;
         }
 
 
+     
         public static object ReadObject(BsonValue value)
         {
             switch (value.Type)

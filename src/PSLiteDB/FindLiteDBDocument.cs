@@ -119,7 +119,7 @@ namespace PSLiteDB
                         }
                         else
                         {
-                            WriteObject(Connection.Mapper.ToDocument(results));
+                            WriteObject(Connection.Mapper.ToDocument(results), false);
                         }
                     }
                     else
@@ -164,7 +164,7 @@ namespace PSLiteDB
                         {
                             foreach (var r in results)
                             {
-                                WriteObject(Connection.Mapper.ToDocument(r));
+                                WriteObject(Connection.Mapper.ToDocument(r), false);
                             }
                         }
                     }
@@ -197,7 +197,7 @@ namespace PSLiteDB
                     {
                         foreach (var r in results)
                         {
-                            WriteObject(Connection.Mapper.ToDocument(r));
+                            WriteObject(Connection.Mapper.ToDocument(r), false);
                         }
 
                     }
@@ -224,7 +224,7 @@ namespace PSLiteDB
                         {
                             foreach (var r in results)
                             {
-                                WriteObject(Connection.Mapper.ToDocument(r));
+                                WriteObject(Connection.Mapper.ToDocument(r),false);
                             }
 
                         }
