@@ -47,6 +47,6 @@ jobs:
 
       - name: Run Pester Tests
         run: |
-          Import-Module -path (join-path $env:GITHUB_WORKSPACE -childpath 'module/PSLiteDB.psd1')
+          Import-Module (join-path $env:GITHUB_WORKSPACE -childpath 'module/PSLiteDB.psd1')
           Invoke-Pester -path (join-path $env:GITHUB_WORKSPACE -childpath 'tests/v5.tests.ps1') -pass
         shell: pwsh
