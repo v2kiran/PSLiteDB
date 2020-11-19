@@ -44,3 +44,9 @@ jobs:
           #Install-Module -Name $Modules -Scope "CurrentUser" -ErrorAction "Stop"
           Get-module Pester -list
         shell: pwsh
+
+      - name: Run Pester Tests
+        run: |
+          Import-Module -path (join-path $env:GITHUB_WORKSPACE -childpath 'module/PSLiteDB.psd1')
+          Invoke-Pester -path (join-path $env:GITHUB_WORKSPACE -childpath 'tests/v5.tests.ps1') -pass
+        shell: pwsh
