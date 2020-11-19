@@ -37,7 +37,7 @@ jobs:
         uses: zyborg/pester-tests-report@v1
         with:
           test_results_path: pester_test_result.xml
-          report_name: ${{ runner.os }}
+          report_name: Results on ${{ runner.os }}
           report_title: PSLiteDB Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}

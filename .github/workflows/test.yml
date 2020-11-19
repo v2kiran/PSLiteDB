@@ -23,7 +23,7 @@ jobs:
           ) | Add-Content -Path $env:GITHUB_ENV
         shell: pwsh
 
-      - name: Print defined environment variables "$GH_PROJECTNAME"
+      - name: Print defined $env:GH_PROJECTNAME environment variables {{ GH_PROJECTNAME }}
         run: |
           Write-Output $GH_USERNAME
           Write-Output $GH_PROJECTNAME
