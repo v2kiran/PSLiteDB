@@ -48,7 +48,7 @@ jobs:
       - name: Run Pester Tests
         run: |
           Import-Module (join-path $env:GITHUB_WORKSPACE -childpath 'module/PSLiteDB.psd1')
-          Invoke-Pester -path (join-path $env:GITHUB_WORKSPACE -childpath 'tests/v5.tests.ps1') -pass | Export-CliXml -Path pester_test_result.xml
+          Invoke-Pester -path (join-path $env:GITHUB_WORKSPACE -childpath 'tests/v5.tests.ps1') -pass -Outputfile pester_test_result.xml -OutputFormat NUnitXml
         shell: pwsh
 
       - name: test module
@@ -60,6 +60,7 @@ jobs:
           report_title: $env:GH_PROJECTNAME Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
+          gist_name: testreport
       - name: dump test results
         shell: pwsh
         run: |
