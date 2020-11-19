@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - v2.1-some
+  pull_request:
+    branches:
+      - v2.1-some
 
 jobs:
   job-1-pwsh:

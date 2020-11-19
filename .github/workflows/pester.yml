@@ -23,27 +23,6 @@ jobs:
           ) | Add-Content -Path $env:GITHUB_ENV
         shell: pwsh
 
-      - name: Print defined environment variables
-        run: |
-          Write-Output $GH_USERNAME
-          Write-Output $GH_PROJECTNAME
-        shell: pwsh
-
-      - name: Test Path
-        run: |
-          dir (join-path $env:GITHUB_WORKSPACE -childpath module)
-          write-host "#### ----------- ####"
-        shell: pwsh
-
-      - name: Install dependent modules
-        run: |
-          $Modules = @(
-            "Pester"
-            "InvokeBuild"
-          )
-          #Install-Module -Name $Modules -Scope "CurrentUser" -ErrorAction "Stop"
-          Get-module Pester -list
-        shell: pwsh
 
       - name: Run Pester Tests
         run: |
@@ -56,14 +35,12 @@ jobs:
         uses: zyborg/pester-tests-report@v1
         with:
           test_results_path: pester_test_result.xml
-          report_name: module_tests
+          report_name: Results on ${{ runner.os }}
           report_title: env:GH_PROJECTNAME Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
-          gist_name: testreport
+          gist_name: ${{ runner.os }}
       - name: dump test results
         shell: pwsh
         run: |
-            Write-Host 'Total Tests Executed...:  ${{ steps.test_module.outputs.total_count }}'
-            Write-Host 'Total Tests PASSED.....:  ${{ steps.test_module.outputs.passed_count }}'
-            Write-Host 'Total Tests FAILED.....:  ${{ steps.test_module.outputs.failed_count }}'
+            write-output "${{ steps.test_module.outputs}}"
