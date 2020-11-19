@@ -1,0 +1,47 @@
+name: "Deploy"
+
+on:
+  push:
+    branches:
+      - v2.1
+
+jobs:
+  job-1:
+    name: Publish to GitHub and PowerShell Gallery
+    runs-on: ubuntu-latest
+    #if: "contains(github.event.head_commit.message, ':shipit:')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.1
+
+      - name: Set environment variables
+        run: |
+          $Username, $ProjectName = $env:GITHUB_REPOSITORY -split "/"
+          @(
+            "GH_USERNAME={0}" -f $Username
+            "GH_PROJECTNAME={0}" -f $ProjectName
+          ) | Add-Content -Path $env:GITHUB_ENV
+        shell: pwsh
+
+      - name: Print defined environment variables
+        run: |
+          Write-Output $GH_USERNAME
+          Write-Output $GH_PROJECTNAME
+        shell: pwsh
+
+      - name: Test Path
+        run: |
+          dir "$env:GH_PROJECTNAME\module"
+          write-host "#### ----------- ####"
+          Write-Output $GH_PROJECTNAME
+        shell: pwsh
+
+      - name: Install dependent modules
+        run: |
+          $Modules = @(
+            "Pester"
+            "InvokeBuild"
+          )
+          Install-Module -Name $Modules -Scope "CurrentUser" -Force -ErrorAction "Stop"
+          Get-module Pester -list
+        shell: pwsh
