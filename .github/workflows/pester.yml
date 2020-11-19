@@ -63,6 +63,6 @@ jobs:
       - name: dump test results
         shell: pwsh
         run: |
-        Write-Host 'Total Tests Executed...:  ${{ steps.test_module.outputs.total_count }}'
-        Write-Host 'Total Tests PASSED.....:  ${{ steps.test_module.outputs.passed_count }}'
-        Write-Host 'Total Tests FAILED.....:  ${{ steps.test_module.outputs.failed_count }}'
+            Write-Host 'Total Tests Executed...:  ${{ steps.test_module.outputs.total_count }}'
+            Write-Host 'Total Tests PASSED.....:  ${{ steps.test_module.outputs.passed_count }}'
+            Write-Host 'Total Tests FAILED.....:  ${{ steps.test_module.outputs.failed_count }}'
