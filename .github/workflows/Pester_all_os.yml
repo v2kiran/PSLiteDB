@@ -3,7 +3,7 @@ name: "Deploy"
 on:
   push:
     branches:
-      - v2.1-some
+      - v2.1
   pull_request:
     branches:
       - v2.1-some
@@ -40,15 +40,8 @@ jobs:
         uses: zyborg/pester-tests-report@v1
         with:
           test_results_path: pester_test_result.xml
-          report_name: Results on ${{ runner.os }}
-          report_title: PSLiteDB Tests
+          report_name: ${{ runner.os }}
+          report_title: Pester Results on ${{ runner.os }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
-          gist_name: testreport
-
-      - name: dump test results
-        shell: pwsh
-        run: |
-            Write-Host 'Total Tests Executed...:  ${{ steps.test_module.outputs.total_count }}'
-            Write-Host 'Total Tests PASSED.....:  ${{ steps.test_module.outputs.passed_count }}'
-            Write-Host 'Total Tests FAILED.....:  ${{ steps.test_module.outputs.failed_count }}'
+          gist_name: ${{ runner.os }}
