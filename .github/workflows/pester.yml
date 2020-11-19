@@ -57,7 +57,7 @@ jobs:
         with:
           test_results_path: pester_test_result.xml
           report_name: module_tests
-          report_title: $env:GH_PROJECTNAME Tests
+          report_title: env:GH_PROJECTNAME Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
           gist_name: testreport
