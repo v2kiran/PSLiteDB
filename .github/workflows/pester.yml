@@ -31,9 +31,8 @@ jobs:
 
       - name: Test Path
         run: |
-          dir $env:GITHUB_WORKSPACE
+          dir (join-path $env:GITHUB_WORKSPACE -childpath module)
           write-host "#### ----------- ####"
-          Write-Output $GH_PROJECTNAME
         shell: pwsh
 
       - name: Install dependent modules
@@ -42,6 +41,6 @@ jobs:
             "Pester"
             "InvokeBuild"
           )
-          Install-Module -Name $Modules -Scope "CurrentUser" -Force -ErrorAction "Stop"
+          #Install-Module -Name $Modules -Scope "CurrentUser" -ErrorAction "Stop"
           Get-module Pester -list
         shell: pwsh
