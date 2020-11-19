@@ -23,7 +23,6 @@ jobs:
           ) | Add-Content -Path $env:GITHUB_ENV
         shell: pwsh
 
-
       - name: Run Pester Tests
         run: |
           Import-Module (join-path $env:GITHUB_WORKSPACE -childpath 'module/PSLiteDB.psd1')
@@ -36,10 +35,11 @@ jobs:
         with:
           test_results_path: pester_test_result.xml
           report_name: Results on ${{ runner.os }}
-          report_title: env:GH_PROJECTNAME Tests
+          report_title: Pester Results on ${{ runner.os }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
           gist_name: ${{ runner.os }}
+
       - name: dump test results
         shell: pwsh
         run: |
