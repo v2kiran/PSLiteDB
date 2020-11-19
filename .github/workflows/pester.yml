@@ -31,7 +31,7 @@ jobs:
 
       - name: Test Path
         run: |
-          dir $env:GH_PROJECTNAME
+          dir $env:GITHUB_WORKSPACE
           write-host "#### ----------- ####"
           Write-Output $GH_PROJECTNAME
         shell: pwsh
