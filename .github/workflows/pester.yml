@@ -31,7 +31,7 @@ jobs:
 
       - name: Test Path
         run: |
-          dir "$env:GH_PROJECTNAME\module"
+          dir "$($env:GH_PROJECTNAME)\module"
           write-host "#### ----------- ####"
           Write-Output $GH_PROJECTNAME
         shell: pwsh
