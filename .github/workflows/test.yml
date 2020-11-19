@@ -1,0 +1,36 @@
+name: "Deploy"
+
+on:
+  push:
+    branches:
+      - v2.1
+
+jobs:
+  job-1:
+    name: Publish to GitHub and PowerShell Gallery
+    runs-on: ubuntu-latest
+    #if: "contains(github.event.head_commit.message, ':shipit:')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.1
+
+      - name: Set environment variables
+        run: |
+          $Username, $ProjectName = $env:GITHUB_REPOSITORY -split "/"
+          @(
+            "GH_USERNAME={0}" -f $Username
+            "GH_PROJECTNAME={0}" -f $ProjectName
+          ) | Add-Content -Path $env:GITHUB_ENV
+        shell: pwsh
+
+      - name: Print defined environment variables "$GH_PROJECTNAME"
+        run: |
+          Write-Output $GH_USERNAME
+          Write-Output $GH_PROJECTNAME
+        shell: pwsh
+
+      - name: Test Path ${{ runner.os}}
+        run: |
+          dir (join-path $env:GITHUB_WORKSPACE -childpath module)
+          write-host "#### ----------- ####"
+        shell: pwsh

@@ -3,7 +3,7 @@ name: "Deploy"
 on:
   push:
     branches:
-      - v2.1
+      - v2.1-some
 
 jobs:
   job-1-pwsh:
@@ -37,11 +37,12 @@ jobs:
         uses: zyborg/pester-tests-report@v1
         with:
           test_results_path: pester_test_result.xml
-          report_name: module_tests
+          report_name: ${{ runner.os }}
           report_title: PSLiteDB Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
           gist_name: testreport
+
       - name: dump test results
         shell: pwsh
         run: |
