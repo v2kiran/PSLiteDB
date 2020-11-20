@@ -3,7 +3,7 @@ name: "Deploy"
 on:
   push:
     branches:
-      - v2.1-some
+      - v2.1
 
 jobs:
   job-1:
@@ -39,8 +39,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
           gist_name: ${{ runner.os }}
-
-      - name: dump test results
-        shell: pwsh
-        run: |
-            write-output "${{ steps.test_module.outputs}}"
+          gist_badge_label: Tests %PassedCount%/%TotalCount%
