@@ -42,7 +42,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Step-1 Clone Repository
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Step-2 Run Pester tests (Windows PowerShell 5.1)
         run: |
