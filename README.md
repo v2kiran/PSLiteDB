@@ -1,5 +1,9 @@
 # :rocket: PSLiteDB
 
+Pester Tests
+---
+[![GitHub Workflow - CI](https://github.com/v2kiran/PSLiteDB/workflows/CI/badge.svg)](https://github.com/v2kiran/PSLiteDB/actions?workflow=CI)
+
 ## :boom: OverView
 
 [LiteDB](http://www.litedb.org/) is a noSQL singlefile datastore just like SQLite.
