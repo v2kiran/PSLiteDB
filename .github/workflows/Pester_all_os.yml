@@ -38,7 +38,7 @@ jobs:
           gist_token: ${{ secrets.GIST_TOKEN }}
           gist_name: ${{ runner.os }}
 
-  job-2-powershell5:
+  job-2 WinPowershell 5.1:
     runs-on: windows-latest
     steps:
       - name: Step-1 Clone Repository
