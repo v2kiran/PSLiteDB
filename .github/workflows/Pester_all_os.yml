@@ -1,4 +1,4 @@
-name: "Deploy"
+name: "CI"
 
 on:
   push:
@@ -49,7 +49,7 @@ jobs:
           Write-host $PSVersionTable.PSVersion.Major $PSVersionTable.PSRemotingProtocolVersion.Minor
           Import-Module (join-path $env:GITHUB_WORKSPACE -childpath ('module/{0}.psd1' -f $env:GH_PROJECTNAME))
           Invoke-Pester -path (join-path $env:GITHUB_WORKSPACE -childpath 'tests/v5.tests.ps1') -pass -Outputfile pester_test_result.xml -OutputFormat NUnitXml
-          #if ($Error[0].Fullyqualifiederrorid -eq 'PesterAssertionFailed') {exit 1}
+          if ($Error[0].Fullyqualifiederrorid -eq 'PesterAssertionFailed') {exit 1}
         shell: powershell
 
       - name: Step-3 Create Pester Reports
@@ -57,8 +57,8 @@ jobs:
         uses: zyborg/pester-tests-report@v1
         with:
           test_results_path: pester_test_result.xml
-          report_name: WinPS5.1 ${{ runner.os }}
+          report_name: ${{ runner.os }} PS5.1
           report_title: Pester Results on ${{ runner.os }} using Windows PowerShell 5.1
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gist_token: ${{ secrets.GIST_TOKEN }}
-          gist_name: WinPS5.1 ${{ runner.os }}
+          gist_name: ${{ runner.os }} PS5.1
