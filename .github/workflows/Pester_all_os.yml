@@ -28,7 +28,7 @@ jobs:
         shell: pwsh
 
       - name: Step-3 Create Pester Reports
-        id: $env:GH_PROJECTNAME
+        id: Create_Report
         uses: zyborg/pester-tests-report@v1
         with:
           test_results_path: pester_test_result.xml
@@ -53,7 +53,7 @@ jobs:
         shell: powershell
 
       - name: Step-3 Create Pester Reports
-        id: $env:GH_PROJECTNAME
+        id: Create_Report
         uses: zyborg/pester-tests-report@v1
         with:
           test_results_path: pester_test_result.xml
