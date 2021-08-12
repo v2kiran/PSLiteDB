@@ -1,3 +1,11 @@
+## 2.2.0 (August 12, 2021)
+
+### Fixes
+- Fix [#10 String is always converted to DateTime under certain conditions](https://github.com/v2kiran/PSLiteDB/issues/10)
+- Fix [#11 Converting to string error.](https://github.com/v2kiran/PSLiteDB/issues/11)
+
+### Enhancements
+- Updated litedb to the latest available version 5.0.11
 ## 2.1.0 (October 17, 2020)
 
 ### Fixes
