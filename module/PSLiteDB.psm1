@@ -36,8 +36,8 @@ function ConvertTo-LiteDbBSON
     {
         # determine all props that are of type int64 or long
         [List[string]]$All_props = $InputObject[0] | Get-Member -MemberType Properties | Select-Object -ExpandProperty Name
-        [List[string]]$int64_props = $InputObject[0] | Get-Member -MemberType Properties | Where-Object membertype -match 'Noteproperty|^property' | Where-Object definition -match "int64|long" | Select-Object -ExpandProperty Name
-        [List[string]]$Timespan_props = $InputObject[0] | Get-Member -MemberType Properties | Where-Object definition -match "timespan" | Select-Object -ExpandProperty Name
+        [List[string]]$int64_props = $InputObject[0] | Get-Member -MemberType Properties | Where-Object membertype -Match 'Noteproperty|^property' | Where-Object definition -Match '^system\.int64|^long' | Select-Object -ExpandProperty Name
+        [List[string]]$Timespan_props = $InputObject[0] | Get-Member -MemberType Properties | Where-Object definition -Match '^timespan' | Select-Object -ExpandProperty Name
 
         foreach ($i in $InputObject)
         {
@@ -96,10 +96,17 @@ function ConvertTo-LiteDbBSON
 
             # Convert JSON datetime string value to bson datetime values
             $bsonobj.GetEnumerator() |
-                Where-Object value -match "date|(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})" |
+                Where-Object value -Match 'date\(\d{13,20}|(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})' |
                 ForEach-Object {
                     $kvp = $_
-                    $hash[$kvp.key] = [MSJsonDateConverter]::Convert($kvp)
+                    try
+                    {
+                        $hash[$kvp.key] = [MSJsonDateConverter]::Convert($kvp)
+                    }
+                    catch
+                    {
+                        Write-Warning "Unable to convert value [$kvp] to datetime"
+                    }
                 }
 
 
