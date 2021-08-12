@@ -15,7 +15,7 @@ MovieID,Title,MPAA,Budget,Gross,Release Date,Genre,Runtime,Rating,RatingCount
 4,Born on the Fourth of July,R,14000000,161001698,1989-12-20,War,145,7.2,91415
 5,Field of Dreams,PG,15000000,84431625,1989-04-21,Drama,107,7.5,101702
 6,Uncle Buck,PG,15000000,79258538,1989-08-16,Family,100,7,77659
-7,When Harry Met Sally...,R,16000000,92800000,1989-07-21,Romance,96,7.6,180871
+7,When Harry Met Sally long-date,R,16000000,92800000,1989-07-21,Romance,96,7.6,180871
 8,Dead Poets Society,PG,16400000,235860116,1989-06-02,Drama,129,8.1,382002
 9,Parenthood,PG-13,20000000,126297830,1989-07-31,Comedy,124,7,41866
 10,Lethal Weapon 2,R,25000000,227853986,1989-07-07,Comedy,114,7.2,151737
@@ -200,7 +200,11 @@ Describe "Find-LiteDBDocument" -Tag Find -Fixture {
     It "Limit results" {
       $result = Find-LiteDBDocument movies -Where "MPAA='PG-13'" -Select "{_id,MovieName:Title}" -Limit 1
       $result | Should -Not -BeNullOrEmpty
+<<<<<<< HEAD
+      @($result).count | Should -Be 1
+=======
       $result.count | Should -Be 1
+>>>>>>> master
       $result.MovieName | Should -contain "Look Who's Talking"
     }
 

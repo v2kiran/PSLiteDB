@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="26" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2021-08-12" time="16:45:58">
+  <environment nunit-version="2.5.8.0" clr-version="Unknown" user-domain="DUCATI" cwd="C:\Users\Kiran\OneDrive\GitHub\PSLiteDB" machine-name="DUCATI" os-version="10.0.19043" platform="Microsoft Windows 10 Pro|C:\Windows|\Device\Harddisk1\Partition3" user="Kiran" />
+  <culture-info current-culture="en-IN" current-uiculture="en-US" />
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="2.0573" asserts="0" description="Pester">
+    <results>
+      <test-suite type="TestFixture" name="C:\Users\Kiran\OneDrive\GitHub\PSLiteDB\tests\v5.tests.ps1" executed="True" result="Success" success="True" time="2.0573" asserts="0" description="C:\Users\Kiran\OneDrive\GitHub\PSLiteDB\tests\v5.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Open-LitedbConnection" executed="True" result="Success" success="True" time="0.2156" asserts="0" description="Open-LitedbConnection">
+            <results>
+              <test-case description="creates a in-memory database" name="Open-LitedbConnection.creates a in-memory database" time="0.1171" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="New-LiteDBCollection" executed="True" result="Success" success="True" time="0.3394" asserts="0" description="New-LiteDBCollection">
+            <results>
+              <test-case description="Creates a new Collection" name="New-LiteDBCollection.Creates a new Collection" time="0.0845" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Rename-LiteDBCollection" executed="True" result="Success" success="True" time="0.4023" asserts="0" description="Rename-LiteDBCollection">
+            <results>
+              <test-case description="Renames a Collection" name="Rename-LiteDBCollection.Renames a Collection" time="0.0211" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Remove-LiteDBCollection" executed="True" result="Success" success="True" time="0.4569" asserts="0" description="Remove-LiteDBCollection">
+            <results>
+              <test-case description="Remove a Collection" name="Remove-LiteDBCollection.Remove a Collection" time="0.0169" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="New-LiteDBIndex" executed="True" result="Success" success="True" time="0.5198" asserts="0" description="New-LiteDBIndex">
+            <results>
+              <test-case description="Creates a new Index" name="New-LiteDBIndex.Creates a new Index" time="0.0213" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Remove-LiteDBIndex" executed="True" result="Success" success="True" time="0.5785" asserts="0" description="Remove-LiteDBIndex">
+            <results>
+              <test-case description="Removes an Index" name="Remove-LiteDBIndex.Removes an Index" time="0.016" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="ConvertTo-LiteDbBSON" executed="True" result="Success" success="True" time="0.7189" asserts="0" description="ConvertTo-LiteDbBSON">
+            <results>
+              <test-case description="Converts psobjects to BSON Documents" name="ConvertTo-LiteDbBSON.Converts psobjects to BSON Documents" time="0.0988" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Add-LiteDBDocument" executed="True" result="Success" success="True" time="0.7965" asserts="0" description="Add-LiteDBDocument">
+            <results>
+              <test-case description="Adds\inserts documents" name="Add-LiteDBDocument.Adds\inserts documents" time="0.0407" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Find-LiteDBDocument" executed="True" result="Success" success="True" time="1.1526" asserts="0" description="Find-LiteDBDocument">
+            <results>
+              <test-suite type="TestFixture" name="Find-LiteDBDocument.Find All" executed="True" result="Success" success="True" time="0.0815" asserts="0" description="Find-LiteDBDocument.Find All">
+                <results>
+                  <test-case description="Finds all documents in the database" name="Find-LiteDBDocument.Find All.Finds all documents in the database" time="0.0219" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Limits the results returned with the Limit parameter" name="Find-LiteDBDocument.Find All.Limits the results returned with the Limit parameter" time="0.0097" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Find-LiteDBDocument.Find by ID" executed="True" result="Success" success="True" time="0.1324" asserts="0" description="Find-LiteDBDocument.Find by ID">
+                <results>
+                  <test-case description="finds documents by ID" name="Find-LiteDBDocument.Find by ID.finds documents by ID" time="0.0122" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Find-LiteDBDocument.Find by SQL" executed="True" result="Success" success="True" time="0.2309" asserts="0" description="Find-LiteDBDocument.Find by SQL">
+                <results>
+                  <test-case description="finds the first 5 documents" name="Find-LiteDBDocument.Find by SQL.finds the first 5 documents" time="0.0136" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="finds the first 2 documents with select properties" name="Find-LiteDBDocument.Find by SQL.finds the first 2 documents with select properties" time="0.0151" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Where clause" name="Find-LiteDBDocument.Find by SQL.Where clause" time="0.0183" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Functions" name="Find-LiteDBDocument.Find by SQL.Functions" time="0.0147" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Find-LiteDBDocument.Named Queries" executed="True" result="Success" success="True" time="0.3175" asserts="0" description="Find-LiteDBDocument.Named Queries">
+                <results>
+                  <test-case description="Where filter" name="Find-LiteDBDocument.Named Queries.Where filter" time="0.0103" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Custom Columns" name="Find-LiteDBDocument.Named Queries.Custom Columns" time="0.0108" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Limit results" name="Find-LiteDBDocument.Named Queries.Limit results" time="0.01" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Functions" name="Find-LiteDBDocument.Named Queries.Functions" time="0.0108" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Update-LiteDBDocument" executed="True" result="Success" success="True" time="1.2969" asserts="0" description="Update-LiteDBDocument">
+            <results>
+              <test-suite type="TestFixture" name="Update-LiteDBDocument.Update By BSON Expression" executed="True" result="Success" success="True" time="0.0543" asserts="0" description="Update-LiteDBDocument.Update By BSON Expression">
+                <results>
+                  <test-case description="Changes a property value" name="Update-LiteDBDocument.Update By BSON Expression.Changes a property value" time="0.0145" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Update-LiteDBDocument.Update By SQL" executed="True" result="Success" success="True" time="0.1064" asserts="0" description="Update-LiteDBDocument.Update By SQL">
+                <results>
+                  <test-case description="Changes multiple property values" name="Update-LiteDBDocument.Update By SQL.Changes multiple property values" time="0.0123" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Remove-LiteDBDocument" executed="True" result="Success" success="True" time="1.4877" asserts="0" description="Remove-LiteDBDocument">
+            <results>
+              <test-suite type="TestFixture" name="Remove-LiteDBDocument.Remove By ID" executed="True" result="Success" success="True" time="0.0526" asserts="0" description="Remove-LiteDBDocument.Remove By ID">
+                <results>
+                  <test-case description="Removes a document by ID" name="Remove-LiteDBDocument.Remove By ID.Removes a document by ID" time="0.0118" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Remove-LiteDBDocument.Remove By BSON Expression" executed="True" result="Success" success="True" time="0.1053" asserts="0" description="Remove-LiteDBDocument.Remove By BSON Expression">
+                <results>
+                  <test-case description="removes document(s)" name="Remove-LiteDBDocument.Remove By BSON Expression.removes document(s)" time="0.011" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Remove-LiteDBDocument.Remove By SQL" executed="True" result="Success" success="True" time="0.1553" asserts="0" description="Remove-LiteDBDocument.Remove By SQL">
+                <results>
+                  <test-case description="Removes multiple documents" name="Remove-LiteDBDocument.Remove By SQL.Removes multiple documents" time="0.011" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Upsert-LiteDBDocument" executed="True" result="Success" success="True" time="1.5986" asserts="0" description="Upsert-LiteDBDocument">
+            <results>
+              <test-suite type="TestFixture" name="Upsert-LiteDBDocument.Upsert by ID" executed="True" result="Success" success="True" time="0.0747" asserts="0" description="Upsert-LiteDBDocument.Upsert by ID">
+                <results>
+                  <test-case description="Adds missing documents" name="Upsert-LiteDBDocument.Upsert by ID.Adds missing documents" time="0.0319" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Close-LiteDBConnection" executed="True" result="Success" success="True" time="1.6491" asserts="0" description="Close-LiteDBConnection">
+            <results>
+              <test-case description="Closes the connection" name="Close-LiteDBConnection.Closes the connection" time="0.0119" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

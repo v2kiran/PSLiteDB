@@ -12,7 +12,7 @@
     RootModule             = 'lib\PSLiteDB.dll'
 
     # Version number of this module.
-    ModuleVersion          = '2.1.0'
+    ModuleVersion          = '2.2.0'
 
     # ID used to uniquely identify this module
     GUID                   = 'a68c0417-43ed-479e-a214-f41cd5191ff3'

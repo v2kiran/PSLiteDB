@@ -1,0 +1,64 @@
+name: "CI"
+
+on:
+  push:
+    branches:
+      - v2.1-s
+  pull_request:
+    branches:
+      - v2.1
+
+env:
+  GH_PROJECTNAME: PSLiteDB
+
+jobs:
+  job-1_Pwsh7:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Step-1 Clone Repository
+        uses: actions/checkout@v2.3.1
+
+      - name: Step-2 Run Pester Tests via pwsh
+        run: |
+          Import-Module (join-path $env:GITHUB_WORKSPACE -childpath ('module/{0}.psd1' -f $env:GH_PROJECTNAME))
+          Invoke-Pester -path (join-path $env:GITHUB_WORKSPACE -childpath 'tests/v5.tests.ps1') -pass -Outputfile pester_test_result.xml -OutputFormat NUnitXml
+        shell: pwsh
+
+      - name: Step-3 Create Pester Reports
+        id: Create_Report
+        uses: zyborg/pester-tests-report@v1
+        with:
+          test_results_path: pester_test_result.xml
+          report_name: ${{ runner.os }}
+          report_title: Pester Results on ${{ runner.os }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gist_token: ${{ secrets.GIST_TOKEN }}
+          gist_name: ${{ runner.os }}
+
+  job-2_WinPowershell_51:
+    runs-on: windows-latest
+    steps:
+      - name: Step-1 Clone Repository
+        uses: actions/checkout@v2
+
+      - name: Step-2 Run Pester tests (Windows PowerShell 5.1)
+        run: |
+          Write-host $PSVersionTable.PSVersion.Major $PSVersionTable.PSRemotingProtocolVersion.Minor
+          Import-Module (join-path $env:GITHUB_WORKSPACE -childpath ('module/{0}.psd1' -f $env:GH_PROJECTNAME))
+          Invoke-Pester -path (join-path $env:GITHUB_WORKSPACE -childpath 'tests/v5.tests.ps1') -pass -Outputfile pester_test_result.xml -OutputFormat NUnitXml
+          if ($Error[0].Fullyqualifiederrorid -eq 'PesterAssertionFailed') {exit 1}
+        shell: powershell
+
+      - name: Step-3 Create Pester Reports
+        id: Create_Report
+        uses: zyborg/pester-tests-report@v1
+        with:
+          test_results_path: pester_test_result.xml
+          report_name: ${{ runner.os }} PS5.1
+          report_title: Pester Results on ${{ runner.os }} using Windows PowerShell 5.1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gist_token: ${{ secrets.GIST_TOKEN }}
+          gist_name: ${{ runner.os }} PS5.1
