@@ -5,6 +5,7 @@ on:
     branches:
       - v2.2
 
+
 jobs:
   job-1:
     name: Publish to GitHub and PowerShell Gallery
