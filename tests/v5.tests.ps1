@@ -201,6 +201,7 @@ Describe "Find-LiteDBDocument" -Tag Find -Fixture {
       $result = Find-LiteDBDocument movies -Where "MPAA='PG-13'" -Select "{_id,MovieName:Title}" -Limit 1
       $result | Should -Not -BeNullOrEmpty
       @($result).count | Should -Be 1
+
       $result.MovieName | Should -contain "Look Who's Talking"
     }
 
