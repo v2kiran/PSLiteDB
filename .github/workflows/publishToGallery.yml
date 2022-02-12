@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'shipit')"
     steps:
-      - name: Publish Module to PowerShell Gallery
+      - name: Step-1 Clone Repository
+        uses: actions/checkout@v2.4.0
+      - name: Step-2 Publish Module to PowerShell Gallery
         uses: pcgeek86/publish-powershell-module-action@v20
         id: publish-module
         with:
