@@ -17,5 +17,7 @@ jobs:
       - name: Step-2 Publish Module to PowerShell Gallery
         run: |
           Write-Host "Begin publishing module: $pwd $PWD"
-          ./build/publish.ps1 -PSGalleryApiKey ${{ secrets.PSGALLERY }}
+          $publish = join-path $env:GITHUB_WORKSPACE -childpath 'build/publish.ps1'
+          write-host "build path: $publish"
+          & $publish -PSGalleryApiKey ${{ secrets.PSGALLERY }}
         shell: pwsh
