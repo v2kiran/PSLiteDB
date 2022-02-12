@@ -16,6 +16,6 @@ jobs:
 
       - name: Step-2 Publish Module to PowerShell Gallery
         run: |
-          write-host "Begin publishing module: $pwd"
+          Write-Host "Begin publishing module: $pwd $PWD"
           ./build/publish.ps1 -PSGalleryApiKey ${{ secrets.PSGALLERY }}
         shell: pwsh
