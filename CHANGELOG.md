@@ -1,3 +1,12 @@
+## 2.3.0 (February 12, 2022)
+
+### Fixes
+- Fix [#15 Import-Module fails](https://github.com/v2kiran/PSLiteDB/issues/15)
+- Fix dates were not being converted from strings in Windows PowerShell 5.1
+
+### Internal Updates
+- Fix pester tests
+
 ## 2.2.0 (August 12, 2021)
 
 ### Fixes
