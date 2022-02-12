@@ -17,7 +17,7 @@ jobs:
       - name: Step-2 Publish Module to PowerShell Gallery
         run: |
           Write-Host "Begin publishing module: $pwd $PWD"
-          $publish = join-path $env:GITHUB_WORKSPACE -childpath 'build/publish.ps1'
+          $publish = join-path $env:GITHUB_WORKSPACE -childpath 'build/Publish.ps1'
           write-host "build path: $publish"
           if(Test-path $publish)
           {
@@ -26,5 +26,6 @@ jobs:
           else
           {
               Write-Warning "Path $publish was not found"
+              throw "Path $publish was not found"
           }
         shell: pwsh
