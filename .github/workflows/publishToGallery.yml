@@ -19,5 +19,12 @@ jobs:
           Write-Host "Begin publishing module: $pwd $PWD"
           $publish = join-path $env:GITHUB_WORKSPACE -childpath 'build/publish.ps1'
           write-host "build path: $publish"
-          & $publish -PSGalleryApiKey ${{ secrets.PSGALLERY }}
+          if(Test-path $publish)
+          {
+              & $publish -PSGalleryApiKey ${{ secrets.PSGALLERY }}
+          }
+          else
+          {
+              Write-Warning "Path $publish was not found"
+          }
         shell: pwsh
