@@ -15,5 +15,5 @@ jobs:
       - name: Test shipit
         run: |
           write-host "#### ----------- ####"
-          write-host "Testing action based on if condition 'iftest'"
+          write-host "Testing action based on if condition . 'iftest'"
         shell: pwsh
