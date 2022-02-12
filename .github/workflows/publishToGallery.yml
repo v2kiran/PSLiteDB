@@ -13,8 +13,9 @@ jobs:
     steps:
       - name: Step-1 Clone Repository
         uses: actions/checkout@v2.4.0
+
       - name: Step-2 Publish Module to PowerShell Gallery
-        shell: pwsh
         run: |
           write-host "Begin publishing module: $pwd"
           ./build/publish.ps1 -PSGalleryApiKey ${{ secrets.PSGALLERY }}
+        shell: pwsh
