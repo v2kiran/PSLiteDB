@@ -96,7 +96,7 @@ function ConvertTo-LiteDbBSON
 
             # Convert JSON datetime string value to bson datetime values
             $bsonobj.GetEnumerator() |
-                Where-Object value -Match 'date\(\d{13,20}|(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})' |
+                Where-Object value -Match 'date\(\d{12,20}|(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})' |
                 ForEach-Object {
                     $kvp = $_
                     try
