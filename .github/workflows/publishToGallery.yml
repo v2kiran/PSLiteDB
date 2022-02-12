@@ -14,7 +14,6 @@ jobs:
       - name: Step-1 Clone Repository
         uses: actions/checkout@v2.4.0
       - name: Step-2 Publish Module to PowerShell Gallery
-        uses: pcgeek86/publish-powershell-module-action@v20
-        id: publish-module
-        with:
-          NuGetApiKey: ${{ secrets.PSGALLERY}}
+        shell: pwsh
+        run: |
+          ./build/publish.ps1 -PSGalleryApiKey ${{ secrets.PSGALLERY }}
