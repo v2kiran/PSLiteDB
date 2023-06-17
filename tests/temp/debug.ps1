@@ -68,7 +68,7 @@ Find-LiteDBDocument movies -Sql "Select _id,Title,MPAA from movies Where MPAA = 
 # using where to filter the results - greaterthan
 Find-LiteDBDocument movies -Sql "Select _id,Title,Rating from movies Where Rating > 7.5"
 
-# using multiple where filters. ( movies that contain 'talking' in their title)
+# using1 multiple where filters. ( movies that contain 'talking' in their title)
 Find-LiteDBDocument movies -Sql "Select _id,Title from movies where MPAA = 'PG-13' and Title like '%talking'"
 
 # Sorting by name descending
