@@ -1,4 +1,4 @@
-﻿Import-Module 'C:\gh\PSLiteDB\module\PSLiteDB.psd1'
+﻿Import-Module 'C:\gh\PSLiteDB\module\PSLiteDB.psd1' -Force -Verbose
 
 $dbPath = "C:\temp\temp\LiteDB\Movie2.db"
 Remove-Item $dbPath
@@ -80,3 +80,5 @@ Find-LiteDBDocument movies -Sql "select _id,Title,ReleaseDate from test where Re
 # using Functions
 # get the first 5 documents with selected properties or fields from the movies collection
 Find-LiteDBDocument movies -Sql "Select upper(Title),_id,MPAA from movies limit 5"
+
+Update-ModuleManifest -Path 'C:\gh\PSLiteDB\module\PSLiteDB.psd1' -FunctionsToExport (gcm -module pslitedb | select -ExpandProperty name)

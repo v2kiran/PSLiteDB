@@ -1,3 +1,10 @@
+## 2.4.0 (June 18, 2023)
+
+### changes
+- update litedb to version 5.0.16
+- update newtonsoft.json to verson 13.0.3
+- update powershellstandard.library to version 5.1.1.0
+
 ## 2.3.0 (February 12, 2022)
 
 ### Fixes
