@@ -12,13 +12,13 @@
 RootModule = 'lib\PSLiteDB.dll'
 
 # Version number of this module.
-ModuleVersion = '2.4.0'
+ModuleVersion = '2.5.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = 'f69cba2d-860d-4d1a-8ddb-1953d7c95f7a'
+GUID = 'c100166b-c7c6-48e4-ad55-0a5c2f19a030'
 
 # Author of this module
 Author = 'Kiran Reddy'
@@ -69,12 +69,12 @@ RequiredAssemblies = 'lib\LiteDB.dll'
 NestedModules = @('PSLiteDB.psm1')
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Upsert-LiteDbDocument', 'ConvertTo-LiteDbBSON', 'Add-LiteDBDocument', 
-               'Close-LiteDBConnection', 'Find-LiteDBDocument', 
-               'Get-LiteDBCollectionName', 'Get-LiteDBIndex', 'Merge-LiteDBDocument', 
-               'New-LiteDBCollection', 'New-LiteDBDatabase', 'New-LiteDBIndex', 
-               'Open-LiteDBConnection', 'Remove-LiteDBCollection', 
-               'Remove-LiteDBDocument', 'Remove-LiteDBIndex', 
+FunctionsToExport = 'Upsert-LiteDbDocument', 'ConvertTo-LiteDbBSON', 'Add-LiteDBDocument',
+               'Close-LiteDBConnection', 'Find-LiteDBDocument',
+               'Get-LiteDBCollectionName', 'Get-LiteDBIndex', 'Merge-LiteDBDocument',
+               'New-LiteDBCollection', 'New-LiteDBDatabase', 'New-LiteDBIndex',
+               'Open-LiteDBConnection', 'Remove-LiteDBCollection',
+               'Remove-LiteDBDocument', 'Remove-LiteDBIndex',
                'Rename-LiteDBCollection', 'Update-LiteDBDocument'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -135,4 +135,3 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
-

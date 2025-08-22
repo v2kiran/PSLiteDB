@@ -1,3 +1,9 @@
+## 2.5.0 (August 22, 2025)
+
+### changes
+- update litedb to version 5.0.21
+
+
 ## 2.4.0 (June 18, 2023)
 
 ### changes

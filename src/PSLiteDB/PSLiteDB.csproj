@@ -6,10 +6,11 @@
     <Authors>Kiran Reddy</Authors>
     <Company>Personal</Company>
     <developmentDependency>true</developmentDependency>
-    <Version>2.1.0</Version>
-    <AssemblyVersion>0.0.1.0</AssemblyVersion>
-    <FileVersion>0.0.1.0</FileVersion>
+    <Version>2.3.0</Version>
+    <AssemblyVersion>0.0.2.0</AssemblyVersion>
+    <FileVersion>0.0.2.0</FileVersion>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <Description>Wrapper for LiteDB</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -18,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="LiteDB" Version="5.0.16" />
+    <PackageReference Include="LiteDB" Version="5.0.21" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
   </ItemGroup>

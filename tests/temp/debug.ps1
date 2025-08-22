@@ -75,7 +75,7 @@ Find-LiteDBDocument movies -Sql "Select _id,Title from movies where MPAA = 'PG-1
 Find-LiteDBDocument movies -Sql "Select _id,Title from movies where MPAA = 'PG-13' order by Title desc"
 
 # date filter
-Find-LiteDBDocument movies -Sql "select _id,Title,ReleaseDate from test where ReleaseDate > datetime('8/16/1989') order by Releasedate desc"
+Find-LiteDBDocument movies -Sql "select _id,Title,ReleaseDate from movies where ReleaseDate > datetime('16/12/1989') order by ReleaseDate desc"
 
 # using Functions
 # get the first 5 documents with selected properties or fields from the movies collection
